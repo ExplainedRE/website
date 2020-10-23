@@ -4,3 +4,19 @@
     }
     
 }
+
+
+.home[posts] {
+    // Make sure to use a big logo
+    .home-avatar img {
+      width: 25rem;
+    }
+
+    // Get rid of border radius and box shadow
+    img {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    
+}
