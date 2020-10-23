@@ -1,0 +1,17 @@
+# Hugo default output directory
+public/
+resources/_gen/
+node_modules/
+build/
+
+## OS Files
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# OSX
+.DS_Store
+
+# Linux
+.directory
