@@ -58,7 +58,14 @@ theme = "LoveIt"
       post = ""
       # LoveIt NEW | 0.2.5 whether to use typeit animation for title name
       typeit = false
-
+  # Google analytics
+  [params.analytics]
+    enable = false
+    # Google Analytics
+    [params.analytics.google]
+      id = "G-Z0NYXY577C"
+      # whether to anonymize IP
+      anonymizeIP = false
 [menu]
   [[menu.main]]
     identifier = "posts"
@@ -87,7 +94,14 @@ theme = "LoveIt"
     url = "/categories/"
     title = ""
     weight = 3
-
+  [[menu.main]]
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "About"
+    url = "/about/"
+    title = ""
+    weight = 4
 # Markup related configuration in Hugo
 [markup]
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
