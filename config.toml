@@ -66,6 +66,12 @@ theme = "LoveIt"
       id = "G-Z0NYXY577C"
       # whether to anonymize IP
       anonymizeIP = false
+  # Code config
+  [params.page.code]
+    # whether to show the copy button of the code block
+    copy = true
+    # the maximum number of lines of displayed code by default
+    maxShownLines = 20
 [menu]
   [[menu.main]]
     identifier = "posts"
