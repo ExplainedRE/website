@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>explained.re</title>
+        <link>/</link>
+        <description>explained.re</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Oct 2020 21:29:42 &#43;0300</lastBuildDate>
+            <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>First_post</title>
+    <link>/posts/first_post/</link>
+    <pubDate>Fri, 23 Oct 2020 21:29:42 &#43;0300</pubDate>
+    <author>Author</author>
+    <guid>/posts/first_post/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
+</rss>
