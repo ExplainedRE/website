@@ -8,6 +8,21 @@ title = "explained.re"
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
 
+# whether to use robots.txt
+enableRobotsTXT = true
+
+# whether to use git commit log
+enableGitInfo = true
+
+# whether to use emoji code
+enableEmoji = true
+
+# Google analytics ID
+googleAnalytics = "G-Z0NYXY577C"
+
+# Number of posts to show in a page
+paginate = 15
+
 [params]
   # LoveIt theme version
   version = "0.2.X"
@@ -31,7 +46,7 @@ theme = "LoveIt"
       # LoveIt CHANGED | 0.2.7 title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page
-      subtitle = "This is My New Hugo Site"
+      subtitle = ""
       # whether to use typeit animation for subtitle
       typeit = false
       # whether to show social links
@@ -60,7 +75,7 @@ theme = "LoveIt"
       typeit = false
   # Google analytics
   [params.analytics]
-    enable = false
+    enable = true
     # Google Analytics
     [params.analytics.google]
       id = "G-Z0NYXY577C"
@@ -108,6 +123,14 @@ theme = "LoveIt"
     url = "/about/"
     title = ""
     weight = 4
+  [[menu.main]]
+    identifier = "github"
+    pre = "<i class='fab fa-github fa-fw'></i>"
+    post = ""
+    name = ""
+    url = "https://github.com/explainedre/website"
+    title = "GitHub"
+    weight = 5
 # Markup related configuration in Hugo
 [markup]
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
