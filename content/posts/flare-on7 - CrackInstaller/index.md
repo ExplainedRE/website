@@ -262,9 +262,11 @@ Now that we have resolved the API functions the binary is going to use, we can c
 2. `sub_140002ED8` - seem to be writing the data from the second argument to a file, it writes the data it got from the previous function to `C:\Windows\System32\cfs.dll`.
 3. `sub_140001FB4` - accepts a service name and a binary path, then creates a service and starts it. At this point, we understand that the `cfs.dll` the binary dumps is actually a driver. After running the service the function stores a handle to the `\\.\Htsysm72FB` device in the fourth argument. Some of you may already know what this device is, but even if you don't a quick search will tell you immediately. This is the famous vulnerable Capcom driver, which basically allows an unprivileged user to execute code in the kernel.
 
-    The sole purpose of this Capcom driver here is to accept an IOCTL, then disable SMEP (prevents the kernel to execute user code), execute code from the user and reenable SMEP again. If you'd like to read a full analysis of this vulnerable driver, we recommend reading the following:
-    - [https://github.com/notscimmy/libcapcom](https://github.com/notscimmy/libcapcom)
-    - [https://www.fuzzysecurity.com/tutorials/28.html](https://www.fuzzysecurity.com/tutorials/28.html)
+  {{< admonition tip >}}
+  The sole purpose of this Capcom driver here is to accept an IOCTL, then disable SMEP (prevents the kernel to execute user code), execute code from the user and reenable SMEP again. If you'd like to read a full analysis of this vulnerable driver, we recommend reading the following:
+  - [https://github.com/notscimmy/libcapcom](https://github.com/notscimmy/libcapcom)
+  - [https://www.fuzzysecurity.com/tutorials/28.html](https://www.fuzzysecurity.com/tutorials/28.html)
+  {{< /admonition >}}
 
 4. `sub_140002C44` - accepts the handle to the device and a pointer to the second PE file decoded by `sub_140002370`. It then locates the export `DriverBootstrap` from our driver and ultimately calls `DeviceIOControl`, with IOCTL code `0xAA013044` and a buffer pointing to code that contains the address of `DriverBootstrap`.
 
