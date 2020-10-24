@@ -28,7 +28,7 @@ googleAnalytics = "G-Z0NYXY577C"
 # Number of posts to show in a page
 paginate = 15
 
-images = ["/images/explained.svg", "/images/explained_dark.png"]
+images = ["/images/explained_dark.png"]
 
 [params]
   # LoveIt theme version
@@ -37,7 +37,7 @@ images = ["/images/explained.svg", "/images/explained_dark.png"]
   # public git repo url only then enableGitInfo is true
   gitRepo = "https://github.com/ExplainedRE/website"
   # website images for Open Graph and Twitter Cards
-  images = ["images/explained.svg"]
+  images = ["images/explained_dark.png"]
 
   # Home page config
   [params.home]
