@@ -1776,5 +1776,5 @@ This challenge contained quite a lot of learning opportunities and required thin
 
 1. String decryption script
    
-    [decrypt_strings.py](decrpt_strings.py)
+    [decrypt_strings.py](decrypt_strings.py)
 
