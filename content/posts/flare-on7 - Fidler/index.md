@@ -1,6 +1,6 @@
 ---
 title: "Flare-On 7 — 01 Fidler"
-date: 2020-10-23T21:29:42+03:00
+date: 2020-10-23T21:29:41+03:00
 draft: false
 author: "explained.re"
 tags: ["flare-on"]
