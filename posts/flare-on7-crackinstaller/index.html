@@ -33,7 +33,7 @@ Simply executing the binary doesn&rsquo;t seem to do much, so we&rsquo;ll fire u
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/explained.re\/posts\/flare-on7-crackinstaller\/"
-        },"genre": "posts","keywords": "flare-on","wordcount":  3907 ,
+        },"genre": "posts","keywords": "flare-on","wordcount":  3908 ,
         "url": "https:\/\/explained.re\/posts\/flare-on7-crackinstaller\/","datePublished": "2020-10-23T21:29:49+03:00","dateModified": "2020-10-23T21:29:49+03:00","publisher": {
             "@type": "Organization",
             "name": "explained.re"},"author": {
@@ -94,7 +94,7 @@ Simply executing the binary doesn&rsquo;t seem to do much, so we&rsquo;ll fire u
 <main class="main">
                 <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 09 crackinstaller</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class="post-category">included in <a href="/categories/write-up/"><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3907 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3908 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;19 minutes&nbsp;</div>
         </div><div class="content" id="content"><div class="details admonition info open">
         <div class="details-summary admonition-title">
@@ -324,23 +324,25 @@ Simply executing the binary doesn&rsquo;t seem to do much, so we&rsquo;ll fire u
         <span class="p">}</span>
 </code></pre></div><p>Now that we have resolved the API functions the binary is going to use, we can continue analyzing our <code>init_function</code>. In it, we see another function (<code>sub_140002370</code>) that calls <code>decode_string</code>, but this time it converts it to a Unicode string before it returns it, let&rsquo;s rename it <code>decode_string_unicode</code>. And then, we can also rename the encoded strings that are passed to this function as well, as we did before. Now we can continue to see what functions our <code>initi_functions</code> invokes:</p>
 <ol>
-<li>
-<p><code>sub_140002370</code> - decodes and returns an executable file (PE format)</p>
-</li>
-<li>
-<p><code>sub_140002ED8</code> - seem to be writing the data from the second argument to a file, it writes the data it got from the previous function to <code>C:\Windows\System32\cfs.dll</code>.</p>
-</li>
-<li>
-<p><code>sub_140001FB4</code> - accepts a service name and a binary path, then creates a service and starts it. At this point, we understand that the <code>cfs.dll</code> the binary dumps is actually a driver. After running the service the function stores a handle to the <code>\\.\Htsysm72FB</code> device in the fourth argument. Some of you may already know what this device is, but even if you don&rsquo;t a quick search will tell you immediately. This is the famous vulnerable Capcom driver, which basically allows an unprivileged user to execute code in the kernel.</p>
-<p>The sole purpose of this Capcom driver here is to accept an IOCTL, then disable SMEP (prevents the kernel to execute user code), execute code from the user and reenable SMEP again. If you&rsquo;d like to read a full analysis of this vulnerable driver, we recommend reading the following:</p>
+<li><code>sub_140002370</code> - decodes and returns an executable file (PE format)</li>
+<li><code>sub_140002ED8</code> - seem to be writing the data from the second argument to a file, it writes the data it got from the previous function to <code>C:\Windows\System32\cfs.dll</code>.</li>
+<li><code>sub_140001FB4</code> - accepts a service name and a binary path, then creates a service and starts it. At this point, we understand that the <code>cfs.dll</code> the binary dumps is actually a driver. After running the service the function stores a handle to the <code>\\.\Htsysm72FB</code> device in the fourth argument. Some of you may already know what this device is, but even if you don&rsquo;t a quick search will tell you immediately. This is the famous vulnerable Capcom driver, which basically allows an unprivileged user to execute code in the kernel.</li>
+</ol>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>The sole purpose of this Capcom driver here is to accept an IOCTL, then disable SMEP (prevents the kernel to execute user code), execute code from the user and reenable SMEP again. If you&rsquo;d like to read a full analysis of this vulnerable driver, we recommend reading the following:</p>
 <ul>
 <li><a href="https://github.com/notscimmy/libcapcom" target="_blank" rel="noopener noreffer">https://github.com/notscimmy/libcapcom</a></li>
 <li><a href="https://www.fuzzysecurity.com/tutorials/28.html" target="_blank" rel="noopener noreffer">https://www.fuzzysecurity.com/tutorials/28.html</a></li>
 </ul>
-</li>
-<li>
-<p><code>sub_140002C44</code> - accepts the handle to the device and a pointer to the second PE file decoded by <code>sub_140002370</code>. It then locates the export <code>DriverBootstrap</code> from our driver and ultimately calls <code>DeviceIOControl</code>, with IOCTL code <code>0xAA013044</code> and a buffer pointing to code that contains the address of <code>DriverBootstrap</code>.</p>
-</li>
+</div>
+        </div>
+    </div>
+<ol start="4">
+<li><code>sub_140002C44</code> - accepts the handle to the device and a pointer to the second PE file decoded by <code>sub_140002370</code>. It then locates the export <code>DriverBootstrap</code> from our driver and ultimately calls <code>DeviceIOControl</code>, with IOCTL code <code>0xAA013044</code> and a buffer pointing to code that contains the address of <code>DriverBootstrap</code>.</li>
 </ol>
 <p>Since we already know this driver is Capcom, we know this IOCTL will make the driver disable SMEP, and then jumping to the user-supplied code in the input buffer of the <code>DeviceIoControl</code>. The easiest way to continue is to debug this and have a look at the code the kernel will be executing. But before we start <em>WinDbg</em>, we need to figure out where we&rsquo;d like to break. A quick way is to locate where the dumped <code>cfs.dll</code> driver handles our IOCTL. We open up IDA and hit <code>Ctrl+I</code> to search an immediate value, which brings us to the dispatch function that handles <code>IRP_MJ_DEVICE_CONTROL</code> requests - <code>sub_10590</code>. Here we see that this IOCTL will ultimately bring to the invocation of <code>sub_10524</code> which accepts a pointer, disables SMEP, and jumps to it. This is where we&rsquo;d like to break to we take the <code>call</code> address and subtract is from the module base to get its offset in the driver.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Python</span><span class="o">&gt;</span><span class="mh">0x00010573</span> <span class="o">-</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">get_imagebase</span><span class="p">()</span>
