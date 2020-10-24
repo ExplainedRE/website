@@ -3,7 +3,12 @@ baseURL = "/"
 defaultContentLanguage = "en"
 # language code
 languageCode = "en"
+
 title = "explained.re"
+
+# site description
+description = "Reverse Engineering Explained"
+
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
@@ -22,6 +27,8 @@ googleAnalytics = "G-Z0NYXY577C"
 
 # Number of posts to show in a page
 paginate = 15
+
+images = ["/images/explained.svg", "/images/explained_dark.png"]
 
 [params]
   # LoveIt theme version
