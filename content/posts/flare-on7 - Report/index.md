@@ -1,5 +1,5 @@
 ---
-title: "Flare-On 7 - 04 Report"
+title: "Flare-On 7 — 04 Report"
 date: 2020-10-23T21:29:42+03:00
 draft: false
 author: "explained.re"
