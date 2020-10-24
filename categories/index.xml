@@ -3,5 +3,19 @@
         <title>Categories - Category - explained.re</title>
         <link>/categories/</link>
         <description>Categories - Category - explained.re</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="/categories/" rel="self" type="application/rss+xml" /></channel>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Oct 2020 21:30:50 &#43;0300</lastBuildDate><atom:link href="/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>ctf</title>
+    <link>/categories/ctf/</link>
+    <pubDate>Fri, 23 Oct 2020 21:30:50 &#43;0300</pubDate>
+    <author>Author</author>
+    <guid>/categories/ctf/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>write-up</title>
+    <link>/categories/write-up/</link>
+    <pubDate>Fri, 23 Oct 2020 21:29:51 &#43;0300</pubDate>
+    <author>Author</author>
+    <guid>/categories/write-up/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
 </rss>

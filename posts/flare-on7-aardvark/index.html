@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Flare-On 7 — 08 Aardvark - explained.re</title><meta name="Description" content=""><meta property="og:title" content="Flare-On 7 — 08 Aardvark" />
+<meta property="og:description" content="Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
+$ file ttt2.exe ttt2.exe: PE32&#43; executable (GUI) x86-64, for MS Windows When opening the file in IDA, the flow is pretty straight forward." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/flare-on7-aardvark/" />
+<meta property="og:image" content="/images/explained.svg"/>
+<meta property="article:published_time" content="2020-10-23T21:29:48+03:00" />
+<meta property="article:modified_time" content="2020-10-23T21:29:48+03:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/images/explained.svg"/>
+
+<meta name="twitter:title" content="Flare-On 7 — 08 Aardvark"/>
+<meta name="twitter:description" content="Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
+$ file ttt2.exe ttt2.exe: PE32&#43; executable (GUI) x86-64, for MS Windows When opening the file in IDA, the flow is pretty straight forward."/>
+<meta name="application-name" content="explained.re">
+<meta name="apple-mobile-web-app-title" content="explained.re"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/flare-on7-aardvark/" /><link rel="prev" href="/posts/flare-on7-re-crowd/" /><link rel="next" href="/posts/flare-on7-crackinstaller/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Flare-On 7 — 08 Aardvark",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/flare-on7-aardvark\/"
+        },"genre": "posts","keywords": "flare-on","wordcount":  1519 ,
+        "url": "\/posts\/flare-on7-aardvark\/","datePublished": "2020-10-23T21:29:48+03:00","dateModified": "2020-10-23T21:29:48+03:00","publisher": {
+            "@type": "Organization",
+            "name": "explained.re"},"author": {
+                "@type": "Person",
+                "name": "explained.re"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="explained.re"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/explained.svg"
+        data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x"
+        data-sizes="auto"
+        alt="/images/explained.svg"
+        title="/images/explained.svg" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/explainedre/website" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="explained.re"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/explained.svg"
+        data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x"
+        data-sizes="auto"
+        alt="/images/explained.svg"
+        title="/images/explained.svg" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/explainedre/website" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 08 Aardvark</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class="post-category">included in <a href="/categories/write-up/"><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1519 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#dumping-the-resource">Dumping the resource</a></li>
+    <li><a href="#game-board-ui">Game board UI</a></li>
+    <li><a href="#checking-the-elf-server-file">Checking the ELF server file</a>
+      <ul>
+        <li><a href="#patching-the-elf-resource">Patching the ELF resource</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>Challenge Description<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.</div>
+        </div>
+    </div>
+<h2 id="getting-started">Getting Started</h2>
+<p>The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get <code>ttt2.exe</code> which is a 64-bit Windows binary.</p>
+<pre><code class="language-visual-basic" data-lang="visual-basic">$ file ttt2.exe 
+ttt2.exe: PE32+ executable (GUI) x86-64, for MS Windows
+</code></pre><p>When opening the file in IDA, the flow is pretty straight forward. The <code>WinMain</code> function verifies that the environment is suitable for executing the challenge. First, it gets a path to a temporary folder and checks whether it can bind to a file named <code>%TEMP%/496b9b4b.ed5</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">if</span> <span class="p">(</span> <span class="n">GetTempPathA</span><span class="p">(</span><span class="mh">0x105u</span><span class="p">,</span> <span class="n">temp_path</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">SetCurrentDirectoryA</span><span class="p">(</span><span class="n">temp_path</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">WSAStartup</span><span class="p">(</span><span class="n">WINSOCK_VERSION</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">WSAData</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="s">&#34;Error initializing Winsock&#34;</span><span class="p">,</span> <span class="s">&#34;Error&#34;</span><span class="p">,</span> <span class="mh">0x10u</span><span class="p">);</span>
+    <span class="k">goto</span> <span class="n">LABEL_17</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">...</span> <span class="p">[</span> <span class="n">snip</span> <span class="p">]</span> <span class="p">...</span>
+  <span class="n">wsprintfA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">name</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="s">&#34;496b9b4b.ed5&#34;</span><span class="p">);</span>
+  <span class="n">DeleteFileA</span><span class="p">(</span><span class="s">&#34;496b9b4b.ed5&#34;</span><span class="p">);</span>
+  <span class="n">v8</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">v6</span> <span class="o">=</span> <span class="n">v8</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">v8</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="n">i64</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="s">&#34;socket failed&#34;</span><span class="p">,</span> <span class="s">&#34;Error&#34;</span><span class="p">,</span> <span class="mh">0x10u</span><span class="p">);</span>
+    <span class="n">v9</span> <span class="o">=</span> <span class="s">&#34;Error creating Unix domain socket&#34;</span><span class="p">;</span>
+<span class="nl">LABEL_16</span><span class="p">:</span>
+    <span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="n">v9</span><span class="p">,</span> <span class="s">&#34;Error&#34;</span><span class="p">,</span> <span class="mh">0x10u</span><span class="p">);</span>
+    <span class="k">goto</span> <span class="n">LABEL_17</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">bind</span><span class="p">(</span><span class="n">v8</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="n">name</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">v10</span> <span class="o">=</span> <span class="s">&#34;bind failed&#34;</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div><p>The flow is then creating to create a COM object and call a function named <code>sub_1400012B0</code>. This function begins with creating a new <code>.tmp</code> file name in the %TEMP% directory. Then reads a resource name &ldquo;300&rdquo; from its resource section, and writes it to the temp file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">GetTempFileNameA</span><span class="p">(</span><span class="s">&#34;.&#34;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">FileName</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="s">&#34;GetTempFileName failed&#34;</span><span class="p">;</span>
+    <span class="k">goto</span> <span class="n">LABEL_7</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">wsprintfA</span><span class="p">(</span><span class="n">Str</span><span class="p">,</span> <span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">FileName</span><span class="p">);</span>
+  <span class="o">*</span><span class="n">strchr</span><span class="p">(</span><span class="n">Str</span><span class="p">,</span> <span class="sc">&#39;\\&#39;</span><span class="p">)</span> <span class="o">=</span> <span class="sc">&#39;/&#39;</span><span class="p">;</span>
+  <span class="n">hTempFile</span> <span class="o">=</span> <span class="p">(</span><span class="kr">__int64</span><span class="p">)</span><span class="n">CreateFileA</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span> <span class="mh">0x40000000u</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="mi">3u</span><span class="p">,</span> <span class="mh">0x80u</span><span class="p">,</span> <span class="mi">0</span><span class="n">i64</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">hTempFile</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="s">&#34;CreateFile failed&#34;</span><span class="p">;</span>
+    <span class="k">goto</span> <span class="n">LABEL_7</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">hResource</span> <span class="o">=</span> <span class="n">FindResourceA</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="p">(</span><span class="n">LPCSTR</span><span class="p">)</span><span class="mi">300</span><span class="p">,</span> <span class="p">(</span><span class="n">LPCSTR</span><span class="p">)</span><span class="mh">0x100</span><span class="p">);</span>
+  <span class="n">c_hResource</span> <span class="o">=</span> <span class="n">hResource</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">hResource</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="s">&#34;FindResource failed&#34;</span><span class="p">;</span>
+<span class="nl">LABEL_7</span><span class="p">:</span>
+    <span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="s">&#34;Error&#34;</span><span class="p">,</span> <span class="mh">0x10u</span><span class="p">);</span>
+    <span class="n">c_hrsrc</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">void</span> <span class="o">**</span><span class="p">)</span><span class="n">NumberOfBytesWritten</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!*</span><span class="p">(</span><span class="n">_QWORD</span> <span class="o">*</span><span class="p">)</span><span class="n">NumberOfBytesWritten</span> <span class="p">)</span>
+      <span class="k">goto</span> <span class="n">LABEL_16</span><span class="p">;</span>
+    <span class="k">goto</span> <span class="n">LABEL_15</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">size</span> <span class="o">=</span> <span class="n">SizeofResource</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="n">hResource</span><span class="p">);</span>
+  <span class="n">hrsrc</span> <span class="o">=</span> <span class="n">LoadResource</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="n">c_hResource</span><span class="p">);</span>
+  <span class="n">c_hrsrc</span> <span class="o">=</span> <span class="n">hrsrc</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">hrsrc</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="s">&#34;LockResource failed&#34;</span><span class="p">,</span> <span class="s">&#34;Error&#34;</span><span class="p">,</span> <span class="mh">0x10u</span><span class="p">);</span>
+    <span class="k">goto</span> <span class="n">LABEL_16</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">buf</span> <span class="o">=</span> <span class="n">LockResource</span><span class="p">(</span><span class="n">hrsrc</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">WriteFile</span><span class="p">((</span><span class="n">HANDLE</span><span class="p">)</span><span class="n">hTempFile</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">NumberOfBytesWritten</span><span class="p">,</span> <span class="mi">0</span><span class="n">i64</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">NumberOfBytesWritten</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">size</span> <span class="p">)</span>
+  <span class="p">{</span>
+</code></pre></div><h2 id="dumping-the-resource">Dumping the resource</h2>
+<p>What is this resource that was saved? We can check it using different PE Resource editors. We chose to use radare2 for this.</p>
+<p>First, open the binary in radare2 and use the <code>iR</code> command to list its resources.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="err">$</span> <span class="n">r2</span> <span class="n">ttt2</span><span class="p">.</span><span class="n">exe</span> 
+
+<span class="p">[</span><span class="mh">0x1400027bc</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">iR</span>
+<span class="n">Resource</span> <span class="mi">0</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="n">BOARD</span>
+  <span class="nl">timestamp</span><span class="p">:</span> <span class="n">Tue</span> <span class="n">Jan</span>  <span class="mi">1</span> <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="mi">1980</span>
+  <span class="nl">vaddr</span><span class="p">:</span> <span class="mh">0x140023100</span>
+  <span class="nl">size</span><span class="p">:</span> <span class="mi">328</span>
+  <span class="nl">type</span><span class="p">:</span> <span class="n">DIALOG</span>
+  <span class="nl">language</span><span class="p">:</span> <span class="n">LANG_ENGLISH</span>
+<span class="n">Resource</span> <span class="mi">1</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="nl">timestamp</span><span class="p">:</span> <span class="n">Tue</span> <span class="n">Jan</span>  <span class="mi">1</span> <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="mi">1980</span>
+  <span class="nl">vaddr</span><span class="p">:</span> <span class="mh">0x140025a48</span>
+  <span class="nl">size</span><span class="p">:</span> <span class="mi">585</span>
+  <span class="nl">type</span><span class="p">:</span> <span class="n">MANIFEST</span>
+  <span class="nl">language</span><span class="p">:</span> <span class="n">LANG_ENGLISH</span>
+<span class="n">Resource</span> <span class="mi">2</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="mi">300</span>
+  <span class="nl">timestamp</span><span class="p">:</span> <span class="n">Tue</span> <span class="n">Jan</span>  <span class="mi">1</span> <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="mi">1980</span>
+  <span class="nl">vaddr</span><span class="p">:</span> <span class="mh">0x140023248</span>
+  <span class="nl">size</span><span class="p">:</span> <span class="mi">10</span><span class="n">K</span>
+  <span class="nl">type</span><span class="p">:</span> <span class="n">UNKNOWN</span> <span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+  <span class="nl">language</span><span class="p">:</span> <span class="n">LANG_ENGLISH</span>
+
+</code></pre></div><p>We see that there are 3 resource files, interesting! The first one called &ldquo;BOARD&rdquo; (a DIALOG), the second is named &ldquo;1&rdquo; (a MANIFEST) and the third is our target resource — &ldquo;300&rdquo;. Let&rsquo;s print some bytes from the resource &ldquo;300&rdquo; and see what&rsquo;s in there.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="p">[</span><span class="mh">0x1400027bc</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">px</span> <span class="err">@</span> <span class="mh">0x140023248</span>
+<span class="o">-</span> <span class="n">offset</span> <span class="o">-</span>    <span class="mi">0</span> <span class="mi">1</span>  <span class="mi">2</span> <span class="mi">3</span>  <span class="mi">4</span> <span class="mi">5</span>  <span class="mi">6</span> <span class="mi">7</span>  <span class="mi">8</span> <span class="mi">9</span>  <span class="n">A</span> <span class="n">B</span>  <span class="n">C</span> <span class="n">D</span>  <span class="n">E</span> <span class="n">F</span>  <span class="mo">01234567</span><span class="mi">89</span><span class="n">ABCDEF</span>
+<span class="mh">0x140023248</span>  <span class="mf">7f</span><span class="mi">45</span> <span class="mi">4</span><span class="n">c46</span> <span class="mo">0201</span> <span class="mo">0100</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span>  <span class="p">.</span><span class="n">ELF</span><span class="p">............</span>
+<span class="mh">0x140023258</span>  <span class="mo">0300</span> <span class="mf">3e00</span> <span class="mo">0100</span> <span class="mo">0000</span> <span class="n">a013</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span>  <span class="p">..</span><span class="o">&gt;</span><span class="p">.............</span>
+<span class="mh">0x140023268</span>  <span class="mi">4000</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mi">4021</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span>  <span class="err">@</span><span class="p">.......</span><span class="err">@</span><span class="o">!</span><span class="p">......</span>
+<span class="mh">0x140023278</span>  <span class="mo">0000</span> <span class="mo">0000</span> <span class="mi">4000</span> <span class="mi">3800</span> <span class="mi">0900</span> <span class="mi">4000</span> <span class="mi">1</span><span class="n">b00</span> <span class="mi">1</span><span class="n">a00</span>  <span class="p">....</span><span class="err">@</span><span class="mf">.8</span><span class="p">...</span><span class="err">@</span><span class="p">.....</span>
+<span class="mh">0x140023288</span>  <span class="mo">0600</span> <span class="mo">0000</span> <span class="mo">0400</span> <span class="mo">0000</span> <span class="mi">4000</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span>  <span class="p">........</span><span class="err">@</span><span class="p">.......</span>
+<span class="mh">0x140023298</span>  <span class="mi">4000</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mi">4000</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span>  <span class="err">@</span><span class="p">.......</span><span class="err">@</span><span class="p">.......</span>
+<span class="mh">0x1400232a8</span>  <span class="n">f801</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="n">f801</span> <span class="mo">0000</span> <span class="mo">0000</span> <span class="mo">0000</span>  <span class="p">................</span>
+</code></pre></div><p>Interesting! It seems like the program is dropping a Linux ELF file to the file. And it doesn&rsquo;t look like it was applied with any kind of encryption on it. How does a Windows executable run this Linux ELF binary? This made us curious.</p>
+<p>Let&rsquo;s dump this ELF to a file so we can look at it later. Using radare2&rsquo;s <code>wtf</code> (Write To File) command we can specify the resource length and dump it.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="p">[</span><span class="mh">0x1400027bc</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">wtf</span> <span class="n">rsrc_300</span><span class="p">.</span><span class="n">elf</span> <span class="mi">10240</span> <span class="err">@</span> <span class="mh">0x140023248</span>
+<span class="n">Dumped</span> <span class="mi">10240</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mh">0x140023248</span> <span class="n">into</span> <span class="n">rsrc_300</span><span class="p">.</span><span class="n">elf</span>
+</code></pre></div><h2 id="game-board-ui">Game board UI</h2>
+<p>Back to our analysis. After saving the ELF file to a temporary file, the program calls <code>sub_140001930</code>. In this function, we can see checks for our OS version. Each version has a different function to handle it. These handler functions will use <code>CreateLxProcecs</code> COM method to execute the Linux binary is WSL, the Windows Subsystem for Linux. According to one of the error messages, we can see that we need to have WSL version 1 installed. Luckily, we do.</p>
+<p>When the program is executing the ELF file using COM, we are back to the <code>WinMain</code> function and continue the execution of the program. First, it looks like a connection was established, using the <code>accept</code> function and then a call to create a dialog using the <code>BOARD</code> resource we saw earlier.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">s</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">c_hsock</span><span class="p">,</span> <span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">i64</span><span class="p">);</span>
+<span class="n">hModule</span> <span class="o">=</span> <span class="n">GetModuleHandleA</span><span class="p">(</span><span class="mi">0</span><span class="n">i64</span><span class="p">);</span>
+<span class="n">hWnd_</span> <span class="o">=</span> <span class="n">CreateDialogParamA</span><span class="p">(</span><span class="n">hModule</span><span class="p">,</span> <span class="s">&#34;BOARD&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="n">i64</span><span class="p">,</span> <span class="p">(</span><span class="n">DLGPROC</span><span class="p">)</span><span class="n">DialogFunc</span><span class="p">,</span> <span class="mi">0</span><span class="n">i64</span><span class="p">);</span>
+</code></pre></div><p>When looking at the <code>DialogFunc</code> function, it looks like a board game that is handling commands from a server (<code>send</code>, <code>recv</code>). It seems like the board is built out of 9 space characters (0x20).</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="mi">14000123</span><span class="n">A</span>  <span class="n">mov</span>     <span class="n">rax</span><span class="p">,</span> <span class="mi">2020202020202020</span><span class="n">h</span>
+<span class="mi">140001244</span>  <span class="n">xor</span>     <span class="n">r9d</span><span class="p">,</span> <span class="n">r9d</span>        <span class="p">;</span> <span class="n">flags</span>
+<span class="mi">140001247</span>  <span class="n">mov</span>     <span class="nl">cs</span><span class="p">:</span><span class="n">board</span><span class="p">,</span> <span class="n">rax</span>
+</code></pre></div><p>A closer looks at the function suggests that it is a &ldquo;front end&rdquo; GUI for a game, but that the processing itself done in the Linux ELF. When user clicks different buttons, the operations are sent to the ELF binary through sockets, and then it replies with results. Since the ELF seems to contain valuable information, it&rsquo;s time to open it. But before it, let&rsquo;s open the game and see how it looks like when running it.</p>
+<a class="lightgallery" href="/posts/flare-on7-aardvark/images/image.png" title="/posts/flare-on7-aardvark/images/image.png" data-thumbnail="/posts/flare-on7-aardvark/images/image.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image.png"
+            data-srcset="/posts/flare-on7-aardvark/images/image.png, images/image.png 1.5x, /posts/flare-on7-aardvark/images/image.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on7-aardvark/images/image.png" />
+    </a>
+<p>It looks like a simple Tic-Tac-Toc game. The spaces we saw earlier must be the annotation for an empty cell. The program always takes the first turn and put an X in the middle cell. It looks like we need to win the game by placing &ldquo;O&rdquo; in it. Game on.</p>
+<h2 id="checking-the-elf-server-file">Checking the ELF server file</h2>
+<p>The Linux ELF file is a very simple game back end. After establishing a connection to the server it builds an empty game and sends it to the client (the EXE file). The EXE is showing the game, and the Server is processing the current state of the board. If it&rsquo;s the turn of the &ldquo;O&rdquo;, it uses the <code>recv</code> function to get the coordinates of where the user placed &ldquo;O&rdquo;. When it&rsquo;s X&rsquo;s turn, the server looks for the best cell to place X in, and send an updated board to the Windows process. After each turn, the server validates if there is a winner. As our goal is to win, we wanted to check how can we bypass the different checks.</p>
+<p>At the very beginning of the program, we saw that the board is initialized with empty spaces:</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="mi">0</span><span class="n">B67</span>  <span class="n">lea</span>     <span class="n">rbx</span><span class="p">,</span> <span class="n">g_board</span>
+<span class="p">...</span>
+<span class="mi">0</span><span class="n">B98</span>  <span class="n">mov</span>     <span class="n">rax</span><span class="p">,</span> <span class="mi">2020202020202020</span><span class="n">h</span>
+<span class="mi">0</span><span class="n">BA2</span>  <span class="n">mov</span>     <span class="p">[</span><span class="n">rbx</span><span class="p">],</span> <span class="n">rax</span>
+<span class="mi">0</span><span class="n">BA5</span>  <span class="n">mov</span>     <span class="nl">cs</span><span class="p">:</span><span class="n">g_board</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="n">h</span>
+</code></pre></div><p>It caught us by surprise to see that there is no enforcing of an empty board in both the server and the Windows application. In fact, we wondered if we can patch the default empty board of nine spaces — empty cells — and replace it with a board with &lsquo;O&rsquo;. If we will able to do this, the server will try to check if there is a winner and will see that &ldquo;O&rdquo; wins. Let&rsquo;s try to do this.</p>
+<h3 id="patching-the-elf-resource">Patching the ELF resource</h3>
+<p>What we want to do is to take the instruction at <code>0xb98</code> and patch it with O chars — <code>0x4f</code>. We need to remember that we can&rsquo;t just patch the dumped file, because it should reside in the resources of the Windows executable. Luckily, the resource wasn&rsquo;t encrypted in any way so we can simply patch the bytes in the resource section itself.</p>
+<p>First, let&rsquo;s copy <code>ttt2.exe</code> to a new file that we can patch, and open it in radare2 in write mode enabled (<code>-w</code>).</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="err">$</span> <span class="n">cp</span> <span class="n">ttt2</span><span class="p">.</span><span class="n">exe</span> <span class="n">ttt2_patched</span><span class="p">.</span><span class="n">exe</span> 
+<span class="err">$</span> <span class="n">r2</span> <span class="o">-</span><span class="n">w</span> <span class="n">ttt2_patched</span><span class="p">.</span><span class="n">exe</span>
+</code></pre></div><p>Then, we can navigate to the &ldquo;300&rdquo; resource and from there, we can go <code>0xb98</code> bytes forward, to the <code>mov</code> instruction. Radare2 named the resource for us as &ldquo;resource.2&rdquo;.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="p">[</span><span class="mh">0x1400027bc</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">s</span> <span class="n">resource</span><span class="mf">.2</span> <span class="o">+</span> <span class="mh">0xb98</span>
+<span class="p">[</span><span class="mh">0x140023de0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">pd</span> <span class="mi">1</span>
+<span class="mh">0x140023de0</span>      <span class="mi">48</span><span class="n">b82020202020202020</span>   <span class="n">movabs</span> <span class="n">rax</span><span class="p">,</span> <span class="mh">0x2020202020202020</span> <span class="p">;</span> <span class="err">&#39;</span>        <span class="err">&#39;</span>
+</code></pre></div><p>Good, we are in the right place. All we need is two &ldquo;O&quot;s so it will be easy for us to click the third one a complete a row. Let&rsquo;s patch the bytes of this instruction from <code>48b82020</code>to <code>48b84f4f</code> using the <code>wx</code> command.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="p">[</span><span class="mh">0x140023de0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">wx</span> <span class="mi">48</span><span class="n">b84f4f</span>
+<span class="p">[</span><span class="mh">0x140023de0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">pd</span> <span class="mi">1</span>
+<span class="mh">0x140023de0</span>      <span class="mi">48</span><span class="n">b84f4f202020202020</span>   <span class="n">movabs</span> <span class="n">rax</span><span class="p">,</span> <span class="mh">0x2020202020204f4f</span> <span class="p">;</span> <span class="err">&#39;</span><span class="n">OO</span>      <span class="err">&#39;</span>
+</code></pre></div><p>Alright, let&rsquo;s close radare2 and start our patched process. Running the program, we can see that the first two cells are filled with &ldquo;O&rdquo;. These are the cells that we patched, so far so good.</p>
+<a class="lightgallery" href="/posts/flare-on7-aardvark/images/image_1.png" title="/posts/flare-on7-aardvark/images/image_1.png" data-thumbnail="/posts/flare-on7-aardvark/images/image_1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_1.png"
+            data-srcset="/posts/flare-on7-aardvark/images/image_1.png, images/image_1.png 1.5x, /posts/flare-on7-aardvark/images/image_1.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on7-aardvark/images/image_1.png" />
+    </a>
+<p>This is our turn now, and thus we click on the cell at the top right corner to fill it with &ldquo;O&rdquo;. The message box with the flag will immediately appear on the screen:</p>
+<a class="lightgallery" href="/posts/flare-on7-aardvark/images/image_2.png" title="/posts/flare-on7-aardvark/images/image_2.png" data-thumbnail="/posts/flare-on7-aardvark/images/image_2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_2.png"
+            data-srcset="/posts/flare-on7-aardvark/images/image_2.png, images/image_2.png 1.5x, /posts/flare-on7-aardvark/images/image_2.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on7-aardvark/images/image_2.png" />
+    </a>
+<p><strong>Flag:</strong> <code>c1ArF/P2CjiDXQIZ@flare-on.com</code></p>
+<hr>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-10-23</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/flare-on/">flare-on</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/flare-on7-re-crowd/" class="prev" rel="prev" title="Flare-On 7 — 07 RE Crowd"><i class="fas fa-angle-left fa-fw"></i>Flare-On 7 — 07 RE Crowd</a>
+            <a href="/posts/flare-on7-crackinstaller/" class="next" rel="next" title="Flare-On 7 — 09 crackinstaller">Flare-On 7 — 09 crackinstaller<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":20},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-Z0NYXY577C');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-Z0NYXY577C" async></script></body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Flare-On 7 — 02 Garbage - explained.re</title><meta name="Description" content=""><meta property="og:title" content="Flare-On 7 — 02 Garbage" />
+<meta property="og:description" content="Challenge Description  One of our team members developed a Flare-On challenge but accidentally deleted it. We recovered it using extreme digital forensic techniques but it seems to be corrupted. We would fix it but we are too busy solving today&rsquo;s most important information security threats affecting our global economy. You should be able to get it working again, reverse engineer it, and acquire the flag.   Triage In the second challenge of Flare-On7 we are given a small binary file with the ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/flare-on7-garbage/" />
+<meta property="og:image" content="/images/explained.svg"/>
+<meta property="article:published_time" content="2020-10-23T21:29:42+03:00" />
+<meta property="article:modified_time" content="2020-10-23T21:29:42+03:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/images/explained.svg"/>
+
+<meta name="twitter:title" content="Flare-On 7 — 02 Garbage"/>
+<meta name="twitter:description" content="Challenge Description  One of our team members developed a Flare-On challenge but accidentally deleted it. We recovered it using extreme digital forensic techniques but it seems to be corrupted. We would fix it but we are too busy solving today&rsquo;s most important information security threats affecting our global economy. You should be able to get it working again, reverse engineer it, and acquire the flag.   Triage In the second challenge of Flare-On7 we are given a small binary file with the ."/>
+<meta name="application-name" content="explained.re">
+<meta name="apple-mobile-web-app-title" content="explained.re"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/flare-on7-garbage/" /><link rel="prev" href="/posts/flare-on7-fidler/" /><link rel="next" href="/posts/flare-on7-wednesday/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Flare-On 7 — 02 Garbage",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/flare-on7-garbage\/"
+        },"genre": "posts","keywords": "flare-on","wordcount":  889 ,
+        "url": "\/posts\/flare-on7-garbage\/","datePublished": "2020-10-23T21:29:42+03:00","dateModified": "2020-10-23T21:29:42+03:00","publisher": {
+            "@type": "Organization",
+            "name": "explained.re"},"author": {
+                "@type": "Person",
+                "name": "explained.re"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="explained.re"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/explained.svg"
+        data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x"
+        data-sizes="auto"
+        alt="/images/explained.svg"
+        title="/images/explained.svg" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/explainedre/website" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="explained.re"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/explained.svg"
+        data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x"
+        data-sizes="auto"
+        alt="/images/explained.svg"
+        title="/images/explained.svg" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/explainedre/website" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 02 Garbage</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class="post-category">included in <a href="/categories/write-up/"><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;889 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#triage">Triage</a></li>
+    <li><a href="#unpacking-the-program-using-upx">Unpacking the program using UPX</a></li>
+    <li><a href="#quick-analysis-in-cutter">Quick analysis in Cutter</a></li>
+    <li><a href="#emulating-the-binary-on-cutter-for-linux">Emulating the binary on Cutter for Linux</a></li>
+    <li><a href="#the-python-solution">The Python solution</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>Challenge Description<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">One of our team members developed a Flare-On challenge but accidentally deleted it. We recovered it using extreme digital forensic techniques but it seems to be corrupted. We would fix it but we are too busy solving today&rsquo;s most important information security threats affecting our global economy. You should be able to get it working again, reverse engineer it, and acquire the flag.</div>
+        </div>
+    </div>
+<h2 id="triage">Triage</h2>
+<p>In the second challenge of Flare-On7 we are given a small binary file with the <code>.exe</code> extension. As usual, let&rsquo;s start by a quick triaging and execute the <code>file</code> command on <code>garbage.exe</code> to get more information about it.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ file garbage.exe 
+garbage.exe: PE32 executable <span class="o">(</span>console<span class="o">)</span> Intel 80386, <span class="k">for</span> MS Windows, UPX compress
+</code></pre></div><p>The <code>file</code> commands tell us that we have a 32-bit Windows executable that is compressed with the popular <a href="https://en.wikipedia.org/wiki/UPX" target="_blank" rel="noopener noreffer">UPX</a> packer.</p>
+<h2 id="unpacking-the-program-using-upx">Unpacking the program using UPX</h2>
+<p>Luckily, whenever we have a UPX  packed executable, we can simply use the official <code>upx</code> program to unpack it.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ upx -d garbage.exe -o garbage_unpacked.exe
+                       Ultimate Packer <span class="k">for</span> eXecutables
+                          Copyright <span class="o">(</span>C<span class="o">)</span> <span class="m">1996</span> - <span class="m">2020</span>
+UPX git-d7ba31+ Markus Oberhumer, Laszlo Molnar <span class="p">&amp;</span> John Reiser   Jan 23rd <span class="m">2020</span>
+
+        File size         Ratio      Format      Name
+   --------------------   ------   -----------   -----------
+upx: garbage.exe: OverlayException: invalid overlay size<span class="p">;</span> file is possibly corrupt
+
+Unpacked <span class="m">1</span> file: <span class="m">0</span> ok, <span class="m">1</span> error.
+</code></pre></div><p>Oh no, UPX threw an error at us: &ldquo;OverlayException: invalid overlay size; file is possibly corrupt&rdquo;. Since the output did not provide a lot of meaningful data, let&rsquo;s check online and see what causes this error.  Thankfully, UPX is open source so we can check the <a href="https://github.com/upx/upx/blob/d7ba31cab8ce8d95d2c10e88d2ec787ac52005ef/src/packer.cpp#L574-L583" target="_blank" rel="noopener noreffer">original source code</a> and check why this error is showed.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="n">Packer</span><span class="o">::</span><span class="n">checkOverlay</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">overlay</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">overlay</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="n">off_t</span><span class="p">)</span><span class="n">overlay</span> <span class="o">&gt;</span> <span class="n">file_size</span><span class="p">)</span>
+        <span class="k">throw</span> <span class="n">OverlayException</span><span class="p">(</span><span class="s">&#34;invalid overlay size; file is possibly corrupt&#34;</span><span class="p">);</span>
+    <span class="p">...</span>
+</code></pre></div><p>Looks pretty simple. From reading the code we can understand that the calculated overlay size is bigger than the file size. The overlay size is calculated by reading the PE headers in the executable, while the file size is the actual file on disk. Thus, we can either fix the headers or simply increase the file size and feed it with appended null bytes. Hopefully, with enough null bytes we will be able to satisfy UPX so it will unpack the file for us.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Copy the binary</span>
+$ cp garbage.exe modified_garbage.exe
+
+<span class="c1"># Append 1000 null-bytes to its end</span>
+$ python -c <span class="s2">&#34;print(&#39;\x00&#39;*1000)&#34;</span> &gt;&gt; modified_garbage.exe
+
+<span class="c1"># Unpack it using UPX</span>
+$ upx -d modified_garbage.exe -o garbage_unpacked.exe
+                       Ultimate Packer <span class="k">for</span> eXecutables
+                          Copyright <span class="o">(</span>C<span class="o">)</span> <span class="m">1996</span> - <span class="m">2020</span>
+UPX git-d7ba31+ Markus Oberhumer, Laszlo Molnar <span class="p">&amp;</span> John Reiser   Jan 23rd <span class="m">2020</span>
+
+        File size         Ratio      Format      Name
+   --------------------   ------   -----------   -----------
+     <span class="m">79629</span> &lt;-     <span class="m">41741</span>   52.42%    win32/pe     garbage_unpacked.exe
+
+Unpacked <span class="m">1</span> file.
+</code></pre></div><h2 id="quick-analysis-in-cutter">Quick analysis in Cutter</h2>
+<p>Great! So UPX was able to unpack the file now, and we can begin its analysis. Let&rsquo;s open this file in  <a href="https://cutter.re/" target="_blank" rel="noopener noreffer">Cutter</a> and see what is waiting for us.</p>
+<a class="lightgallery" href="/posts/flare-on7-garbage/images/image.png" title="/posts/flare-on7-garbage/images/image.png" data-thumbnail="/posts/flare-on7-garbage/images/image.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image.png"
+            data-srcset="/posts/flare-on7-garbage/images/image.png, images/image.png 1.5x, /posts/flare-on7-garbage/images/image.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on7-garbage/images/image.png" />
+    </a>
+<p>Now that the binary is opened, we can go to the <code>main</code> function which is the place we usually start our analysis from. The <code>main</code> function is very small and contains 3 blocks.</p>
+<a class="lightgallery" href="/posts/flare-on7-garbage/images/image_1.png" title="/posts/flare-on7-garbage/images/image_1.png" data-thumbnail="/posts/flare-on7-garbage/images/image_1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_1.png"
+            data-srcset="/posts/flare-on7-garbage/images/image_1.png, images/image_1.png 1.5x, /posts/flare-on7-garbage/images/image_1.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on7-garbage/images/image_1.png" />
+    </a>
+<p>When looking at the function, we see that it builds two arrays on the stack, and then xor each of them with a different key. The results will be written to a file.</p>
+<p>Luckily, the code is very simple so we can implement it manually in python. But why should we work hard? We already have this Windows executable opened in Cutter on Linux, so instead of understanding the instructions, we can use Cutter&rsquo;s emulation feature to emulate them, and just inspect the stack\registers and wait for the results. As simple as that? Yes. Well, almost - there is one thing we need to care for, Cutter can&rsquo;t emulate API calls to system libraries, so we need to <code>NOP</code> the call to <code>CreateFileA</code> at <code>0x00401166</code>.</p>
+<h2 id="emulating-the-binary-on-cutter-for-linux">Emulating the binary on Cutter for Linux</h2>
+<p>In Cutter disassembly view, click on the top address of the main function and choose Debug→Start emulation from the Debug menu.</p>
+<a class="lightgallery" href="/posts/flare-on7-garbage/images/image_2.png" title="/posts/flare-on7-garbage/images/image_2.png" data-thumbnail="/posts/flare-on7-garbage/images/image_2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_2.png"
+            data-srcset="/posts/flare-on7-garbage/images/image_2.png, images/image_2.png 1.5x, /posts/flare-on7-garbage/images/image_2.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on7-garbage/images/image_2.png" />
+    </a>
+<p>Then, go to the call to <code>CreateFileA</code> at <code>0x00401166</code> and right-click. From the context menu choose &ldquo;Edit → NOP Instruction&rdquo;.</p>
+<a class="lightgallery" href="/posts/flare-on7-garbage/images/image_3.png" title="/posts/flare-on7-garbage/images/image_3.png" data-thumbnail="/posts/flare-on7-garbage/images/image_3.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/image_3.png"
+            data-srcset="/posts/flare-on7-garbage/images/image_3.png, images/image_3.png 1.5x, /posts/flare-on7-garbage/images/image_3.png 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on7-garbage/images/image_3.png" />
+    </a>
+<p>In the dialog that opened, choose &ldquo;Enable Cache Mode&rdquo;. This will make sure that the file on disk stays the same, and only the memory loaded to Cutter will be changed.</p>
+<p>Now it should look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">0x00401160      push    dword <span class="o">[</span>lpFileName<span class="o">]</span> <span class="p">;</span> LPCSTR lpFileName
+0x00401166      nop
+0x00401167      nop
+0x00401168      nop
+0x00401169      nop
+0x0040116a      nop
+0x0040116b      nop
+0x0040116c      lea     ecx, <span class="o">[</span>lpFileName<span class="o">]</span>
+</code></pre></div><p>Now, let&rsquo;s open the Register References view (Debug → View → Register References). This view will show us some interesting values that are referenced by the registers. Now we can use step over the instruction in Main, until we find what is the content that will be written to the flag.</p>
+<p>The following gif shows how we emulate each instruction until the flag appears in both the stack and the registers. We can also learn that the file to be written is a vbs script <code>sink_the_tanker.vbs</code>.</p>
+<a class="lightgallery" href="/posts/flare-on7-garbage/images/get_flag.gif" title="/posts/flare-on7-garbage/images/get_flag.gif" data-thumbnail="/posts/flare-on7-garbage/images/get_flag.gif">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="images/get_flag.gif"
+            data-srcset="/posts/flare-on7-garbage/images/get_flag.gif, images/get_flag.gif 1.5x, /posts/flare-on7-garbage/images/get_flag.gif 2x"
+            data-sizes="auto"
+            alt="/posts/flare-on7-garbage/images/get_flag.gif" />
+    </a>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">MsgBox<span class="o">(</span><span class="s2">&#34;Congrats! Your key is: C0rruptGarbag3@flare-on.com&#34;</span><span class="o">)</span>
+</code></pre></div><h2 id="the-python-solution">The Python solution</h2>
+<p>For those of you who prefer the Python way, we have a code ready for you:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">from malduck import xor
+
+<span class="nv">buf1</span> <span class="o">=</span> b<span class="s2">&#34;8\x0E\x02;\x19;\x1B4\x1B\f#&gt;3\b\x11B9\x12\x1Es&#34;</span>
+<span class="nv">key1</span> <span class="o">=</span> b<span class="s2">&#34;KglPFOsQDxBPXmclOpmsdLDEPMRWbMDzwhDGOyqAkVMRvnBeIkpZIhFznwVylfjrkqprBPAdPuaiVoVugQAlyOQQtxBNsTdPZgDH &#34;</span>
+print<span class="o">(</span>xor<span class="o">(</span>key1, buf1<span class="o">))</span>
+
+<span class="nv">buf2</span> <span class="o">=</span> b<span class="s2">&#34;##3,\x0E?dI\n\x1E\n\x04#\x16\x02\x1ADf\b</span><span class="nv">$2</span><span class="s2">\x11t,*-B\x0F&gt;Pd\r]\x04\x1B\x17\x166\x03\x054 \t\bc!</span>$<span class="s2">\x0E\x15\x144X\x1A)y:\x00\x00&#34;</span>     
+<span class="nv">key2</span> <span class="o">=</span> b<span class="s2">&#34;nPTnaGLkIqdcQwvieFQKGcTGOTbfMjDNmvibfBDdFBhoPaBbtfQuuGWYomtqTFqvBSKdUMmciqKSGZaosWCSoZlcIlyQpOwkcAgw &#34;</span>       
+print<span class="o">(</span>xor<span class="o">(</span>key2, buf2<span class="o">))</span>
+
+<span class="c1"># Results:</span>
+<span class="c1"># b&#39;sink_the_tanker.vbs\x00&#39;</span>
+<span class="c1"># b&#39;MsgBox(&#34;Congrats! Your key is: C0rruptGarbag3@flare-on.com&#39;</span>
+</code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-10-23</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/flare-on/">flare-on</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/flare-on7-fidler/" class="prev" rel="prev" title="Flare-On 7 — 01 Fidler"><i class="fas fa-angle-left fa-fw"></i>Flare-On 7 — 01 Fidler</a>
+            <a href="/posts/flare-on7-wednesday/" class="next" rel="next" title="Flare-On 7 — 03 Wednesday">Flare-On 7 — 03 Wednesday<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":20},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-Z0NYXY577C');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-Z0NYXY577C" async></script></body>
+</html>
