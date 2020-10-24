@@ -1,5 +1,5 @@
 ---
-title: "Flare-On7 — 02 Garbage"
+title: "Flare-On 7 — 02 Garbage"
 date: 2020-10-23T21:29:42+03:00
 draft: false
 author: "explained.re"
