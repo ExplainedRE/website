@@ -1,88 +1,88 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>write-up - Category - explained.re</title>
-        <link>/categories/write-up/</link>
+        <link>https://explained.re/categories/write-up/</link>
         <description>write-up - Category - explained.re</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Oct 2020 21:29:51 &#43;0300</lastBuildDate><atom:link href="/categories/write-up/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Oct 2020 21:29:51 &#43;0300</lastBuildDate><atom:link href="https://explained.re/categories/write-up/" rel="self" type="application/rss+xml" /><item>
     <title>Flare-On 7 — 11 Rabbithole</title>
-    <link>/posts/flare-on-7-rabbithole/</link>
+    <link>https://explained.re/posts/flare-on-7-rabbithole/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:51 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on-7-rabbithole/</guid>
+    <guid>https://explained.re/posts/flare-on-7-rabbithole/</guid>
     <description><![CDATA[Challenge Description  One of our endpoints was infected with a very dangerous, yet unknown malware strain that operates in a fileless manner. The malware is - without doubt - an APT that is the ingenious work of the Cyber Army of the Republic of Kazohinia.
 One of our experts said that it looks like they took an existing banking malware family, and modified it in a way that it can be used to collect and exfiltrate files from the hard drive.]]></description>
 </item><item>
     <title>Flare-On 7 — 10 Break</title>
-    <link>/posts/flare-on-7-break/</link>
+    <link>https://explained.re/posts/flare-on-7-break/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:50 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on-7-break/</guid>
+    <guid>https://explained.re/posts/flare-on-7-break/</guid>
     <description><![CDATA[Challenge Description  As a reward for making it this far in Flare-On, we&rsquo;ve decided to give you a break. Welcome to the land of sunshine and rainbows!   For your convenience, use the table of contents on the sidebar to navigate to different locations and skip parts that you are rather familiar with.
 Initial Analysis First Look at ./break Looks like this challenge author decided to give us a break after all that hard work we&rsquo;ve done so far.]]></description>
 </item><item>
     <title>Flare-On 7 — 09 crackinstaller</title>
-    <link>/posts/flare-on7-crackinstaller/</link>
+    <link>https://explained.re/posts/flare-on7-crackinstaller/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:49 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on7-crackinstaller/</guid>
+    <guid>https://explained.re/posts/flare-on7-crackinstaller/</guid>
     <description><![CDATA[Challenge Description  What kind of crackme doesn&rsquo;t even ask for the password? We need to work on our COMmunication skills.   In this challenge we get a 64 bit Windows executable, off to a good start.
  The challenge description has a clue for the possible usage of COM objects here, so we&rsquo;ll make a mental note of that.
 Simply executing the binary doesn&rsquo;t seem to do much, so we&rsquo;ll fire up a debugger and start looking at the code.]]></description>
 </item><item>
     <title>Flare-On 7 — 08 Aardvark</title>
-    <link>/posts/flare-on7-aardvark/</link>
+    <link>https://explained.re/posts/flare-on7-aardvark/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:48 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on7-aardvark/</guid>
+    <guid>https://explained.re/posts/flare-on7-aardvark/</guid>
     <description><![CDATA[Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
 $ file ttt2.exe ttt2.exe: PE32+ executable (GUI) x86-64, for MS Windows When opening the file in IDA, the flow is pretty straight forward.]]></description>
 </item><item>
     <title>Flare-On 7 — 07 RE Crowd</title>
-    <link>/posts/flare-on7-re-crowd/</link>
+    <link>https://explained.re/posts/flare-on7-re-crowd/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:47 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on7-re-crowd/</guid>
+    <guid>https://explained.re/posts/flare-on7-re-crowd/</guid>
     <description><![CDATA[Challenge Description  Hello,
 Here at Reynholm Industries we pride ourselves on everything. It&rsquo;s not easy to admit, but recently one of our most valuable servers was breached. We don&rsquo;t believe in host monitoring so all we have is a network packet capture. We need you to investigate and determine what data was extracted from the server, if any.
    Getting Started In the 7th challenge of Flare-On7 we are given with a network capture file re_crowd.]]></description>
 </item><item>
     <title>Flare-On 7 — 06 Codeit</title>
-    <link>/posts/flare-on7-codeit/</link>
+    <link>https://explained.re/posts/flare-on7-codeit/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:46 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on7-codeit/</guid>
+    <guid>https://explained.re/posts/flare-on7-codeit/</guid>
     <description><![CDATA[Challenge Description  Reverse engineer this little compiled script to figure out what you need to do to make it give you the flag (as a QR code).   Getting started In the sixth challenge we are given with a simple file named codeit.exe. As in most of the challenges, let&rsquo;s start by executing the file command on it.
 $ file codeit.exe codeit.exe: PE32 executable (GUI) Intel 80386, for MS Windows, UPX compressed Similar to the 2nd challenge, codeit.]]></description>
 </item><item>
     <title>Flare-On 7 — 05 TKApp</title>
-    <link>/posts/flare-on7-tkapp/</link>
+    <link>https://explained.re/posts/flare-on7-tkapp/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:45 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on7-tkapp/</guid>
+    <guid>https://explained.re/posts/flare-on7-tkapp/</guid>
     <description><![CDATA[Challenge Description  Now you can play Flare-On on your watch! As long as you still have an arm left to put a watch on, or emulate the watch&rsquo;s operating system with sophisticated developer tools.   In this one, we get a .tpk file which is a Tizen OS application that&rsquo;s used in smartwatches. Let&rsquo;s extract the files from this archive to see what we&rsquo;re dealing with.
 $ unzip TKApp.]]></description>
 </item><item>
     <title>Flare-On 7 — 04 Report</title>
-    <link>/posts/flare-on7-report/</link>
+    <link>https://explained.re/posts/flare-on7-report/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:44 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on7-report/</guid>
+    <guid>https://explained.re/posts/flare-on7-report/</guid>
     <description><![CDATA[Challenge Description  Nobody likes analysing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
 $ file report.xls report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10.]]></description>
 </item><item>
     <title>Flare-On 7 — 03 Wednesday</title>
-    <link>/posts/flare-on7-wednesday/</link>
+    <link>https://explained.re/posts/flare-on7-wednesday/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:43 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on7-wednesday/</guid>
+    <guid>https://explained.re/posts/flare-on7-wednesday/</guid>
     <description><![CDATA[Challenge Description  Be the wednesday. Unlike challenge 1, you probably won&rsquo;t be able to beat this game the old fashioned way. Read the README.txt file, it is very important.   Usually, when the challenge author tells you that the README.txt is very important, it&rsquo;s a great idea to start the challenge by reading it.
 ██╗ ██╗███████╗██████╗ ███╗ ██╗███████╗███████╗██████╗ █████╗ ██╗ ██╗ ██║ ██║██╔════╝██╔══██╗████╗ ██║██╔════╝██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝ ██║ █╗ ██║█████╗ ██║ ██║██╔██╗ ██║█████╗ ███████╗██║ ██║███████║ ╚████╔╝ ██║███╗██║██╔══╝ ██║ ██║██║╚██╗██║██╔══╝ ╚════██║██║ ██║██╔══██║ ╚██╔╝ ╚███╔███╔╝███████╗██████╔╝██║ ╚████║███████╗███████║██████╔╝██║ ██║ ██║ ╚══╝╚══╝ ╚══════╝╚═════╝ ╚═╝ ╚═══╝╚══════╝╚══════╝╚═════╝ ╚═╝ ╚═╝ ╚═╝ --- BE THE WEDNESDAY --- S M T DUDE T F S --- Enable accelerated graphics in VM --- --- Attach sound card device to VM --- --- Only reverse mydude.]]></description>
 </item><item>
     <title>Flare-On 7 — 02 Garbage</title>
-    <link>/posts/flare-on7-garbage/</link>
+    <link>https://explained.re/posts/flare-on7-garbage/</link>
     <pubDate>Fri, 23 Oct 2020 21:29:42 &#43;0300</pubDate>
     <author>Author</author>
-    <guid>/posts/flare-on7-garbage/</guid>
+    <guid>https://explained.re/posts/flare-on7-garbage/</guid>
     <description><![CDATA[Challenge Description  One of our team members developed a Flare-On challenge but accidentally deleted it. We recovered it using extreme digital forensic techniques but it seems to be corrupted. We would fix it but we are too busy solving today&rsquo;s most important information security threats affecting our global economy. You should be able to get it working again, reverse engineer it, and acquire the flag.   Triage In the second challenge of Flare-On7 we are given a small binary file with the .]]></description>
 </item></channel>
 </rss>
