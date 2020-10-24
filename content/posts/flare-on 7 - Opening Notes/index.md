@@ -10,6 +10,9 @@ featuredImagePreview: "images/flare.png"
 
 lightgallery: false
 
+toc:
+  enable: false
+
 ---
 
 
