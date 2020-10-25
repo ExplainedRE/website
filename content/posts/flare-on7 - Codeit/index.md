@@ -140,9 +140,9 @@ Running this script on the source code will provide a much better output. Now th
 ---
 
 ## Analyzing the Script
-Now that everything is cleaner, we need to find the entry point of this script. Since we still have hundreds of lines of code, it might not be that easy to find the line of code that is not part of the function. To do this, I used a simple regex search for `^\w+\(\)`. It resulted in two results — first, a call to `AREIALBHUYT()`, and second was a call to `GUIDELETE()`.
+Now that everything is cleaner, we need to find the entry point of this script. Since we still have hundreds of lines of code, it might not be that easy to find the line of code that is not part of the function. To do this, we used a simple regex search for `^\w+\(\)`. It resulted in two results — first, a call to `AREIALBHUYT()`, and second was a call to `GUIDELETE()`.
 
-The `AREIALBHUYT` begins with defining the GUI we saw when executing the file. Then, it calls a function that drops either a BMP or DLL files to the disk, with a random name (using `FILEINSTALL`). We will need to put our hands on these files, for sure. Let's do this. Run `codeit.exe` and put a breakpoint on `kernel32!WriteFile`. Then, just before `WrieFile` returns, catch the created file and backup it. In our case, we got the files `ykxuailcqvrqrnjkpvtp.dll` and `yoqjgzqopvjqlllsqgzh.bmp` . We will call them `dropped.dll` and `dropped.bmp`. Opening the BMP image, we can see that this is the image that appears when opening `codeit.exe`. One thing caught our eyes when we opened the image in our editor. The pixels in the first rows look "corrupted". Stego?
+The `AREIALBHUYT` begins with defining the GUI we saw when executing the file. Then, it calls a function that drops either a BMP or DLL files to the disk, with a random name (using `FILEINSTALL`). We will need to put our hands on these files, for sure. Let's do this. Run `codeit.exe` in a debugger and put a breakpoint on `kernel32!WriteFile`. Then, just before `WrieFile` returns, catch the created file and backup it. In our case, we got the files `ykxuailcqvrqrnjkpvtp.dll` and `yoqjgzqopvjqlllsqgzh.bmp` . We will call them `dropped.dll` and `dropped.bmp`. Opening the BMP image, we can see that this is the image that appears when opening `codeit.exe`. One thing caught our eyes when we opened the image in our editor. The pixels in the first rows look "corrupted". Stego?
 
  
 
@@ -179,7 +179,7 @@ IF $FLUZYTJACB[0] <> 0 THEN
     $FLUZYTJACB = DLLCALL("advapi32.dll", "int", "CryptCreateHash", "ptr", ...[snip]
 ```
 
-The function `AREGTFDCYNI` is a very interesting function and it looks like it performs bit manipulations on the computer name. Let's go over it slowly to understand this function. We annotated, commented and rename some parts fro your convenience.
+The function `AREGTFDCYNI` is a very interesting function and it looks like it performs bit manipulations on the computer name. Let's go over it slowly to understand this function. We annotated, commented and renamed some parts for your convenience.
 
 ```vb
 FUNC AREGTFDCYNI(BYREF $computer_name)
@@ -256,7 +256,7 @@ It seems like it contains sequences of 0xff and 0xfe. This makes sense as the pr
 from malduck import chunks
 
 # Read the BMP image from offset 54. We used 150 as an arbitrary limit
-data = open(r"C:\Users\John\Downloads\flareon7\6_-_codeit\s.bmp", "rb").read()[54:150]
+data = open(r"dropped.bmp", "rb").read()[54:150]
 
 # Transfer each byte to either '1' or '0' by ANDing it with 1
 binary = "".join([str(bit & 1) for bit in data])
