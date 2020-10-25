@@ -11,7 +11,7 @@ lightgallery: true
 ---
 
 {{< admonition info "Challenge Description" >}}
-Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.
+Expect difficulty running this one. I suggest investigating why each error is occurring. Or not, whatever. You do you.
 {{< /admonition >}}
 
 ## Getting Started
@@ -52,7 +52,7 @@ LABEL_16:
   }
 ```
 
-The flow is then creating to create a COM object and call a function named `sub_1400012B0`. This function begins with creating a new `.tmp` file name in the %TEMP% directory. Then reads a resource name "300" from its resource section, and writes it to the temp file.
+The flow is then creating a COM object and call a function named `sub_1400012B0`. This function begins with creating a new `.tmp` file in the %TEMP% directory. Then reads a resource name "300" from its resource section, and writes it to the temp file.
 
 ```c
 if ( !GetTempFileNameA(".", prefix, 0, FileName) )
@@ -170,7 +170,7 @@ When looking at the `DialogFunc` function, it looks like a board game that is ha
 140001247  mov     cs:board, rax
 ```
 
-A closer looks at the function suggests that it is a "front end" GUI for a game, but that the processing itself done in the Linux ELF. When user clicks different buttons, the operations are sent to the ELF binary through sockets, and then it replies with results. Since the ELF seems to contain valuable information, it's time to open it. But before it, let's open the game and see how it looks like when running it.
+A closer looks at the function suggests that it is a "front end" GUI for a game, but that the processing itself done in the Linux ELF. When a user clicks different buttons, the operations are sent to the ELF binary through sockets, and then it replies with results. Since the ELF seems to contain valuable information, it's time to open it. But before it, let's open the game and see how it looks like when running it.
 
 {{< image src="images/image.png" >}}
 
@@ -211,7 +211,7 @@ Then, we can navigate to the "300" resource and from there, we can go `0xb98` by
 0x140023de0      48b82020202020202020   movabs rax, 0x2020202020202020 ; '        '
 ```
 
-Good, we are in the right place. All we need is two "O"s so it will be easy for us to click the third one a complete a row. Let's patch the bytes of this instruction from `48b82020`to `48b84f4f` using the `wx` command.
+Good, we are in the right place. All we need is two "O"s so it will be easy for us to click the third one and complete a row. Let's patch the bytes of this instruction from `48b82020`to `48b84f4f` using the `wx` command.
 
 ```c
 [0x140023de0]> wx 48b84f4f
