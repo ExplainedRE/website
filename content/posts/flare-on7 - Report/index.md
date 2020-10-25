@@ -11,7 +11,7 @@ lightgallery: true
 ---
 
 {{< admonition info "Challenge Description" >}}
-Nobody likes analysing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.
+Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.
 {{< /admonition >}}
 
 ## Getting Started
@@ -23,7 +23,7 @@ $ file report.xls
 report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10.0, Code page: 1252, 0x17: 1048576CDFV2 Microsoft Excel
 ```
 
-When opening this file in LibreOffice Calc, we see the following message box. It tells us that the document has macro insides and that we should be careful while handling them as they might contain a virus — scary!
+When opening this file in LibreOffice Calc, we see the following message box. It tells us that the document has macro inside and that we should be careful while handling them as they might contain a virus — scary!
 
 {{< image src="images/image.png" >}}
 
@@ -72,7 +72,7 @@ Type: OLE
 
 The summary table gives us a very nice summary of what the file does. The things that caught our attention are:
 
-1. Writing the file using `Open` and `Write`
+1. Writing to files using `Open` and `Write`
 2. Usage of `Xor`
 3. Handling of binary data
 4. Hard-coded hex strings (well, it was not easy to miss these)
@@ -104,7 +104,7 @@ Sub Auto_Open()
 End Sub
 ```
 
-Naturally, this will be the function we will start to analyzed. It begins with variable declaration, and then `Split` a string named `F.L` by a dot delimiter. The split array is assigned to a variable named `onzo.`
+Naturally, this will be the function we will start to analyze. It begins with variables declaration, and then `Split` a string named `F.L` by a dot delimiter. The split array is assigned to a variable named `onzo.`
 
 ```vb
 Function folderol(id_FFFE As Variant)
@@ -118,7 +118,7 @@ Function folderol(id_FFFE As Variant)
         onzo = Split(F.L, ".")
 ```
 
-Where did this `F.L` came from? When searching for `F.L` in the output of the program we ran, we find nothing. We did find `F` though, and it is the name of a form. Looking at LibreOffice Calc again, we can see what `F.L` is. It is a label in a form.
+Where did this `F.L` come from? When searching for `F.L` in the output of the program we ran, we find nothing. We did find `F` though, and it is the name of a form. Looking at LibreOffice Calc again, we can see what `F.L` is. It is a label in a form.
 
 {{< image src="images/image_1.png" >}}
 
@@ -222,7 +222,7 @@ Moving forward, we see that the script is checking all the processes for the exi
         Next
 ```
 
-The code is then creating a `Network` object and checks if our UserDomain name is `FLARE-ON`. If it is not, the script is raising an error and a message box. Most likely, by renaming our UserDomain to "FLARE-ON" we can solve, or at least make a big progress towards solving, the challenge. But we are on Linux, so let's work harder.
+The code is then creating a `Network` object and checks if our UserDomain name is `FLARE-ON`. If it is not, the script is raising an error and a message box. Most likely, by renaming our UserDomain to "FLARE-ON" we can solve, or at least make big progress towards solving, the challenge. But we are on Linux, so let's work harder.
 
 ```vb
         Set groke = CreateObject("WScript.Network")
@@ -284,7 +284,7 @@ open('out.bin', 'wb').write(xord)
 
 ```
 
-Let's run the program and check the value of `out.bin`:
+Let's run the script and check the value of `out.bin`:
 
 ```vb
 $ file out.bin
