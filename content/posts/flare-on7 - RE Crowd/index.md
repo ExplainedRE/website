@@ -51,7 +51,7 @@ $ grep -a  "accounts.txt" re_crowd.pcapng
 
 Sadly, it looks like this is the only mention for this file in cleartext. But it still can be accessible in some kind of encrypted or compressed form. We went over some of the other HTTP objects we exported and didn't spot an interesting lead.
 
-## Extracting Sessions from them PCAP
+## Extracting Sessions from the PCAP
 
 Without additional lead from the http objects, we decided to use `tshark` and check what other sessions were conducted to the http port. We now see that there were other requests to — "http://192.168.68.1/".
 
@@ -107,9 +107,9 @@ If: <http://192.168.68.1:80/jCwMtOXAZueJjMrPAYIqqhXCMGbVrxrbKMffGnjsRuSnGUVBVHWx
 [ . . . ]
 ```
 
-We found dozens of very suspicious requests to the server. This looks like an exploitation attempt or data exfiltration. We've never seen requests of this kine and we decided to google for some of the keywords in the request `(Not <locktoken:write1>)`.
+We found dozens of very suspicious requests to the server. This looks like an exploitation attempt or data exfiltration. We've never seen requests of this kind and we decided to google for some of the keywords in the request `(Not <locktoken:write1>)`.
 
-Googling for this keyword brought us immediately to CVE-2017-7269 — a vulnerability in IIS. This must be it. When reading about this vulnerability online we saw that it targets 32 bit IIS servers. The exploit is publicly available in multiple repositories on Github, including Metasploit's. The challenge author must have used one of these implementations. From the different implementation, we understood that the exploit is using a shellcode with ROP and alphanumeric encodind to eventually execute a remote shell on the victim. 
+Googling for this keyword brought us immediately to CVE-2017-7269 — a vulnerability in IIS. This must be it. When reading about this vulnerability online we saw that it targets 32 bit IIS servers. The exploit is publicly available in multiple repositories on Github, including Metasploit's. The challenge author must have used one of these implementations. From the different implementation, we understood that the exploit is using a shellcode with ROP and alphanumeric encoding to eventually execute a remote shell on the victim. 
 
 Let's grab the shellcode and open it in radare2.
 
@@ -130,7 +130,7 @@ $ r2 -b 32 shellcode.bin
 
 ```
 
-Since the shellcode is encoded using the Metasploit's [alpha_mixed](https://www.offensive-security.com/metasploit-unleashed/alphanumeric-shellcode/) encoding we can't easily analyze the shellcode. It will be a good idea to decode it using a decoder for this encoding. Such a project is available here: [https://github.com/axfla/Metasploit-AlphanumUnicodeMixed-decoder/blob/master/dcode.py](https://github.com/axfla/Metasploit-AlphanumUnicodeMixed-decoder/blob/master/dcode.py).
+Since the shellcode is encoded using Metasploit's [alpha_mixed](https://www.offensive-security.com/metasploit-unleashed/alphanumeric-shellcode/) encoding we can't easily analyze the shellcode. It will be a good idea to decode it using a decoder for this encoding. Such a project is available here: [https://github.com/axfla/Metasploit-AlphanumUnicodeMixed-decoder/blob/master/dcode.py](https://github.com/axfla/Metasploit-AlphanumUnicodeMixed-decoder/blob/master/dcode.py).
 
 We inserted our shellcode to the original script and modified it a little bit to print only the decoded shellcode. Then, we wrote the results to a file and ran `strings` on it. The command gave us some interesting results like `ws2_32` which is a Windows networking library, `KXOR` and `killervulture123` that look like some keys.
 
@@ -183,7 +183,7 @@ $ tshark -r re_crowd.pcapng -Y "tcp.port == 4444" -T fields -e data > attacker_t
 
 
 ## Decrypting the Sessions
-From the code of the shellcode on Github we understand that the first 4 bytes are the length, encrypted with a key `KXOR` and the next is an rc4 encrypted second-stage payload that was sent form the attacker to the server. The key is `killervulture123`.
+From the code of the shellcode on Github we understand that the first 4 bytes are the length, encrypted with a key `KXOR` and the next is an rc4 encrypted second-stage payload that was sent from the attacker to the server. The key is `killervulture123`.
 
 Let's decrypt it using RC4 and the key, starting from the fifth byte:
 
