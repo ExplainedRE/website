@@ -63,7 +63,7 @@ Based on the fact we have a `NimMain` function, we can understand that this exec
 Now we need to have a goal in mind before we continue our reversing process. The option we may come up with at this point are:
 
 1. Find the flag statically / find where the flag is decode or decrypted upon a win, and do that statically
-2. Patch the game in order to win. This can be done in many way, here are two:
+2. Patch the game in order to win. This can be done in many ways, here are two:
     1. Reduce a score threshold we need to get to in order to win - make the winning screen pop up after passing one obstacle for example.
     2. Patch the condition in which the game decide if we pass an obstacle or not, to make it always think we passed
 
