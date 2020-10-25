@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Flare-On 7 — 08 Aardvark - explained.re</title><meta name="Description" content=""><meta property="og:title" content="Flare-On 7 — 08 Aardvark" />
-<meta property="og:description" content="Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
+<meta property="og:description" content="Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occurring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
 $ file ttt2.exe ttt2.exe: PE32&#43; executable (GUI) x86-64, for MS Windows When opening the file in IDA, the flow is pretty straight forward." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://explained.re/posts/flare-on7-aardvark/" />
@@ -17,7 +17,7 @@ $ file ttt2.exe ttt2.exe: PE32&#43; executable (GUI) x86-64, for MS Windows When
 <meta name="twitter:image" content="https://explained.re/images/explained_dark.png"/>
 
 <meta name="twitter:title" content="Flare-On 7 — 08 Aardvark"/>
-<meta name="twitter:description" content="Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
+<meta name="twitter:description" content="Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occurring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
 $ file ttt2.exe ttt2.exe: PE32&#43; executable (GUI) x86-64, for MS Windows When opening the file in IDA, the flow is pretty straight forward."/>
 <meta name="application-name" content="explained.re">
 <meta name="apple-mobile-web-app-title" content="explained.re"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -31,7 +31,7 @@ $ file ttt2.exe ttt2.exe: PE32&#43; executable (GUI) x86-64, for MS Windows When
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/explained.re\/posts\/flare-on7-aardvark\/"
-        },"genre": "posts","keywords": "flare-on","wordcount":  1519 ,
+        },"genre": "posts","keywords": "flare-on","wordcount":  1517 ,
         "url": "https:\/\/explained.re\/posts\/flare-on7-aardvark\/","datePublished": "2020-10-23T21:29:48+03:00","dateModified": "2020-10-23T21:29:48+03:00","publisher": {
             "@type": "Organization",
             "name": "explained.re"},"author": {
@@ -95,7 +95,7 @@ $ file ttt2.exe ttt2.exe: PE32&#43; executable (GUI) x86-64, for MS Windows When
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 08 Aardvark</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class="post-category">included in <a href="/categories/write-up/"><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1519 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1517 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -119,7 +119,7 @@ $ file ttt2.exe ttt2.exe: PE32&#43; executable (GUI) x86-64, for MS Windows When
             <i class="icon fas fa-info-circle fa-fw"></i>Challenge Description<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.</div>
+            <div class="admonition-content">Expect difficulty running this one. I suggest investigating why each error is occurring. Or not, whatever. You do you.</div>
         </div>
     </div>
 <h2 id="getting-started">Getting Started</h2>
@@ -151,7 +151,7 @@ ttt2.exe: PE32+ executable (GUI) x86-64, for MS Windows
   <span class="p">{</span>
     <span class="n">v10</span> <span class="o">=</span> <span class="s">&#34;bind failed&#34;</span><span class="p">;</span>
   <span class="p">}</span>
-</code></pre></div><p>The flow is then creating to create a COM object and call a function named <code>sub_1400012B0</code>. This function begins with creating a new <code>.tmp</code> file name in the %TEMP% directory. Then reads a resource name &ldquo;300&rdquo; from its resource section, and writes it to the temp file.</p>
+</code></pre></div><p>The flow is then creating a COM object and call a function named <code>sub_1400012B0</code>. This function begins with creating a new <code>.tmp</code> file in the %TEMP% directory. Then reads a resource name &ldquo;300&rdquo; from its resource section, and writes it to the temp file.</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">GetTempFileNameA</span><span class="p">(</span><span class="s">&#34;.&#34;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">FileName</span><span class="p">)</span> <span class="p">)</span>
   <span class="p">{</span>
     <span class="n">v2</span> <span class="o">=</span> <span class="s">&#34;GetTempFileName failed&#34;</span><span class="p">;</span>
@@ -240,7 +240,7 @@ ttt2.exe: PE32+ executable (GUI) x86-64, for MS Windows
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="mi">14000123</span><span class="n">A</span>  <span class="n">mov</span>     <span class="n">rax</span><span class="p">,</span> <span class="mi">2020202020202020</span><span class="n">h</span>
 <span class="mi">140001244</span>  <span class="n">xor</span>     <span class="n">r9d</span><span class="p">,</span> <span class="n">r9d</span>        <span class="p">;</span> <span class="n">flags</span>
 <span class="mi">140001247</span>  <span class="n">mov</span>     <span class="nl">cs</span><span class="p">:</span><span class="n">board</span><span class="p">,</span> <span class="n">rax</span>
-</code></pre></div><p>A closer looks at the function suggests that it is a &ldquo;front end&rdquo; GUI for a game, but that the processing itself done in the Linux ELF. When user clicks different buttons, the operations are sent to the ELF binary through sockets, and then it replies with results. Since the ELF seems to contain valuable information, it&rsquo;s time to open it. But before it, let&rsquo;s open the game and see how it looks like when running it.</p>
+</code></pre></div><p>A closer looks at the function suggests that it is a &ldquo;front end&rdquo; GUI for a game, but that the processing itself done in the Linux ELF. When a user clicks different buttons, the operations are sent to the ELF binary through sockets, and then it replies with results. Since the ELF seems to contain valuable information, it&rsquo;s time to open it. But before it, let&rsquo;s open the game and see how it looks like when running it.</p>
 <a class="lightgallery" href="/posts/flare-on7-aardvark/images/image.png" title="/posts/flare-on7-aardvark/images/image.png" data-thumbnail="/posts/flare-on7-aardvark/images/image.png">
         <img
             class="lazyload"
@@ -269,7 +269,7 @@ ttt2.exe: PE32+ executable (GUI) x86-64, for MS Windows
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="p">[</span><span class="mh">0x1400027bc</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">s</span> <span class="n">resource</span><span class="mf">.2</span> <span class="o">+</span> <span class="mh">0xb98</span>
 <span class="p">[</span><span class="mh">0x140023de0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">pd</span> <span class="mi">1</span>
 <span class="mh">0x140023de0</span>      <span class="mi">48</span><span class="n">b82020202020202020</span>   <span class="n">movabs</span> <span class="n">rax</span><span class="p">,</span> <span class="mh">0x2020202020202020</span> <span class="p">;</span> <span class="err">&#39;</span>        <span class="err">&#39;</span>
-</code></pre></div><p>Good, we are in the right place. All we need is two &ldquo;O&quot;s so it will be easy for us to click the third one a complete a row. Let&rsquo;s patch the bytes of this instruction from <code>48b82020</code>to <code>48b84f4f</code> using the <code>wx</code> command.</p>
+</code></pre></div><p>Good, we are in the right place. All we need is two &ldquo;O&quot;s so it will be easy for us to click the third one and complete a row. Let&rsquo;s patch the bytes of this instruction from <code>48b82020</code>to <code>48b84f4f</code> using the <code>wx</code> command.</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="p">[</span><span class="mh">0x140023de0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">wx</span> <span class="mi">48</span><span class="n">b84f4f</span>
 <span class="p">[</span><span class="mh">0x140023de0</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">pd</span> <span class="mi">1</span>
 <span class="mh">0x140023de0</span>      <span class="mi">48</span><span class="n">b84f4f202020202020</span>   <span class="n">movabs</span> <span class="n">rax</span><span class="p">,</span> <span class="mh">0x2020202020204f4f</span> <span class="p">;</span> <span class="err">&#39;</span><span class="n">OO</span>      <span class="err">&#39;</span>

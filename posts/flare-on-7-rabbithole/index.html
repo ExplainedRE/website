@@ -31,7 +31,7 @@ One of our experts said that it looks like they took an existing banking malware
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/explained.re\/posts\/flare-on-7-rabbithole\/"
-        },"genre": "posts","keywords": "flare-on","wordcount":  10875 ,
+        },"genre": "posts","keywords": "flare-on","wordcount":  10878 ,
         "url": "https:\/\/explained.re\/posts\/flare-on-7-rabbithole\/","datePublished": "2020-10-23T21:29:51+03:00","dateModified": "2020-10-23T21:29:51+03:00","publisher": {
             "@type": "Organization",
             "name": "explained.re"},"author": {
@@ -95,7 +95,7 @@ One of our experts said that it looks like they took an existing banking malware
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 11 Rabbithole</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class="post-category">included in <a href="/categories/write-up/"><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;10875 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;10878 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;52 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -171,7 +171,7 @@ NTUSER.DAT: MS Windows registry file, NT/2000 or above
 <li>One or more of the keys have binary blobs as values - <strong>probable</strong></li>
 <li>Similar to many &ldquo;file-less&rdquo; stages in malware, a script of some kind (Javascript, VBScript, Powershell, batch, &hellip;) will be written to the registry - <strong>probable</strong></li>
 <li>This is not, or partially not, a real registry hive, but a hoax - <strong>unlikely</strong></li>
-<li>We will need to go over a list of recently opened file and search for clues - <strong>unlikely</strong></li>
+<li>We will need to go over a list of recently opened files and search for clues - <strong>unlikely</strong></li>
 <li>We will need to look for recently accessed network locations (like URLs, IPs, &hellip;) to download the challenge - <strong>unlikely</strong></li>
 </ol>
 <p>These are only some of the ideas we had on our minds, and to test our theories against the file, we need to explore it and extract valuable data out of it.</p>
@@ -1074,7 +1074,7 @@ no-cache, no-store, must-revalidate
 <p>The smallest of them is <code>SoftwareColumn.bin</code> which has 36 bytes, pretty small for a flag.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat SoftwareColumn.bin 
 no-cache, no-store, must-revalidate
-</code></pre></div><p>Nope, not this one. Next one is <code>SolutionDat.bin</code> with length of 40 bytes — can it contain the flag?</p>
+</code></pre></div><p>Nope, not this one. The next one is <code>SolutionDat.bin</code> with a length of 40 bytes — can it contain the flag?</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ xxd SolutionDat.bin 
 00000000: <span class="m">3556</span> 0a0c <span class="m">5080</span> <span class="m">0000</span> <span class="m">9480</span> 2baf c73a ef8f  5V..P.....+..:..
 00000010: cad9 3b6e 7b93 d297 <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span>  ..<span class="p">;</span>n<span class="o">{</span>...........
@@ -1171,7 +1171,7 @@ no-cache, no-store, must-revalidate
     <span class="err">0</span><span class="nf">x1E4BFA</span> <span class="no">add</span>   <span class="no">rsp</span><span class="p">,</span> <span class="mi">20</span><span class="no">h</span>
     <span class="err">0</span><span class="nf">x1E4BFE</span> <span class="no">pop</span>   <span class="no">rax</span>
     <span class="err">0</span><span class="nf">x1E4BFF</span> <span class="no">retn</span>
-</code></pre></div><p>Let&rsquo;s set a breakpoint at the beginning of <code>Generate_DiMap</code> and run the program again. This time, we will enter the first call to <code>rax</code>. Running the program once again, we are now stopped at <code>0x1E4BE2</code>, just before <code>DiMap</code> name is generated. Stepping into the <code>call</code> we see a <code>jmp</code> instruction to a function in <code>0x1C542C</code> that looks familiar. Too familiar. The function we have just arrived at looks like the reversed function of the XOR decryption function we implemented at the beginning of the analysis (<code>xor_decrypt_data</code>). In fact, this looks like the encryption function that was responsible for XOR encrypting the data. We can safely assume that this is a rolling XOR encryption function so let&rsquo;s name it <code>xor_encrypt_data</code>. Note, that if you will check the leaked source code, you will also find a pair of XOR encryption and decryption function which will look similar (but not an exact match) to our own pair of functions.</p>
+</code></pre></div><p>Let&rsquo;s set a breakpoint at the beginning of <code>Generate_DiMap</code> and run the program again. This time, we will enter the first call to <code>rax</code>. Running the program once again, we are now stopped at <code>0x1E4BE2</code>, just before the <code>DiMap</code> name is generated. Stepping into the <code>call</code> we see a <code>jmp</code> instruction to a function in <code>0x1C542C</code> that looks familiar. Too familiar. The function we have just arrived at looks like the reversed function of the XOR decryption function we implemented at the beginning of the analysis (<code>xor_decrypt_data</code>). In fact, this looks like the encryption function that was responsible for XOR encrypting the data. We can safely assume that this is a rolling XOR encryption function so let&rsquo;s name it <code>xor_encrypt_data</code>. Note, that if you will check the leaked source code, you will also find a pair of XOR encryption and decryption function which will look similar (but not an exact match) to our own pair of functions.</p>
 <a class="lightgallery" href="/posts/flare-on-7-rabbithole/images/image_22.png" title="/posts/flare-on-7-rabbithole/images/image_22.png" data-thumbnail="/posts/flare-on-7-rabbithole/images/image_22.png">
         <img
             class="lazyload"

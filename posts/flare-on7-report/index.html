@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Flare-On 7 — 04 Report - explained.re</title><meta name="Description" content=""><meta property="og:title" content="Flare-On 7 — 04 Report" />
-<meta property="og:description" content="Challenge Description  Nobody likes analysing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
+<meta property="og:description" content="Challenge Description  Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
 $ file report.xls report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://explained.re/posts/flare-on7-report/" />
@@ -17,7 +17,7 @@ $ file report.xls report.xls: Composite Document File V2 Document, Little Endian
 <meta name="twitter:image" content="https://explained.re/images/explained_dark.png"/>
 
 <meta name="twitter:title" content="Flare-On 7 — 04 Report"/>
-<meta name="twitter:description" content="Challenge Description  Nobody likes analysing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
+<meta name="twitter:description" content="Challenge Description  Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
 $ file report.xls report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10."/>
 <meta name="application-name" content="explained.re">
 <meta name="apple-mobile-web-app-title" content="explained.re"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -31,7 +31,7 @@ $ file report.xls report.xls: Composite Document File V2 Document, Little Endian
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/explained.re\/posts\/flare-on7-report\/"
-        },"genre": "posts","keywords": "flare-on","wordcount":  1695 ,
+        },"genre": "posts","keywords": "flare-on","wordcount":  1694 ,
         "url": "https:\/\/explained.re\/posts\/flare-on7-report\/","datePublished": "2020-10-23T21:29:44+03:00","dateModified": "2020-10-23T21:29:44+03:00","publisher": {
             "@type": "Organization",
             "name": "explained.re"},"author": {
@@ -95,7 +95,7 @@ $ file report.xls report.xls: Composite Document File V2 Document, Little Endian
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 04 Report</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class="post-category">included in <a href="/categories/write-up/"><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1695 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1694 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -115,14 +115,14 @@ $ file report.xls report.xls: Composite Document File V2 Document, Little Endian
             <i class="icon fas fa-info-circle fa-fw"></i>Challenge Description<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">Nobody likes analysing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.</div>
+            <div class="admonition-content">Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.</div>
         </div>
     </div>
 <h2 id="getting-started">Getting Started</h2>
 <p>In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the <code>file</code> command on it and verify that the extension makes sense.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ file report.xls 
 report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10.0, Code page: 1252, 0x17: 1048576CDFV2 Microsoft Excel
-</code></pre></div><p>When opening this file in LibreOffice Calc, we see the following message box. It tells us that the document has macro insides and that we should be careful while handling them as they might contain a virus — scary!</p>
+</code></pre></div><p>When opening this file in LibreOffice Calc, we see the following message box. It tells us that the document has macro inside and that we should be careful while handling them as they might contain a virus — scary!</p>
 <a class="lightgallery" href="/posts/flare-on7-report/images/image.png" title="/posts/flare-on7-report/images/image.png" data-thumbnail="/posts/flare-on7-report/images/image.png">
         <img
             class="lazyload"
@@ -172,7 +172,7 @@ Type: OLE
 
 </code></pre></div><p>The summary table gives us a very nice summary of what the file does. The things that caught our attention are:</p>
 <ol>
-<li>Writing the file using <code>Open</code> and <code>Write</code></li>
+<li>Writing to files using <code>Open</code> and <code>Write</code></li>
 <li>Usage of <code>Xor</code></li>
 <li>Handling of binary data</li>
 <li>Hard-coded hex strings (well, it was not easy to miss these)</li>
@@ -192,7 +192,7 @@ Type: OLE
 <span class="k">Sub</span> <span class="nf">Auto_Open</span><span class="p">()</span>
   <span class="n">Sheet1</span><span class="p">.</span><span class="n">folderol</span>
 <span class="k">End</span> <span class="k">Sub</span>
-</code></pre></div><p>Naturally, this will be the function we will start to analyzed. It begins with variable declaration, and then <code>Split</code> a string named <code>F.L</code> by a dot delimiter. The split array is assigned to a variable named <code>onzo.</code></p>
+</code></pre></div><p>Naturally, this will be the function we will start to analyze. It begins with variables declaration, and then <code>Split</code> a string named <code>F.L</code> by a dot delimiter. The split array is assigned to a variable named <code>onzo.</code></p>
 <div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Function</span> <span class="nf">folderol</span><span class="p">(</span><span class="n">id_FFFE</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">)</span>
         <span class="k">Dim</span> <span class="n">wabbit</span> <span class="ow">As</span> <span class="kt">Byte</span>
         <span class="k">Dim</span> <span class="n">fn</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">:</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">FreeFile</span>
@@ -202,7 +202,7 @@ Type: OLE
         <span class="k">Dim</span> <span class="n">buff</span><span class="p">(</span><span class="n">0</span> <span class="k">To</span> <span class="n">7</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Byte</span>
         
         <span class="n">onzo</span> <span class="o">=</span> <span class="n">Split</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;.&#34;</span><span class="p">)</span>
-</code></pre></div><p>Where did this <code>F.L</code> came from? When searching for <code>F.L</code> in the output of the program we ran, we find nothing. We did find <code>F</code> though, and it is the name of a form. Looking at LibreOffice Calc again, we can see what <code>F.L</code> is. It is a label in a form.</p>
+</code></pre></div><p>Where did this <code>F.L</code> come from? When searching for <code>F.L</code> in the output of the program we ran, we find nothing. We did find <code>F</code> though, and it is the name of a form. Looking at LibreOffice Calc again, we can see what <code>F.L</code> is. It is a label in a form.</p>
 <a class="lightgallery" href="/posts/flare-on7-report/images/image_1.png" title="/posts/flare-on7-report/images/image_1.png" data-thumbnail="/posts/flare-on7-report/images/image_1.png">
         <img
             class="lazyload"
@@ -285,7 +285,7 @@ Type: OLE
             <span class="k">End</span>
           <span class="k">End</span> <span class="k">If</span>
         <span class="k">Next</span>
-</code></pre></div><p>The code is then creating a <code>Network</code> object and checks if our UserDomain name is <code>FLARE-ON</code>. If it is not, the script is raising an error and a message box. Most likely, by renaming our UserDomain to &ldquo;FLARE-ON&rdquo; we can solve, or at least make a big progress towards solving, the challenge. But we are on Linux, so let&rsquo;s work harder.</p>
+</code></pre></div><p>The code is then creating a <code>Network</code> object and checks if our UserDomain name is <code>FLARE-ON</code>. If it is not, the script is raising an error and a message box. Most likely, by renaming our UserDomain to &ldquo;FLARE-ON&rdquo; we can solve, or at least make big progress towards solving, the challenge. But we are on Linux, so let&rsquo;s work harder.</p>
 <div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb">        <span class="k">Set</span> <span class="n">groke</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">&#34;WScript.Network&#34;</span><span class="p">)</span>
         <span class="n">firkin</span> <span class="o">=</span> <span class="n">groke</span><span class="p">.</span><span class="n">UserDomain</span>
         <span class="k">If</span> <span class="n">firkin</span> <span class="o">&lt;&gt;</span> <span class="s">&#34;FLARE-ON&#34;</span> <span class="k">Then</span>
@@ -327,7 +327,7 @@ Type: OLE
 <span class="c1"># Save the results to a file</span>
 <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;out.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xord</span><span class="p">)</span>
 
-</code></pre></div><p>Let&rsquo;s run the program and check the value of <code>out.bin</code>:</p>
+</code></pre></div><p>Let&rsquo;s run the script and check the value of <code>out.bin</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb"><span class="err">$</span> <span class="n">file</span> <span class="n">out</span><span class="p">.</span><span class="n">bin</span>
 <span class="n">out</span><span class="p">.</span><span class="n">bin</span><span class="p">:</span> <span class="n">PNG</span> <span class="n">image</span> <span class="n">data</span><span class="p">,</span> <span class="n">600</span> <span class="n">x</span> <span class="n">310</span><span class="p">,</span> <span class="n">8</span><span class="o">-</span><span class="n">bit</span><span class="o">/</span><span class="n">color</span> <span class="n">RGBA</span><span class="p">,</span> <span class="n">non</span><span class="o">-</span><span class="n">interlaced</span>
 </code></pre></div><p>The <code>file</code> command told us it is a valid PNG file, let&rsquo;s open it in an image viewer and check it out:</p>

@@ -12,8 +12,8 @@
     <author>Author</author>
     <guid>https://explained.re/posts/flare-on-7-opening-notes/</guid>
     <description><![CDATA[Hello and welcome to our series of tutorials about Flare-On 7! In this series we will take you to a journey into each and every one of the challenges &ndash; including the almighty 10th and 11th challenges.
-In the write ups we explain how we approached the different challenges, how we overcame obstacles, scripted our way to the top and avoided rabbit holes.
-Naturally, the most detailed write ups are of Challenge 10 and Challenge 11 as they are the most interesting ones.]]></description>
+In the write-ups, we explain how we approached the different challenges, how we overcame obstacles, scripted our way to the top and avoided rabbit holes.
+Naturally, the most detailed write-ups are of Challenge 10 and Challenge 11 as they are the most interesting ones.]]></description>
 </item><item>
     <title>Flare-On 7 — 11 Rabbithole</title>
     <link>https://explained.re/posts/flare-on-7-rabbithole/</link>
@@ -45,7 +45,7 @@ Simply executing the binary doesn&rsquo;t seem to do much, so we&rsquo;ll fire u
     <pubDate>Fri, 23 Oct 2020 21:29:48 &#43;0300</pubDate>
     <author>Author</author>
     <guid>https://explained.re/posts/flare-on7-aardvark/</guid>
-    <description><![CDATA[Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occuring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
+    <description><![CDATA[Challenge Description  Expect difficulty running this one. I suggest investigating why each error is occurring. Or not, whatever. You do you.   Getting Started The eighth challenge this year was surprisingly easy, a good rest before the hardest challenges in the final. In it, we get ttt2.exe which is a 64-bit Windows binary.
 $ file ttt2.exe ttt2.exe: PE32+ executable (GUI) x86-64, for MS Windows When opening the file in IDA, the flow is pretty straight forward.]]></description>
 </item><item>
     <title>Flare-On 7 — 07 RE Crowd</title>
@@ -78,7 +78,7 @@ $ unzip TKApp.]]></description>
     <pubDate>Fri, 23 Oct 2020 21:29:44 &#43;0300</pubDate>
     <author>Author</author>
     <guid>https://explained.re/posts/flare-on7-report/</guid>
-    <description><![CDATA[Challenge Description  Nobody likes analysing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
+    <description><![CDATA[Challenge Description  Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
 $ file report.xls report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10.]]></description>
 </item><item>
     <title>Flare-On 7 — 03 Wednesday</title>
