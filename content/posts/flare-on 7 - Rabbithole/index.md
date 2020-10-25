@@ -63,7 +63,7 @@ Seeing this, and knowing we are facing a reverse engineering challenge, we can a
 1. One or more of the keys have binary blobs as values - **probable**
 2. Similar to many "file-less" stages in malware, a script of some kind (Javascript, VBScript, Powershell, batch, ...) will be written to the registry - **probable**
 3. This is not, or partially not, a real registry hive, but a hoax - **unlikely**
-4. We will need to go over a list of recently opened file and search for clues - **unlikely**
+4. We will need to go over a list of recently opened files and search for clues - **unlikely**
 5. We will need to look for recently accessed network locations (like URLs, IPs, ...) to download the challenge - **unlikely**
 
 These are only some of the ideas we had on our minds, and to test our theories against the file, we need to explore it and extract valuable data out of it.
@@ -1057,7 +1057,7 @@ $ cat SoftwareColumn.bin
 no-cache, no-store, must-revalidate
 ```
 
-Nope, not this one. Next one is `SolutionDat.bin` with length of 40 bytes — can it contain the flag?
+Nope, not this one. The next one is `SolutionDat.bin` with a length of 40 bytes — can it contain the flag?
 
 ```bash
 $ xxd SolutionDat.bin 
@@ -1170,7 +1170,7 @@ func Generate_DiMap
     0x1E4BFF retn
 ```
 
-Let's set a breakpoint at the beginning of `Generate_DiMap` and run the program again. This time, we will enter the first call to `rax`. Running the program once again, we are now stopped at `0x1E4BE2`, just before `DiMap` name is generated. Stepping into the `call` we see a `jmp` instruction to a function in `0x1C542C` that looks familiar. Too familiar. The function we have just arrived at looks like the reversed function of the XOR decryption function we implemented at the beginning of the analysis (`xor_decrypt_data`). In fact, this looks like the encryption function that was responsible for XOR encrypting the data. We can safely assume that this is a rolling XOR encryption function so let's name it `xor_encrypt_data`. Note, that if you will check the leaked source code, you will also find a pair of XOR encryption and decryption function which will look similar (but not an exact match) to our own pair of functions.
+Let's set a breakpoint at the beginning of `Generate_DiMap` and run the program again. This time, we will enter the first call to `rax`. Running the program once again, we are now stopped at `0x1E4BE2`, just before the `DiMap` name is generated. Stepping into the `call` we see a `jmp` instruction to a function in `0x1C542C` that looks familiar. Too familiar. The function we have just arrived at looks like the reversed function of the XOR decryption function we implemented at the beginning of the analysis (`xor_decrypt_data`). In fact, this looks like the encryption function that was responsible for XOR encrypting the data. We can safely assume that this is a rolling XOR encryption function so let's name it `xor_encrypt_data`. Note, that if you will check the leaked source code, you will also find a pair of XOR encryption and decryption function which will look similar (but not an exact match) to our own pair of functions.
 
 {{< image src="images/image_22.png" >}}
 
