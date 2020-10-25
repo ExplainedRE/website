@@ -40,7 +40,7 @@ This one seems to be a stripped 32 bit ELF executable, and once it's executed it
 
 Notice that it says that `'sorry i stole your input :)'` is not the correct password, even though we inserted a bunch of As. This is odd, and we should keep this in mind while analyzing this sample.
 
-Opening the binary in our disassembler of choice, we can see a a pretty straight forward `main` function.
+Opening the binary in our disassembler of choice, we can see a pretty straight forward `main` function.
 
 {{< image src="images/image.png" >}}
 
@@ -152,7 +152,7 @@ ptrace(PTRACE_SYSEMU, parent_pid, 0, 0);
 
 ## Understanding Syscall Emulation
 
-After returning from the initialization function, *parent* will execute its `main` starting with a call to `puts()` to print out the welcome message. Many *glibc* functions ultimately use Linux system calls in order to execute their logic on the system. So for example `puts()` will use the `write` system call in order to write to the desired file descriptor that the user provided. Since *glibc* is open-source, you can go and look for yourself at the function code, and see which system call it invokes during its execution. Another option is to use `strace` on a tiny program that will call the *glibc* function (`puts()` for instance) which will let you know exactly what system calls are involved in the function of interest. Before we dive in, let's make sure we remember how system calls work in x86. A system call is an `int 0x80` instruction while the type of system call is being passed to the kernel using the `eax` register. For the `write` syscall `eax` should be set to `4` (you can find syscall constants based on architecture type [here](https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md#cross_arch-numbers)). Every syscall can also accept arguments, which are being passed in `ebx`, `ecx`, `edx`, `esi`, `edi`, `ebp` accordingly. This out of the way, now the execution goes back to *child1* since *parent* made a syscall which sent a `SIGTRAP` to *child1.* After *child1* called `waitpid()` and got a signal, it'll check its type and in case of a `SIGTRAP` (that in this case is sent due to the syscall) it'll do the following (from `child1_main`):
+After returning from the initialization function, *parent* will execute its `main` starting with a call to `puts()` to print out the welcome message. Many *glibc* functions ultimately use Linux system calls in order to execute their logic on the system. So for example `puts()` will use the `write` system call in order to write to the desired file descriptor that the user-provided. Since *glibc* is open-source, you can go and look for yourself at the function code, and see which system call it invokes during its execution. Another option is to use `strace` on a tiny program that will call the *glibc* function (`puts()` for instance) which will let you know exactly what system calls are involved in the function of interest. Before we dive in, let's make sure we remember how system calls work in x86. A system call is an `int 0x80` instruction while the type of system call is being passed to the kernel using the `eax` register. For the `write` syscall `eax` should be set to `4` (you can find syscall constants based on architecture type [here](https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md#cross_arch-numbers)). Every syscall can also accept arguments, which are being passed in `ebx`, `ecx`, `edx`, `esi`, `edi`, `ebp` accordingly. This out of the way, now the execution goes back to *child1* since *parent* made a syscall which sent a `SIGTRAP` to *child1.* After *child1* called `waitpid()` and got a signal, it'll check its type and in case of a `SIGTRAP` (that in this case is sent due to the syscall) it'll do the following (from `child1_main`):
 
 ```cpp
 if ( (status & 0xFF00) >> 8 == SIGTRAP )
@@ -293,7 +293,7 @@ Now it becomes clear that *child1* reads data from the user and stores it in its
 
 ## String Encryption
 
-The pseudo code looks like this:
+The pseudo-code looks like this:
 
 ```cpp
 _BYTE *__cdecl get_string(int a1)
@@ -446,7 +446,7 @@ The importance of getting rid of *child2* so early in the analysis is that we ar
 
 Let's do a quick recap of how does *child1* gives control to *child2*. To demonstrate it, we can use the handler of the magic value `0x7E85DB2A`. This value is triggered by *child1* in a code that looks like this:
 
-```c
+```asm
 0x080498AE       83 EC 04            sub     esp, 4
 0x080498B1       68 FE CA 00 00      push    0CAFEh
 0x080498B6       68 37 13 00 00      push    1337h
@@ -456,7 +456,7 @@ Let's do a quick recap of how does *child1* gives control to *child2*. To demons
 0x080498C5       83 C4 10            add     esp, 10h
 ```
 
-As we learned earlier, the `call eax` instruction will trigger `SIGSEGV` that will be caught by *child2*. Looking at the handles in *child2*, we can see that the operation it performs is very simple. It only moves a hardcoded value `0x9E3779B9` to the `eax` register of *child1*.
+As we learned earlier, the `call eax` instruction will trigger `SIGSEGV` that will be caught by *child2*. Looking at the handler in *child2*, we can see that the operation it performs is very simple. It only moves a hardcoded value `0x9E3779B9` to the `eax` register of *child1*.
 
 ```c
 case 0x7E85DB2A:                  // Pushed at 0x080498BB
@@ -565,7 +565,7 @@ ida_bytes.patch_bytes(offset,unhex("90909090909090909090909090909090909090909090
 
 To apply the patches to the original binary, we can go to Edit → Patch program → Apply patches to input file. 
 
-Now that we made the patches, we want to be able to attach a debugger to the patched program. Naturally, we still have *child1* that debugs the parent process, and this means that we can not start our debugging session from the parent. Instead, we'd want to attach IDA debugger to *child1* before it starts the important operations. To do this, we can utilize a very nice trick in x86 that causes the program to loop infinitely. The trick is to use the pair of bytes `EB FE` that will cause the program to jump to the current location. To use it, we can change our last patch in the screen above, and place `EB FE` inside. When the program will reach these bytes, it will "wait" for us to attach our debugger to it. When attached, we can simply change our instruction pointer to one of the `nop` instructions after the infinte loop, and we can debug the program step by step.
+Now that we made the patches, we want to be able to attach a debugger to the patched program. Naturally, we still have *child1* that debugs the parent process, and this means that we can not start our debugging session from the parent. Instead, we'd want to attach IDA debugger to *child1* before it starts the important operations. To do this, we can utilize a very nice trick in x86 that causes the program to loop infinitely. The trick is to use the pair of bytes `EB FE` that will cause the program to jump to the current location. To use it, we can change our last patch in the screen above, and place `EB FE` inside. When the program will reach these bytes, it will "wait" for us to attach our debugger to it. When attached, we can simply change our instruction pointer to one of the `nop` instructions after the infinite loop, and we can debug the program step by step.
 
 ```python
 offset = ida_search.find_binary(0, end_addr,"83 EC 08 68 80 90 04 08 6A 0E E8 8A F8 FF FF 83 C4 10 E8 E2 F8 FF FF 83 EC 0C 50 E8 5D 0F 00 00 83 C4 10", 16, idc.SEARCH_DOWN)
@@ -577,7 +577,7 @@ This is how IDA shows the infinite loop of `EB FE`.
 
 {{< image src="images/image_9.png" >}}
 
-Having the ability to debug the program will make the analysis easier, but since the goal of the write-up is to thoroughly explain the flow of the challenge, and because many of our readers did not used a similar patching method, we will still keep the "*child1*" and "*child2*" terminology.
+Having the ability to debug the program will make the analysis easier, but since the goal of the write-up is to thoroughly explain the flow of the challenge, and because many of our readers did not use a similar patching method, we will still keep the "*child1*" and "*child2*" terminology.
 
 ## Decrypting the Strings
 
@@ -671,7 +671,7 @@ void __cdecl __noreturn main()
 }
 ```
 
-The next thing that happens here is the call to `check_input` function. Since *child1* changed the first bytes in the code of `check_input`, *parent*'s invocation of this function will execute an illegal instruction (`0xB0F`) and a `SIGILL` will be sent to *child1*. If we look at the rest of `child1_main` we'll see the code responsible for handling this signal.
+The next thing that happens here is the call to the `check_input` function. Since *child1* changed the first bytes in the code of `check_input`, *parent*'s invocation of this function will execute an illegal instruction (`0xB0F`) and a `SIGILL` will be sent to *child1*. If we look at the rest of `child1_main` we'll see the code responsible for handling this signal.
 
 ```cpp
 if ( (status & 0xFF00) >> 8 == SIGILL )
@@ -1029,11 +1029,11 @@ This piece of code reads the return address and two arguments from the stack, th
 MEMORY[0](&loc_804C3C4, v5);
 ```
 
-The first one is the address `0x804C3C4`which is located just a few instruction above the `call 0`, and the second argument is a local variable. We can now understand that this is a loop! 
+The first one is the address `0x804C3C4` which is located just a few instructions above the `call 0`, and the second argument is a local variable. We can now understand that this is a loop! 
 
 When the code gets to the dynamic call at `0x804C40C` it will loop around to the start of the basic block at `0x804C3C4` and this will happen 16 times, while the local variable `v5` will hold the loop counter (initialized to zero before the loop and incremented every iteration by *child1*). 
 
-The next thing we'd better look at in `sub_804C369` and in `sub_804C217` (which it invokes) is the invocation of glibc functions, since we already know they don't function as usual. There's a use in `chmod`, `pivot_root`, `mlockall` and `uname`. We'll do our thing again - calculate the magic value and locate the relevant code in `child1_main`:
+The next thing we'd better look at in `sub_804C369` and in `sub_804C217` (which it invokes) is the invocation of glibc functions since we already know they don't function as usual. There's a use in `chmod`, `pivot_root`, `mlockall` and `uname`. We'll do our thing again - calculate the magic value and locate the relevant code in `child1_main`:
 
 ```cpp
 if ( magic == 0xE8135594 )          // pivot_root
@@ -1205,7 +1205,7 @@ We'll start by solving this with the debugging method first, followed by the hoo
 
 Previously we show how we can get rid of *child2* by patching key points in *child1* and executing an infinite loop that will allow us to attach a debugger to it. Having such access to *child1* will allow us to easily grab the values we want from `pivot_root` and `mlockall`. 
 
-To star, execute the patched binary file:
+To start, execute the patched binary file:
 
 ```bash
 $ ./break_patched
@@ -1502,7 +1502,7 @@ Quickly browsing around the functions that are called in `shellcode_main`, we se
 4. `sub_8054C75` looks a lot like a function we already analyzed - `copy_to_pid` which uses `ptrace` to copy bytes to the process specified.
 5. There are a few functions that get the base of our shellcode + an offset. This is usually a method that shellcode writers use to hold strings. We'll examine the contents of those offsets and write a comment in the appropriate locations.
 
-Needles to say, we'll rename these functions accordingly for easier analysis. Let's have a high level view of the code we have now:
+Needles to say, we'll rename these functions accordingly for easier analysis. Let's have a high-level view of the code we have now:
 
 ```cpp
 void __cdecl __noreturn shellcode_main(int a1, int input_buffer, int equal_bytes_count)
