@@ -115,7 +115,7 @@ Now it should look like this:
 
 Now, let's open the Register References view (Debug → View → Register References). This view will show us some interesting values that are referenced by the registers. Now we can use step over the instruction in Main, until we find what is the content that will be written to the flag.
 
-The following gif shows how we emulate each instruction until the flag appears in both the stack and the registers. We can also learn that the file to be written is a vbs script `sink_the_tanker.vbs`.
+The following gif shows how we emulate each instruction until the flag appears in both the stack and the registers. We can also learn that the file to be written is a VBS script `sink_the_tanker.vbs`.
 
 {{< image src="images/get_flag.gif" >}}
 
