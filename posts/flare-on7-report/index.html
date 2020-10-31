@@ -1,390 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Flare-On 7 — 04 Report - explained.re</title><meta name="Description" content=""><meta property="og:title" content="Flare-On 7 — 04 Report" />
-<meta property="og:description" content="Challenge Description  Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
-$ file report.xls report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://explained.re/posts/flare-on7-report/" />
-<meta property="og:image" content="https://explained.re/images/explained_dark.png"/>
-<meta property="article:published_time" content="2020-10-23T21:29:44+03:00" />
-<meta property="article:modified_time" content="2020-10-23T21:29:44+03:00" />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://explained.re/images/explained_dark.png"/>
-
-<meta name="twitter:title" content="Flare-On 7 — 04 Report"/>
-<meta name="twitter:description" content="Challenge Description  Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
-$ file report.xls report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10."/>
-<meta name="application-name" content="explained.re">
-<meta name="apple-mobile-web-app-title" content="explained.re"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://explained.re/posts/flare-on7-report/" /><link rel="prev" href="https://explained.re/posts/flare-on7-wednesday/" /><link rel="next" href="https://explained.re/posts/flare-on7-tkapp/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "Flare-On 7 — 04 Report",
-        "inLanguage": "en",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/explained.re\/posts\/flare-on7-report\/"
-        },"genre": "posts","keywords": "flare-on","wordcount":  1694 ,
-        "url": "https:\/\/explained.re\/posts\/flare-on7-report\/","datePublished": "2020-10-23T21:29:44+03:00","dateModified": "2020-10-23T21:29:44+03:00","publisher": {
-            "@type": "Organization",
-            "name": "explained.re"},"author": {
-                "@type": "Person",
-                "name": "explained.re"
-            },"description": ""
-    }
-    </script></head>
-    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="explained.re"><img
-        class="lazyload logo"
-        src="/svg/loading.min.svg"
-        data-src="/images/explained.svg"
-        data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x"
-        data-sizes="auto"
-        alt="/images/explained.svg"
-        title="/images/explained.svg" /></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/explainedre/website" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                    <i class="fas fa-adjust fa-fw"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="explained.re"><img
-        class="lazyload logo"
-        src="/svg/loading.min.svg"
-        data-src="/images/explained.svg"
-        data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x"
-        data-sizes="auto"
-        alt="/images/explained.svg"
-        title="/images/explained.svg" /></a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/explainedre/website" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-fw"></i>
-            </a></div>
-    </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">Contents</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 04 Report</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class="post-category">included in <a href="/categories/write-up/"><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-23">2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1694 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
-                <div class="details-summary toc-title">
-                    <span>Contents</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#extracting-the-macros">Extracting the Macros</a></li>
-    <li><a href="#analyzing-the-macros">Analyzing the Macros</a></li>
-    <li><a href="#vba-stomping-references">VBA Stomping References</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw"></i>Challenge Description<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.</div>
-        </div>
-    </div>
-<h2 id="getting-started">Getting Started</h2>
-<p>In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the <code>file</code> command on it and verify that the extension makes sense.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ file report.xls 
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Flare-On 7 — 04 Report - explained.re</title><meta name=Description content><meta property="og:title" content="Flare-On 7 — 04 Report"><meta property="og:description" content="Challenge Description  Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
+$ file report.xls report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10."><meta property="og:type" content="article"><meta property="og:url" content="https://explained.re/posts/flare-on7-report/"><meta property="og:image" content="https://explained.re/images/explained_dark.png"><meta property="article:published_time" content="2020-10-23T21:29:44+03:00"><meta property="article:modified_time" content="2020-10-23T21:29:44+03:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://explained.re/images/explained_dark.png"><meta name=twitter:title content="Flare-On 7 — 04 Report"><meta name=twitter:description content="Challenge Description  Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.   Getting Started In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the file command on it and verify that the extension makes sense.
+$ file report.xls report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10."><meta name=application-name content="explained.re"><meta name=apple-mobile-web-app-title content="explained.re"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://explained.re/posts/flare-on7-report/><link rel=prev href=https://explained.re/posts/flare-on7-wednesday/><link rel=next href=https://explained.re/posts/flare-on7-tkapp/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Flare-On 7 — 04 Report","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/explained.re\/posts\/flare-on7-report\/"},"genre":"posts","keywords":"flare-on","wordcount":1694,"url":"https:\/\/explained.re\/posts\/flare-on7-report\/","datePublished":"2020-10-23T21:29:44+03:00","dateModified":"2020-10-23T21:29:44+03:00","publisher":{"@type":"Organization","name":"explained.re"},"author":{"@type":"Person","name":"explained.re"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':('dark'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'dark'==='dark'))&&document.body.setAttribute('theme','dark');</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=explained.re><img class="lazyload logo" src=/svg/loading.min.svg data-src=/images/explained.svg data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x" data-sizes=auto alt=/images/explained.svg title=/images/explained.svg></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/about/>About </a><a class=menu-item href=https://github.com/explainedre/website title=GitHub rel="noopener noreffer" target=_blank><i class="fab fa-github fa-fw"></i></a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=explained.re><img class="lazyload logo" src=/svg/loading.min.svg data-src=/images/explained.svg data-srcset="/images/explained.svg, /images/explained.svg 1.5x, /images/explained.svg 2x" data-sizes=auto alt=/images/explained.svg title=/images/explained.svg></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/>Posts</a><a class=menu-item href=/tags/>Tags</a><a class=menu-item href=/categories/>Categories</a><a class=menu-item href=/about/>About</a><a class=menu-item href=https://github.com/explainedre/website title=GitHub rel="noopener noreffer" target=_blank><i class="fab fa-github fa-fw"></i></a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Flare-On 7 — 04 Report</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>explained.re</a></span>&nbsp;<span class=post-category>included in <a href=/categories/write-up/><i class="far fa-folder fa-fw"></i>write-up</a>&nbsp;<a href=/categories/ctf/><i class="far fa-folder fa-fw"></i>ctf</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-10-23>2020-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1694 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#getting-started>Getting Started</a></li><li><a href=#extracting-the-macros>Extracting the Macros</a></li><li><a href=#analyzing-the-macros>Analyzing the Macros</a></li><li><a href=#vba-stomping-references>VBA Stomping References</a></li></ul></nav></div></div><div class=content id=content><div class="details admonition info open"><div class="details-summary admonition-title"><i class="icon fas fa-info-circle fa-fw"></i>Challenge Description<i class="details-icon fas fa-angle-right fa-fw"></i></div><div class=details-content><div class=admonition-content>Nobody likes analyzing infected documents, but it pays the bills. Reverse this macro thrill-ride to discover how to get it to show you the key.</div></div></div><h2 id=getting-started>Getting Started</h2><p>In the 4th challenge of Flare-On7, we are given a single Excel file named &ldquo;report.xls&rdquo;. As in every challenge, let&rsquo;s run the <code>file</code> command on it and verify that the extension makes sense.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>$ file report.xls 
 report.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 10.0, Code page: 1252, 0x17: 1048576CDFV2 Microsoft Excel
-</code></pre></div><p>When opening this file in LibreOffice Calc, we see the following message box. It tells us that the document has macro inside and that we should be careful while handling them as they might contain a virus — scary!</p>
-<a class="lightgallery" href="/posts/flare-on7-report/images/image.png" title="/posts/flare-on7-report/images/image.png" data-thumbnail="/posts/flare-on7-report/images/image.png">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="images/image.png"
-            data-srcset="/posts/flare-on7-report/images/image.png, images/image.png 1.5x, /posts/flare-on7-report/images/image.png 2x"
-            data-sizes="auto"
-            alt="/posts/flare-on7-report/images/image.png" />
-    </a>
-<h2 id="extracting-the-macros">Extracting the Macros</h2>
-<p>Thankfully, we can use <code>olevba</code> from <a href="http://www.decalage.info/python/oletools" target="_blank" rel="noopener noreffer">oletools</a> to extract macros from the file. When running <code>olevba</code> on our file, we get a huge output that contains: Extracted macros, huge hexadecimal blobs, disassembled p-codes, and more. Usually, we would want to focus our attention on the end of the output as it contains a summary.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ olevba report.xls
+</code></pre></div><p>When opening this file in LibreOffice Calc, we see the following message box. It tells us that the document has macro inside and that we should be careful while handling them as they might contain a virus — scary!</p><a class=lightgallery href=/posts/flare-on7-report/images/image.png title=/posts/flare-on7-report/images/image.png data-thumbnail=/posts/flare-on7-report/images/image.png><img class=lazyload src=/svg/loading.min.svg data-src=images/image.png data-srcset="/posts/flare-on7-report/images/image.png, images/image.png 1.5x, /posts/flare-on7-report/images/image.png 2x" data-sizes=auto alt=/posts/flare-on7-report/images/image.png></a><h2 id=extracting-the-macros>Extracting the Macros</h2><p>Thankfully, we can use <code>olevba</code> from <a href=http://www.decalage.info/python/oletools target=_blank rel="noopener noreffer">oletools</a> to extract macros from the file. When running <code>olevba</code> on our file, we get a huge output that contains: Extracted macros, huge hexadecimal blobs, disassembled p-codes, and more. Usually, we would want to focus our attention on the end of the output as it contains a summary.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>$ olevba report.xls
 FILE: report.xls
 Type: OLE
 
 ...
-... <span class="o">[</span>truncated <span class="k">for</span> readibilty<span class="o">]</span> ...
+... <span class=o>[</span>truncated <span class=k>for</span> readibilty<span class=o>]</span> ...
 ...
 
 +----------+--------------------+---------------------------------------------+
-<span class="p">|</span>Type      <span class="p">|</span>Keyword             <span class="p">|</span>Description                                  <span class="p">|</span>
+<span class=p>|</span>Type      <span class=p>|</span>Keyword             <span class=p>|</span>Description                                  <span class=p>|</span>
 +----------+--------------------+---------------------------------------------+
-<span class="p">|</span>AutoExec  <span class="p">|</span>Auto_Open           <span class="p">|</span>Runs when the Excel Workbook is opened       <span class="p">|</span>
-<span class="p">|</span>AutoExec  <span class="p">|</span>Workbook_Open       <span class="p">|</span>Runs when the Excel Workbook is opened       <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>GetObject           <span class="p">|</span>May get an OLE object with a running instance<span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>CreateObject        <span class="p">|</span>May create an OLE object                     <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Environ             <span class="p">|</span>May <span class="nb">read</span> system environment variables        <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Open                <span class="p">|</span>May open a file                              <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Write               <span class="p">|</span>May write to a file <span class="o">(</span><span class="k">if</span> combined with Open<span class="o">)</span>  <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Put                 <span class="p">|</span>May write to a file <span class="o">(</span><span class="k">if</span> combined with Open<span class="o">)</span>  <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Lib                 <span class="p">|</span>May run code from a DLL                      <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Chr                 <span class="p">|</span>May attempt to obfuscate specific strings    <span class="p">|</span>
-<span class="p">|</span>          <span class="p">|</span>                    <span class="p">|</span><span class="o">(</span>use option --deobf to deobfuscate<span class="o">)</span>          <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Xor                 <span class="p">|</span>May attempt to obfuscate specific strings    <span class="p">|</span>
-<span class="p">|</span>          <span class="p">|</span>                    <span class="p">|</span><span class="o">(</span>use option --deobf to deobfuscate<span class="o">)</span>          <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Binary              <span class="p">|</span>May <span class="nb">read</span> or write a binary file <span class="o">(</span><span class="k">if</span> combined <span class="p">|</span>
-<span class="p">|</span>          <span class="p">|</span>                    <span class="p">|</span>with Open<span class="o">)</span>                                   <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>Hex Strings         <span class="p">|</span>Hex-encoded strings were detected, may be    <span class="p">|</span>
-<span class="p">|</span>          <span class="p">|</span>                    <span class="p">|</span>used to obfuscate strings <span class="o">(</span>option --decode to<span class="p">|</span>
-<span class="p">|</span>          <span class="p">|</span>                    <span class="p">|</span>see all<span class="o">)</span>                                     <span class="p">|</span>
-<span class="p">|</span>IOC       <span class="p">|</span>wininet.dll         <span class="p">|</span>Executable file name                         <span class="p">|</span>
-<span class="p">|</span>IOC       <span class="p">|</span>winmm.dll           <span class="p">|</span>Executable file name                         <span class="p">|</span>
-<span class="p">|</span>Suspicious<span class="p">|</span>VBA Stomping        <span class="p">|</span>VBA Stomping was detected: the VBA <span class="nb">source</span>    <span class="p">|</span>
-<span class="p">|</span>          <span class="p">|</span>                    <span class="p">|</span>code and P-code are different, this may have <span class="p">|</span>
-<span class="p">|</span>          <span class="p">|</span>                    <span class="p">|</span>been used to hide malicious code             <span class="p">|</span>
+<span class=p>|</span>AutoExec  <span class=p>|</span>Auto_Open           <span class=p>|</span>Runs when the Excel Workbook is opened       <span class=p>|</span>
+<span class=p>|</span>AutoExec  <span class=p>|</span>Workbook_Open       <span class=p>|</span>Runs when the Excel Workbook is opened       <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>GetObject           <span class=p>|</span>May get an OLE object with a running instance<span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>CreateObject        <span class=p>|</span>May create an OLE object                     <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Environ             <span class=p>|</span>May <span class=nb>read</span> system environment variables        <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Open                <span class=p>|</span>May open a file                              <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Write               <span class=p>|</span>May write to a file <span class=o>(</span><span class=k>if</span> combined with Open<span class=o>)</span>  <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Put                 <span class=p>|</span>May write to a file <span class=o>(</span><span class=k>if</span> combined with Open<span class=o>)</span>  <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Lib                 <span class=p>|</span>May run code from a DLL                      <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Chr                 <span class=p>|</span>May attempt to obfuscate specific strings    <span class=p>|</span>
+<span class=p>|</span>          <span class=p>|</span>                    <span class=p>|</span><span class=o>(</span>use option --deobf to deobfuscate<span class=o>)</span>          <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Xor                 <span class=p>|</span>May attempt to obfuscate specific strings    <span class=p>|</span>
+<span class=p>|</span>          <span class=p>|</span>                    <span class=p>|</span><span class=o>(</span>use option --deobf to deobfuscate<span class=o>)</span>          <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Binary              <span class=p>|</span>May <span class=nb>read</span> or write a binary file <span class=o>(</span><span class=k>if</span> combined <span class=p>|</span>
+<span class=p>|</span>          <span class=p>|</span>                    <span class=p>|</span>with Open<span class=o>)</span>                                   <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>Hex Strings         <span class=p>|</span>Hex-encoded strings were detected, may be    <span class=p>|</span>
+<span class=p>|</span>          <span class=p>|</span>                    <span class=p>|</span>used to obfuscate strings <span class=o>(</span>option --decode to<span class=p>|</span>
+<span class=p>|</span>          <span class=p>|</span>                    <span class=p>|</span>see all<span class=o>)</span>                                     <span class=p>|</span>
+<span class=p>|</span>IOC       <span class=p>|</span>wininet.dll         <span class=p>|</span>Executable file name                         <span class=p>|</span>
+<span class=p>|</span>IOC       <span class=p>|</span>winmm.dll           <span class=p>|</span>Executable file name                         <span class=p>|</span>
+<span class=p>|</span>Suspicious<span class=p>|</span>VBA Stomping        <span class=p>|</span>VBA Stomping was detected: the VBA <span class=nb>source</span>    <span class=p>|</span>
+<span class=p>|</span>          <span class=p>|</span>                    <span class=p>|</span>code and P-code are different, this may have <span class=p>|</span>
+<span class=p>|</span>          <span class=p>|</span>                    <span class=p>|</span>been used to hide malicious code             <span class=p>|</span>
 +----------+--------------------+---------------------------------------------+
 
-</code></pre></div><p>The summary table gives us a very nice summary of what the file does. The things that caught our attention are:</p>
-<ol>
-<li>Writing to files using <code>Open</code> and <code>Write</code></li>
-<li>Usage of <code>Xor</code></li>
-<li>Handling of binary data</li>
-<li>Hard-coded hex strings (well, it was not easy to miss these)</li>
-<li>VBA Stomping</li>
-</ol>
-<p>These behaviors are common in malware and CTF challenges, so we were not surprised. That said, <code>olevba</code> told us that it detected the VBA Stomping technique in this file. This means that the content it printed on the screen isn&rsquo;t enough, as the real VBA code might be different than shown.</p>
-<p>To read more about VBA stomping we recommend visiting <a href="https://vbastomp.com/" target="_blank" rel="noopener noreffer">https://vbastomp.com/</a></p>
-<p>The output of <code>olevba</code> was very important to us, and now we know that we need to use another tool, one that deals better with stomped macros — <a href="https://github.com/Big5-sec/pcode2code" target="_blank" rel="noopener noreffer">pcode2code</a>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pcode2code report.xls -o macros.vba
-</code></pre></div><h2 id="analyzing-the-macros">Analyzing the Macros</h2>
-<p>From a quick look at the output, it seems like it is slightly obfuscated, nothing we won&rsquo;t be able to handle. Let&rsquo;s slowly go through the functions in the macro and try to understand them.</p>
-<p>First, we see that the function to be executed when the document is opened called <code>folderol</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Workbook_Open</span><span class="p">()</span>
-  <span class="n">Sheet1</span><span class="p">.</span><span class="n">folderol</span>
-<span class="k">End</span> <span class="k">Sub</span>
+</code></pre></div><p>The summary table gives us a very nice summary of what the file does. The things that caught our attention are:</p><ol><li>Writing to files using <code>Open</code> and <code>Write</code></li><li>Usage of <code>Xor</code></li><li>Handling of binary data</li><li>Hard-coded hex strings (well, it was not easy to miss these)</li><li>VBA Stomping</li></ol><p>These behaviors are common in malware and CTF challenges, so we were not surprised. That said, <code>olevba</code> told us that it detected the VBA Stomping technique in this file. This means that the content it printed on the screen isn&rsquo;t enough, as the real VBA code might be different than shown.</p><p>To read more about VBA stomping we recommend visiting <a href=https://vbastomp.com/ target=_blank rel="noopener noreffer">https://vbastomp.com/</a></p><p>The output of <code>olevba</code> was very important to us, and now we know that we need to use another tool, one that deals better with stomped macros — <a href=https://github.com/Big5-sec/pcode2code target=_blank rel="noopener noreffer">pcode2code</a>.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>$ pcode2code report.xls -o macros.vba
+</code></pre></div><h2 id=analyzing-the-macros>Analyzing the Macros</h2><p>From a quick look at the output, it seems like it is slightly obfuscated, nothing we won&rsquo;t be able to handle. Let&rsquo;s slowly go through the functions in the macro and try to understand them.</p><p>First, we see that the function to be executed when the document is opened called <code>folderol</code>.</p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb><span class=k>Sub</span> <span class=nf>Workbook_Open</span><span class=p>()</span>
+  <span class=n>Sheet1</span><span class=p>.</span><span class=n>folderol</span>
+<span class=k>End</span> <span class=k>Sub</span>
 
-<span class="k">Sub</span> <span class="nf">Auto_Open</span><span class="p">()</span>
-  <span class="n">Sheet1</span><span class="p">.</span><span class="n">folderol</span>
-<span class="k">End</span> <span class="k">Sub</span>
-</code></pre></div><p>Naturally, this will be the function we will start to analyze. It begins with variables declaration, and then <code>Split</code> a string named <code>F.L</code> by a dot delimiter. The split array is assigned to a variable named <code>onzo.</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Function</span> <span class="nf">folderol</span><span class="p">(</span><span class="n">id_FFFE</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">)</span>
-        <span class="k">Dim</span> <span class="n">wabbit</span> <span class="ow">As</span> <span class="kt">Byte</span>
-        <span class="k">Dim</span> <span class="n">fn</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">:</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">FreeFile</span>
-        <span class="k">Dim</span> <span class="n">onzo</span> <span class="ow">As</span> <span class="kt">String</span>
-        <span class="k">Dim</span> <span class="n">mf</span> <span class="ow">As</span> <span class="kt">String</span>
-        <span class="k">Dim</span> <span class="n">xertz</span> <span class="ow">As</span> <span class="kt">Variant</span>
-        <span class="k">Dim</span> <span class="n">buff</span><span class="p">(</span><span class="n">0</span> <span class="k">To</span> <span class="n">7</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Byte</span>
+<span class=k>Sub</span> <span class=nf>Auto_Open</span><span class=p>()</span>
+  <span class=n>Sheet1</span><span class=p>.</span><span class=n>folderol</span>
+<span class=k>End</span> <span class=k>Sub</span>
+</code></pre></div><p>Naturally, this will be the function we will start to analyze. It begins with variables declaration, and then <code>Split</code> a string named <code>F.L</code> by a dot delimiter. The split array is assigned to a variable named <code>onzo.</code></p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb><span class=k>Function</span> <span class=nf>folderol</span><span class=p>(</span><span class=n>id_FFFE</span> <span class=ow>As</span> <span class=kt>Variant</span><span class=p>)</span>
+        <span class=k>Dim</span> <span class=n>wabbit</span> <span class=ow>As</span> <span class=kt>Byte</span>
+        <span class=k>Dim</span> <span class=n>fn</span> <span class=ow>As</span> <span class=kt>Integer</span><span class=p>:</span> <span class=n>fn</span> <span class=o>=</span> <span class=n>FreeFile</span>
+        <span class=k>Dim</span> <span class=n>onzo</span> <span class=ow>As</span> <span class=kt>String</span>
+        <span class=k>Dim</span> <span class=n>mf</span> <span class=ow>As</span> <span class=kt>String</span>
+        <span class=k>Dim</span> <span class=n>xertz</span> <span class=ow>As</span> <span class=kt>Variant</span>
+        <span class=k>Dim</span> <span class=n>buff</span><span class=p>(</span><span class=n>0</span> <span class=k>To</span> <span class=n>7</span><span class=p>)</span> <span class=ow>As</span> <span class=kt>Byte</span>
         
-        <span class="n">onzo</span> <span class="o">=</span> <span class="n">Split</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;.&#34;</span><span class="p">)</span>
-</code></pre></div><p>Where did this <code>F.L</code> come from? When searching for <code>F.L</code> in the output of the program we ran, we find nothing. We did find <code>F</code> though, and it is the name of a form. Looking at LibreOffice Calc again, we can see what <code>F.L</code> is. It is a label in a form.</p>
-<a class="lightgallery" href="/posts/flare-on7-report/images/image_1.png" title="/posts/flare-on7-report/images/image_1.png" data-thumbnail="/posts/flare-on7-report/images/image_1.png">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="images/image_1.png"
-            data-srcset="/posts/flare-on7-report/images/image_1.png, images/image_1.png 1.5x, /posts/flare-on7-report/images/image_1.png 2x"
-            data-sizes="auto"
-            alt="/posts/flare-on7-report/images/image_1.png" />
-    </a>
-<p>Actually, the content of this label is also shown in the results of <code>olevba</code> under <code>F/o</code>. The value of this label is shown below. As you can see it is separated by dots.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">9655B040B64667238524D15D6201.B95D4E01C55CC562C7557405A532D768C55FA12DD074DC697A06E172992CAF3F8A5C7306B7476B38.C555AC40A7469C234424.853FA85C470699477D3851249A4B9C4E.A855AF40B84695239D24895D2101D05CCA62BE5578055232D568C05F902DDC74D2697406D7724C2CA83FCF5C2606B547A73898246B4BC14E941F9121D464D263B947EB77D36E7F1B8254.853FA85C470699477D3851249A4B9C4E.9A55B240B84692239624.CC55A940B44690238B24CA5D7501CF5C9C62B15561056032C468D15F9C2DE374DD696206B572752C8C3FB25C3806.A8558540924668236724B15D2101AA5CC362C2556A055232AE68B15F7C2DC17489695D06DB729A2C723F8E5C65069747AA389324AE4BB34E921F9421.CB55A240B5469B23.AC559340A94695238D24CD5D75018A5CB062BA557905A932D768D15F982D.D074B6696F06D5729E2CAE3FCF5C7506AD47AC388024C14B7C4E8F1F8F21CB64
-</code></pre></div><p>Then, the function checks for internet connection and shows an alert if no internet connection was found. The program continues and assign to a variable named <code>fudgel</code> the value of <code>GetObject(rigmarole(onzo(7)))</code>. This means, that we need to analyze <code>rigmarole</code> in order to understand what it does with the 8th item in the <code>onzo</code> array.</p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb">      <span class="k">Function</span> <span class="nf">rigmarole</span><span class="p">(</span><span class="n">es</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">id_FFFE</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
-        <span class="k">Dim</span> <span class="n">furphy</span> <span class="ow">As</span> <span class="kt">String</span>
-        <span class="k">Dim</span> <span class="n">c</span> <span class="ow">As</span> <span class="kt">Integer</span>
-        <span class="k">Dim</span> <span class="n">s</span> <span class="ow">As</span> <span class="kt">String</span>
-        <span class="k">Dim</span> <span class="n">cc</span> <span class="ow">As</span> <span class="kt">Integer</span>
-        <span class="n">furphy</span> <span class="o">=</span> <span class="s">&#34;&#34;</span>
-        <span class="k">For</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span> <span class="k">To</span> <span class="n">Len</span><span class="p">(</span><span class="n">es</span><span class="p">)</span> <span class="k">Step</span> <span class="n">4</span>
-          <span class="n">c</span> <span class="o">=</span> <span class="k">CDec</span><span class="p">(</span><span class="s">&#34;&amp;H&#34;</span> <span class="o">&amp;</span> <span class="n">Mid</span><span class="p">(</span><span class="n">es</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">2</span><span class="p">))</span>
-          <span class="n">s</span> <span class="o">=</span> <span class="k">CDec</span><span class="p">(</span><span class="s">&#34;&amp;H&#34;</span> <span class="o">&amp;</span> <span class="n">Mid</span><span class="p">(</span><span class="n">es</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">2</span><span class="p">,</span> <span class="n">2</span><span class="p">))</span>
-          <span class="n">cc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="n">s</span>
-          <span class="n">furphy</span> <span class="o">=</span> <span class="n">furphy</span> <span class="o">+</span> <span class="n">Chr</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
-        <span class="k">Next</span> <span class="n">i</span>
-        <span class="n">rigmarole</span> <span class="o">=</span> <span class="n">furphy</span>
-      <span class="k">End</span> <span class="k">Function</span>
-</code></pre></div><p><code>rigmarole</code> is a very simple function. Basically, it iterates the array and takes two pairs of chars. Each pair is considered hexadecimal and converted to a decimal value. The second pair is then subtracted from the first pair. The result is converted to a char using <code>Chr</code> and added to a string  of chars. Finally, the string is returned. Easy, right? We can see that this function is used quite a bit in the VBA code, so we can start by executing it on every item in <code>onzo</code>. Let&rsquo;s use Python for this</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">malduck</span> <span class="kn">import</span> <span class="n">chunks</span>
+        <span class=n>onzo</span> <span class=o>=</span> <span class=n>Split</span><span class=p>(</span><span class=n>F</span><span class=p>.</span><span class=n>L</span><span class=p>,</span> <span class=s>&#34;.&#34;</span><span class=p>)</span>
+</code></pre></div><p>Where did this <code>F.L</code> come from? When searching for <code>F.L</code> in the output of the program we ran, we find nothing. We did find <code>F</code> though, and it is the name of a form. Looking at LibreOffice Calc again, we can see what <code>F.L</code> is. It is a label in a form.</p><a class=lightgallery href=/posts/flare-on7-report/images/image_1.png title=/posts/flare-on7-report/images/image_1.png data-thumbnail=/posts/flare-on7-report/images/image_1.png><img class=lazyload src=/svg/loading.min.svg data-src=images/image_1.png data-srcset="/posts/flare-on7-report/images/image_1.png, images/image_1.png 1.5x, /posts/flare-on7-report/images/image_1.png 2x" data-sizes=auto alt=/posts/flare-on7-report/images/image_1.png></a><p>Actually, the content of this label is also shown in the results of <code>olevba</code> under <code>F/o</code>. The value of this label is shown below. As you can see it is separated by dots.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>9655B040B64667238524D15D6201.B95D4E01C55CC562C7557405A532D768C55FA12DD074DC697A06E172992CAF3F8A5C7306B7476B38.C555AC40A7469C234424.853FA85C470699477D3851249A4B9C4E.A855AF40B84695239D24895D2101D05CCA62BE5578055232D568C05F902DDC74D2697406D7724C2CA83FCF5C2606B547A73898246B4BC14E941F9121D464D263B947EB77D36E7F1B8254.853FA85C470699477D3851249A4B9C4E.9A55B240B84692239624.CC55A940B44690238B24CA5D7501CF5C9C62B15561056032C468D15F9C2DE374DD696206B572752C8C3FB25C3806.A8558540924668236724B15D2101AA5CC362C2556A055232AE68B15F7C2DC17489695D06DB729A2C723F8E5C65069747AA389324AE4BB34E921F9421.CB55A240B5469B23.AC559340A94695238D24CD5D75018A5CB062BA557905A932D768D15F982D.D074B6696F06D5729E2CAE3FCF5C7506AD47AC388024C14B7C4E8F1F8F21CB64
+</code></pre></div><p>Then, the function checks for internet connection and shows an alert if no internet connection was found. The program continues and assign to a variable named <code>fudgel</code> the value of <code>GetObject(rigmarole(onzo(7)))</code>. This means, that we need to analyze <code>rigmarole</code> in order to understand what it does with the 8th item in the <code>onzo</code> array.</p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb>      <span class=k>Function</span> <span class=nf>rigmarole</span><span class=p>(</span><span class=n>es</span> <span class=ow>As</span> <span class=kt>String</span><span class=p>,</span> <span class=n>id_FFFE</span> <span class=ow>As</span> <span class=kt>String</span><span class=p>)</span> <span class=ow>As</span> <span class=kt>String</span>
+        <span class=k>Dim</span> <span class=n>furphy</span> <span class=ow>As</span> <span class=kt>String</span>
+        <span class=k>Dim</span> <span class=n>c</span> <span class=ow>As</span> <span class=kt>Integer</span>
+        <span class=k>Dim</span> <span class=n>s</span> <span class=ow>As</span> <span class=kt>String</span>
+        <span class=k>Dim</span> <span class=n>cc</span> <span class=ow>As</span> <span class=kt>Integer</span>
+        <span class=n>furphy</span> <span class=o>=</span> <span class=s>&#34;&#34;</span>
+        <span class=k>For</span> <span class=n>i</span> <span class=o>=</span> <span class=n>1</span> <span class=k>To</span> <span class=n>Len</span><span class=p>(</span><span class=n>es</span><span class=p>)</span> <span class=k>Step</span> <span class=n>4</span>
+          <span class=n>c</span> <span class=o>=</span> <span class=k>CDec</span><span class=p>(</span><span class=s>&#34;&amp;H&#34;</span> <span class=o>&amp;</span> <span class=n>Mid</span><span class=p>(</span><span class=n>es</span><span class=p>,</span> <span class=n>i</span><span class=p>,</span> <span class=n>2</span><span class=p>))</span>
+          <span class=n>s</span> <span class=o>=</span> <span class=k>CDec</span><span class=p>(</span><span class=s>&#34;&amp;H&#34;</span> <span class=o>&amp;</span> <span class=n>Mid</span><span class=p>(</span><span class=n>es</span><span class=p>,</span> <span class=n>i</span> <span class=o>+</span> <span class=n>2</span><span class=p>,</span> <span class=n>2</span><span class=p>))</span>
+          <span class=n>cc</span> <span class=o>=</span> <span class=n>c</span> <span class=o>-</span> <span class=n>s</span>
+          <span class=n>furphy</span> <span class=o>=</span> <span class=n>furphy</span> <span class=o>+</span> <span class=n>Chr</span><span class=p>(</span><span class=n>cc</span><span class=p>)</span>
+        <span class=k>Next</span> <span class=n>i</span>
+        <span class=n>rigmarole</span> <span class=o>=</span> <span class=n>furphy</span>
+      <span class=k>End</span> <span class=k>Function</span>
+</code></pre></div><p><code>rigmarole</code> is a very simple function. Basically, it iterates the array and takes two pairs of chars. Each pair is considered hexadecimal and converted to a decimal value. The second pair is then subtracted from the first pair. The result is converted to a char using <code>Chr</code> and added to a string of chars. Finally, the string is returned. Easy, right? We can see that this function is used quite a bit in the VBA code, so we can start by executing it on every item in <code>onzo</code>. Let&rsquo;s use Python for this</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>malduck</span> <span class=kn>import</span> <span class=n>chunks</span>
 
-<span class="n">onzo</span> <span class="o">=</span> <span class="s2">&#34;9655B040B64667238524D15D6201.B95D4E01C55CC562C7557405A532D768C55FA12DD074DC697A06E172992CAF3F8A5C7306B7476B38.C555AC40A7469C234424.853FA85C470699477D3851249A4B9C4E.A855AF40B84695239D24895D2101D05CCA62BE5578055232D568C05F902DDC74D2697406D7724C2CA83FCF5C2606B547A73898246B4BC14E941F9121D464D263B947EB77D36E7F1B8254.853FA85C470699477D3851249A4B9C4E.9A55B240B84692239624.CC55A940B44690238B24CA5D7501CF5C9C62B15561056032C468D15F9C2DE374DD696206B572752C8C3FB25C3806.A8558540924668236724B15D2101AA5CC362C2556A055232AE68B15F7C2DC17489695D06DB729A2C723F8E5C65069747AA389324AE4BB34E921F9421.CB55A240B5469B23.AC559340A94695238D24CD5D75018A5CB062BA557905A932D768D15F982D.D074B6696F06D5729E2CAE3FCF5C7506AD47AC388024C14B7C4E8F1F8F21CB64&#34;</span>
+<span class=n>onzo</span> <span class=o>=</span> <span class=s2>&#34;9655B040B64667238524D15D6201.B95D4E01C55CC562C7557405A532D768C55FA12DD074DC697A06E172992CAF3F8A5C7306B7476B38.C555AC40A7469C234424.853FA85C470699477D3851249A4B9C4E.A855AF40B84695239D24895D2101D05CCA62BE5578055232D568C05F902DDC74D2697406D7724C2CA83FCF5C2606B547A73898246B4BC14E941F9121D464D263B947EB77D36E7F1B8254.853FA85C470699477D3851249A4B9C4E.9A55B240B84692239624.CC55A940B44690238B24CA5D7501CF5C9C62B15561056032C468D15F9C2DE374DD696206B572752C8C3FB25C3806.A8558540924668236724B15D2101AA5CC362C2556A055232AE68B15F7C2DC17489695D06DB729A2C723F8E5C65069747AA389324AE4BB34E921F9421.CB55A240B5469B23.AC559340A94695238D24CD5D75018A5CB062BA557905A932D768D15F982D.D074B6696F06D5729E2CAE3FCF5C7506AD47AC388024C14B7C4E8F1F8F21CB64&#34;</span>
 
-<span class="n">onzo</span> <span class="o">=</span> <span class="n">onzo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class=n>onzo</span> <span class=o>=</span> <span class=n>onzo</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
 
-<span class="n">onzo_decoded</span> <span class="o">=</span> <span class="p">[]</span>
+<span class=n>onzo_decoded</span> <span class=o>=</span> <span class=p>[]</span>
 
-<span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">onzo</span><span class="p">:</span>
-    <span class="c1"># Split each item to a pair of two characters</span>
-    <span class="n">es</span> <span class="o">=</span> <span class="n">chunks</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> 
-    <span class="n">output</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
-    <span class="c1"># A for loop will be more readable than a list comprehension </span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">es</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="n">first</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">16</span><span class="p">)</span>
-        <span class="n">second</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">first</span> <span class="o">-</span> <span class="n">second</span><span class="p">)</span>
-    <span class="n">onzo_decoded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> 
+<span class=k>for</span> <span class=n>o</span> <span class=ow>in</span> <span class=n>onzo</span><span class=p>:</span>
+    <span class=c1># Split each item to a pair of two characters</span>
+    <span class=n>es</span> <span class=o>=</span> <span class=n>chunks</span><span class=p>(</span><span class=n>o</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span> 
+    <span class=n>output</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
+    <span class=c1># A for loop will be more readable than a list comprehension </span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>es</span><span class=p>),</span> <span class=mi>2</span><span class=p>):</span>
+        <span class=n>first</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>es</span><span class=p>[</span><span class=n>i</span><span class=p>],</span><span class=mi>16</span><span class=p>)</span>
+        <span class=n>second</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>es</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>],</span> <span class=mi>16</span><span class=p>)</span>
+        <span class=n>output</span> <span class=o>+=</span> <span class=nb>chr</span><span class=p>(</span><span class=n>first</span> <span class=o>-</span> <span class=n>second</span><span class=p>)</span>
+    <span class=n>onzo_decoded</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>output</span><span class=p>)</span> 
 
-<span class="k">print</span><span class="p">(</span><span class="n">onzo_decoded</span><span class="p">)</span>
-</code></pre></div><p>The decoded array looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="s1">&#39;AppData&#39;</span><span class="p">,</span>
- <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">Microsoft</span><span class="se">\\</span><span class="s1">stomp.mp3&#39;</span><span class="p">,</span>
- <span class="s1">&#39;play &#39;</span><span class="p">,</span>
- <span class="s1">&#39;FLARE-ON&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Sorry, this machine is not supported.&#39;</span><span class="p">,</span>
- <span class="s1">&#39;FLARE-ON&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
- <span class="s1">&#39;winmgmts:</span><span class="se">\\\\</span><span class="s1">.</span><span class="se">\\</span><span class="s1">root</span><span class="se">\\</span><span class="s1">CIMV2&#39;</span><span class="p">,</span>
- <span class="s1">&#39;SELECT Name FROM Win32_Process&#39;</span><span class="p">,</span>
- <span class="s1">&#39;vbox&#39;</span><span class="p">,</span>
- <span class="s1">&#39;WScript.Network&#39;</span><span class="p">,</span>
- <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">Microsoft</span><span class="se">\\</span><span class="s1">v.png&#39;</span><span class="p">]</span>
-</code></pre></div><p>Looking at these strings we can see a hint for VBA stomping (<code>stomp.mp3</code>), we can assume it iterates through the processes using <code>WMI</code> and probably checks the for VM existence (<code>vbox</code>). We can also see <code>v.png</code> that will probably be used as an output file, and of course — we see a couple of <code>FLARE-ON</code>. A very nice trick to do in such cases is to replace every instance of <code>rigmarole(onzo(number))</code> with the value of the string itself. Let&rsquo;s do it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;macros.vba&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
-    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> 
+<span class=k>print</span><span class=p>(</span><span class=n>onzo_decoded</span><span class=p>)</span>
+</code></pre></div><p>The decoded array looks like this:</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=p>[</span><span class=s1>&#39;AppData&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;</span><span class=se>\\</span><span class=s1>Microsoft</span><span class=se>\\</span><span class=s1>stomp.mp3&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;play &#39;</span><span class=p>,</span>
+ <span class=s1>&#39;FLARE-ON&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;Sorry, this machine is not supported.&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;FLARE-ON&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;Error&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;winmgmts:</span><span class=se>\\\\</span><span class=s1>.</span><span class=se>\\</span><span class=s1>root</span><span class=se>\\</span><span class=s1>CIMV2&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;SELECT Name FROM Win32_Process&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;vbox&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;WScript.Network&#39;</span><span class=p>,</span>
+ <span class=s1>&#39;</span><span class=se>\\</span><span class=s1>Microsoft</span><span class=se>\\</span><span class=s1>v.png&#39;</span><span class=p>]</span>
+</code></pre></div><p>Looking at these strings we can see a hint for VBA stomping (<code>stomp.mp3</code>), we can assume it iterates through the processes using <code>WMI</code> and probably checks the for VM existence (<code>vbox</code>). We can also see <code>v.png</code> that will probably be used as an output file, and of course — we see a couple of <code>FLARE-ON</code>. A very nice trick to do in such cases is to replace every instance of <code>rigmarole(onzo(number))</code> with the value of the string itself. Let&rsquo;s do it:</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=n>content</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span> 
+<span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s2>&#34;macros.vba&#34;</span><span class=p>,</span> <span class=s2>&#34;r&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span> 
+    <span class=n>content</span> <span class=o>=</span> <span class=n>f</span><span class=o>.</span><span class=n>read</span><span class=p>()</span> 
 
-<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">onzo_decoded</span><span class="p">):</span> 
-    <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;rigmarole(onzo({idx}))&#34;</span><span class="p">,</span> <span class="n">f</span><span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">{v}</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">)</span>    
+<span class=k>for</span> <span class=n>idx</span><span class=p>,</span> <span class=n>v</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>onzo_decoded</span><span class=p>):</span> 
+    <span class=n>content</span> <span class=o>=</span> <span class=n>content</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=n>f</span><span class=s2>&#34;rigmarole(onzo({idx}))&#34;</span><span class=p>,</span> <span class=n>f</span><span class=s2>&#34;</span><span class=se>\&#34;</span><span class=s2>{v}</span><span class=se>\&#34;</span><span class=s2>&#34;</span><span class=p>)</span>    
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;macros.vba&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-</code></pre></div><p>Now it is much easier to read the content of the macros.</p>
-<p>Moving forward, we see that the script is checking all the processes for the existence of VM related process names:</p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb">      <span class="k">Set</span> <span class="n">fudgel</span> <span class="o">=</span> <span class="n">GetObject</span><span class="p">(</span><span class="s">&#34;winmgmts:\\.\root\CIMV2&#34;</span><span class="p">)</span>
-        <span class="k">Set</span> <span class="n">twattling</span> <span class="o">=</span> <span class="n">fudgel</span><span class="p">.</span><span class="n">ExecQuery</span><span class="p">(</span><span class="s">&#34;SELECT Name FROM Win32_Process&#34;</span><span class="p">,</span> <span class="p">,</span> <span class="n">48</span><span class="p">)</span>
-        <span class="k">For</span> <span class="k">Each</span> <span class="n">p</span> <span class="ow">In</span> <span class="n">twattling</span>
-          <span class="k">Dim</span> <span class="n">pos</span> <span class="ow">As</span> <span class="kt">Integer</span>
-          <span class="n">pos</span> <span class="o">=</span> <span class="n">Instr</span><span class="p">(</span><span class="n">LCase</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">),</span> <span class="s">&#34;vmw&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Instr</span><span class="p">(</span><span class="n">LCase</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">),</span> <span class="s">&#34;vmt&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Instr</span><span class="p">(</span><span class="n">LCase</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">),</span> <span class="s">&#34;vbox&#34;</span><span class="p">)</span>
-          <span class="k">If</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="k">Then</span>
-            <span class="n">MsgBox</span> <span class="s">&#34;Sorry, this machine is not supported.&#34;</span><span class="p">,</span> <span class="n">vbCritical</span><span class="p">,</span> <span class="s">&#34;Error&#34;</span>
-            <span class="k">End</span>
-          <span class="k">End</span> <span class="k">If</span>
-        <span class="k">Next</span>
-</code></pre></div><p>The code is then creating a <code>Network</code> object and checks if our UserDomain name is <code>FLARE-ON</code>. If it is not, the script is raising an error and a message box. Most likely, by renaming our UserDomain to &ldquo;FLARE-ON&rdquo; we can solve, or at least make big progress towards solving, the challenge. But we are on Linux, so let&rsquo;s work harder.</p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb">        <span class="k">Set</span> <span class="n">groke</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">&#34;WScript.Network&#34;</span><span class="p">)</span>
-        <span class="n">firkin</span> <span class="o">=</span> <span class="n">groke</span><span class="p">.</span><span class="n">UserDomain</span>
-        <span class="k">If</span> <span class="n">firkin</span> <span class="o">&lt;&gt;</span> <span class="s">&#34;FLARE-ON&#34;</span> <span class="k">Then</span>
-          <span class="n">MsgBox</span> <span class="s">&#34;Sorry, this machine is not supported.&#34;</span><span class="p">,</span> <span class="n">vbCritical</span><span class="p">,</span> <span class="s">&#34;Error&#34;</span>
-          <span class="k">End</span>
-        <span class="k">End</span> <span class="k">If</span>
-</code></pre></div><p>After this check, the program takes the <code>firkin</code> variable that contains &ldquo;FLARE-ON&rdquo;, and reverse the order of characters to <code>NO-ERALF</code> and assign it to a buffer named <code>buff</code>. Then the program is calling a function named <code>canoodle</code> with the value of another label in the form <code>F</code>, <code>buff</code> and two other arguments.</p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb">        <span class="n">n</span> <span class="o">=</span> <span class="n">Len</span><span class="p">(</span><span class="n">firkin</span><span class="p">)</span>
-        <span class="k">For</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span> <span class="k">To</span> <span class="n">n</span>
-          <span class="n">buff</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">Asc</span><span class="p">(</span><span class="n">Mid</span><span class="err">$</span><span class="p">(</span><span class="n">firkin</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">1</span><span class="p">))</span>
-        <span class="k">Next</span>
+<span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s2>&#34;macros.vba&#34;</span><span class=p>,</span> <span class=s2>&#34;w&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span> 
+    <span class=n>f</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>content</span><span class=p>)</span>
+</code></pre></div><p>Now it is much easier to read the content of the macros.</p><p>Moving forward, we see that the script is checking all the processes for the existence of VM related process names:</p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb>      <span class=k>Set</span> <span class=n>fudgel</span> <span class=o>=</span> <span class=n>GetObject</span><span class=p>(</span><span class=s>&#34;winmgmts:\\.\root\CIMV2&#34;</span><span class=p>)</span>
+        <span class=k>Set</span> <span class=n>twattling</span> <span class=o>=</span> <span class=n>fudgel</span><span class=p>.</span><span class=n>ExecQuery</span><span class=p>(</span><span class=s>&#34;SELECT Name FROM Win32_Process&#34;</span><span class=p>,</span> <span class=p>,</span> <span class=n>48</span><span class=p>)</span>
+        <span class=k>For</span> <span class=k>Each</span> <span class=n>p</span> <span class=ow>In</span> <span class=n>twattling</span>
+          <span class=k>Dim</span> <span class=n>pos</span> <span class=ow>As</span> <span class=kt>Integer</span>
+          <span class=n>pos</span> <span class=o>=</span> <span class=n>Instr</span><span class=p>(</span><span class=n>LCase</span><span class=p>(</span><span class=n>p</span><span class=p>.</span><span class=n>Name</span><span class=p>),</span> <span class=s>&#34;vmw&#34;</span><span class=p>)</span> <span class=o>+</span> <span class=n>Instr</span><span class=p>(</span><span class=n>LCase</span><span class=p>(</span><span class=n>p</span><span class=p>.</span><span class=n>Name</span><span class=p>),</span> <span class=s>&#34;vmt&#34;</span><span class=p>)</span> <span class=o>+</span> <span class=n>Instr</span><span class=p>(</span><span class=n>LCase</span><span class=p>(</span><span class=n>p</span><span class=p>.</span><span class=n>Name</span><span class=p>),</span> <span class=s>&#34;vbox&#34;</span><span class=p>)</span>
+          <span class=k>If</span> <span class=n>pos</span> <span class=o>&gt;</span> <span class=n>0</span> <span class=k>Then</span>
+            <span class=n>MsgBox</span> <span class=s>&#34;Sorry, this machine is not supported.&#34;</span><span class=p>,</span> <span class=n>vbCritical</span><span class=p>,</span> <span class=s>&#34;Error&#34;</span>
+            <span class=k>End</span>
+          <span class=k>End</span> <span class=k>If</span>
+        <span class=k>Next</span>
+</code></pre></div><p>The code is then creating a <code>Network</code> object and checks if our UserDomain name is <code>FLARE-ON</code>. If it is not, the script is raising an error and a message box. Most likely, by renaming our UserDomain to &ldquo;FLARE-ON&rdquo; we can solve, or at least make big progress towards solving, the challenge. But we are on Linux, so let&rsquo;s work harder.</p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb>        <span class=k>Set</span> <span class=n>groke</span> <span class=o>=</span> <span class=n>CreateObject</span><span class=p>(</span><span class=s>&#34;WScript.Network&#34;</span><span class=p>)</span>
+        <span class=n>firkin</span> <span class=o>=</span> <span class=n>groke</span><span class=p>.</span><span class=n>UserDomain</span>
+        <span class=k>If</span> <span class=n>firkin</span> <span class=o>&lt;&gt;</span> <span class=s>&#34;FLARE-ON&#34;</span> <span class=k>Then</span>
+          <span class=n>MsgBox</span> <span class=s>&#34;Sorry, this machine is not supported.&#34;</span><span class=p>,</span> <span class=n>vbCritical</span><span class=p>,</span> <span class=s>&#34;Error&#34;</span>
+          <span class=k>End</span>
+        <span class=k>End</span> <span class=k>If</span>
+</code></pre></div><p>After this check, the program takes the <code>firkin</code> variable that contains &ldquo;FLARE-ON&rdquo;, and reverse the order of characters to <code>NO-ERALF</code> and assign it to a buffer named <code>buff</code>. Then the program is calling a function named <code>canoodle</code> with the value of another label in the form <code>F</code>, <code>buff</code> and two other arguments.</p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb>        <span class=n>n</span> <span class=o>=</span> <span class=n>Len</span><span class=p>(</span><span class=n>firkin</span><span class=p>)</span>
+        <span class=k>For</span> <span class=n>i</span> <span class=o>=</span> <span class=n>1</span> <span class=k>To</span> <span class=n>n</span>
+          <span class=n>buff</span><span class=p>(</span><span class=n>n</span> <span class=o>-</span> <span class=n>i</span><span class=p>)</span> <span class=o>=</span> <span class=n>Asc</span><span class=p>(</span><span class=n>Mid</span><span class=err>$</span><span class=p>(</span><span class=n>firkin</span><span class=p>,</span> <span class=n>i</span><span class=p>,</span> <span class=n>1</span><span class=p>))</span>
+        <span class=k>Next</span>
         
-        <span class="n">wabbit</span> <span class="o">=</span> <span class="n">canoodle</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">2</span><span class="p">,</span> <span class="n">285729</span><span class="p">,</span> <span class="n">buff</span><span class="p">)</span>
-</code></pre></div><p>Let&rsquo;s have a look at the <code>canoodle</code> function now. We renamed the variables to make the analysis easier. First, the function begins with a regular variable definition.</p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Function</span> <span class="nf">canoodle</span><span class="p">(</span><span class="n">f_label</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">decimal_2</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">size</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">NO_ERALF_array</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">)</span> <span class="ow">As</span> <span class="n">Append</span>
-  <span class="k">Dim</span> <span class="n">quean</span> <span class="ow">As</span> <span class="kt">Long</span>
-  <span class="k">Dim</span> <span class="n">index</span> <span class="ow">As</span> <span class="kt">Long</span>
-  <span class="k">Dim</span> <span class="n">kerfuffle</span> <span class="ow">As</span> <span class="kt">Byte</span>
-  <span class="k">ReDim</span> <span class="n">kerfuffle</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-  <span class="n">quean</span> <span class="o">=</span> <span class="n">0</span>
-</code></pre></div><p>Then, we have a very simple xor decryption. The script is iterating through the huge buffer from the <code>F</code> form, starting from the second byte and skipping two bytes at a time. The bytes are being XORd with <code>NO-ERALF</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb">     <span class="k">For</span> <span class="n">index</span> <span class="o">=</span> <span class="n">1</span> <span class="k">To</span> <span class="n">Len</span><span class="p">(</span><span class="n">f_label</span><span class="p">)</span> <span class="k">Step</span> <span class="n">4</span>
-          <span class="n">kerfuffle</span><span class="p">(</span><span class="n">quean</span><span class="p">)</span> <span class="o">=</span> <span class="k">CByte</span><span class="p">(</span><span class="s">&#34;&amp;H&#34;</span> <span class="o">&amp;</span> <span class="n">Mid</span><span class="p">(</span><span class="n">f_label</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="n">decimal_2</span><span class="p">,</span> <span class="n">2</span><span class="p">))</span> <span class="ow">Xor</span> <span class="n">NO_ERALF_array</span><span class="p">(</span><span class="n">quean</span> <span class="ow">Mod</span> <span class="p">(</span><span class="n">UBound</span><span class="p">(</span><span class="n">NO_ERALF_array</span><span class="p">)</span> <span class="o">+</span> <span class="n">1</span><span class="p">))</span>
-          <span class="n">quean</span> <span class="o">=</span> <span class="n">quean</span> <span class="o">+</span> <span class="n">1</span>
-          <span class="k">If</span> <span class="n">quean</span> <span class="o">=</span> <span class="n">UBound</span><span class="p">(</span><span class="n">kerfuffle</span><span class="p">)</span> <span class="k">Then</span>
-            <span class="k">Exit</span> <span class="k">For</span>
-          <span class="k">End</span> <span class="k">If</span>
-      <span class="k">Next</span> <span class="n">index</span>
-</code></pre></div><p>Let&rsquo;s dump this huge hex blob to a file and script the solution for this loop in python.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">malduck</span> <span class="kn">import</span> <span class="n">unhex</span><span class="p">,</span> <span class="n">xor</span>
+        <span class=n>wabbit</span> <span class=o>=</span> <span class=n>canoodle</span><span class=p>(</span><span class=n>F</span><span class=p>.</span><span class=n>T</span><span class=p>.</span><span class=n>Text</span><span class=p>,</span> <span class=n>2</span><span class=p>,</span> <span class=n>285729</span><span class=p>,</span> <span class=n>buff</span><span class=p>)</span>
+</code></pre></div><p>Let&rsquo;s have a look at the <code>canoodle</code> function now. We renamed the variables to make the analysis easier. First, the function begins with a regular variable definition.</p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb><span class=k>Function</span> <span class=nf>canoodle</span><span class=p>(</span><span class=n>f_label</span> <span class=ow>As</span> <span class=kt>String</span><span class=p>,</span> <span class=n>decimal_2</span> <span class=ow>As</span> <span class=kt>Integer</span><span class=p>,</span> <span class=n>size</span> <span class=ow>As</span> <span class=kt>Long</span><span class=p>,</span> <span class=n>NO_ERALF_array</span> <span class=ow>As</span> <span class=kt>Variant</span><span class=p>)</span> <span class=ow>As</span> <span class=n>Append</span>
+  <span class=k>Dim</span> <span class=n>quean</span> <span class=ow>As</span> <span class=kt>Long</span>
+  <span class=k>Dim</span> <span class=n>index</span> <span class=ow>As</span> <span class=kt>Long</span>
+  <span class=k>Dim</span> <span class=n>kerfuffle</span> <span class=ow>As</span> <span class=kt>Byte</span>
+  <span class=k>ReDim</span> <span class=n>kerfuffle</span><span class=p>(</span><span class=n>size</span><span class=p>)</span>
+  <span class=n>quean</span> <span class=o>=</span> <span class=n>0</span>
+</code></pre></div><p>Then, we have a very simple xor decryption. The script is iterating through the huge buffer from the <code>F</code> form, starting from the second byte and skipping two bytes at a time. The bytes are being XORd with <code>NO-ERALF</code>.</p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb>     <span class=k>For</span> <span class=n>index</span> <span class=o>=</span> <span class=n>1</span> <span class=k>To</span> <span class=n>Len</span><span class=p>(</span><span class=n>f_label</span><span class=p>)</span> <span class=k>Step</span> <span class=n>4</span>
+          <span class=n>kerfuffle</span><span class=p>(</span><span class=n>quean</span><span class=p>)</span> <span class=o>=</span> <span class=k>CByte</span><span class=p>(</span><span class=s>&#34;&amp;H&#34;</span> <span class=o>&amp;</span> <span class=n>Mid</span><span class=p>(</span><span class=n>f_label</span><span class=p>,</span> <span class=n>index</span> <span class=o>+</span> <span class=n>decimal_2</span><span class=p>,</span> <span class=n>2</span><span class=p>))</span> <span class=ow>Xor</span> <span class=n>NO_ERALF_array</span><span class=p>(</span><span class=n>quean</span> <span class=ow>Mod</span> <span class=p>(</span><span class=n>UBound</span><span class=p>(</span><span class=n>NO_ERALF_array</span><span class=p>)</span> <span class=o>+</span> <span class=n>1</span><span class=p>))</span>
+          <span class=n>quean</span> <span class=o>=</span> <span class=n>quean</span> <span class=o>+</span> <span class=n>1</span>
+          <span class=k>If</span> <span class=n>quean</span> <span class=o>=</span> <span class=n>UBound</span><span class=p>(</span><span class=n>kerfuffle</span><span class=p>)</span> <span class=k>Then</span>
+            <span class=k>Exit</span> <span class=k>For</span>
+          <span class=k>End</span> <span class=k>If</span>
+      <span class=k>Next</span> <span class=n>index</span>
+</code></pre></div><p>Let&rsquo;s dump this huge hex blob to a file and script the solution for this loop in python.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>malduck</span> <span class=kn>import</span> <span class=n>unhex</span><span class=p>,</span> <span class=n>xor</span>
 
-<span class="c1"># Read the huge blob of hex bytes from a file</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">unhex</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&#34;encrypted.hex&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-<span class="c1"># Create a byte string with every other byte starting from offset 1</span>
-<span class="n">second_stage</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="mi">2</span><span class="p">)])</span>
-<span class="c1"># XOR the bytes string with the key</span>
-<span class="n">xord</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;NO-ERALF&#34;</span><span class="p">,</span> <span class="n">second_stage</span><span class="p">)</span>
+<span class=c1># Read the huge blob of hex bytes from a file</span>
+<span class=n>data</span> <span class=o>=</span> <span class=n>unhex</span><span class=p>(</span><span class=nb>open</span><span class=p>(</span><span class=s2>&#34;encrypted.hex&#34;</span><span class=p>,</span> <span class=s2>&#34;r&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>read</span><span class=p>())</span>
+<span class=c1># Create a byte string with every other byte starting from offset 1</span>
+<span class=n>second_stage</span> <span class=o>=</span> <span class=nb>bytes</span><span class=p>([</span><span class=n>data</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>data</span><span class=p>),</span> <span class=mi>2</span><span class=p>)])</span>
+<span class=c1># XOR the bytes string with the key</span>
+<span class=n>xord</span> <span class=o>=</span> <span class=n>xor</span><span class=p>(</span><span class=sa>b</span><span class=s2>&#34;NO-ERALF&#34;</span><span class=p>,</span> <span class=n>second_stage</span><span class=p>)</span>
 
-<span class="c1"># Save the results to a file</span>
-<span class="nb">open</span><span class="p">(</span><span class="s1">&#39;out.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xord</span><span class="p">)</span>
+<span class=c1># Save the results to a file</span>
+<span class=nb>open</span><span class=p>(</span><span class=s1>&#39;out.bin&#39;</span><span class=p>,</span> <span class=s1>&#39;wb&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>xord</span><span class=p>)</span>
 
-</code></pre></div><p>Let&rsquo;s run the script and check the value of <code>out.bin</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-vb" data-lang="vb"><span class="err">$</span> <span class="n">file</span> <span class="n">out</span><span class="p">.</span><span class="n">bin</span>
-<span class="n">out</span><span class="p">.</span><span class="n">bin</span><span class="p">:</span> <span class="n">PNG</span> <span class="n">image</span> <span class="n">data</span><span class="p">,</span> <span class="n">600</span> <span class="n">x</span> <span class="n">310</span><span class="p">,</span> <span class="n">8</span><span class="o">-</span><span class="n">bit</span><span class="o">/</span><span class="n">color</span> <span class="n">RGBA</span><span class="p">,</span> <span class="n">non</span><span class="o">-</span><span class="n">interlaced</span>
-</code></pre></div><p>The <code>file</code> command told us it is a valid PNG file, let&rsquo;s open it in an image viewer and check it out:</p>
-<a class="lightgallery" href="/posts/flare-on7-report/images/image_2.png" title="/posts/flare-on7-report/images/image_2.png" data-thumbnail="/posts/flare-on7-report/images/image_2.png">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="images/image_2.png"
-            data-srcset="/posts/flare-on7-report/images/image_2.png, images/image_2.png 1.5x, /posts/flare-on7-report/images/image_2.png 2x"
-            data-sizes="auto"
-            alt="/posts/flare-on7-report/images/image_2.png" />
-    </a>
-<p>We got the flag! Cool one.</p>
-<p>Flag: <code>thi5_cou1d_h4v3_b33n_b4d@flare-on.com</code></p>
-<h2 id="vba-stomping-references">VBA Stomping References</h2>
-<p><a href="https://vbastomp.com/" target="_blank" rel="noopener noreffer">https://vbastomp.com/</a></p>
-<p><a href="https://github.com/Big5-sec/pcode2code" target="_blank" rel="noopener noreffer">https://github.com/Big5-sec/pcode2code</a></p>
-</div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>Updated on 2020-10-23</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
-        <div class="post-info-line">
-            <div class="post-info-md"></div>
-            <div class="post-info-share">
-                <span></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/flare-on/">flare-on</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav"><a href="/posts/flare-on7-wednesday/" class="prev" rel="prev" title="Flare-On 7 — 03 Wednesday"><i class="fas fa-angle-left fa-fw"></i>Flare-On 7 — 03 Wednesday</a>
-            <a href="/posts/flare-on7-tkapp/" class="next" rel="next" title="Flare-On 7 — 05 TKApp">Flare-On 7 — 05 TKApp<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
-        </div>
-    </footer></div>
-
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
-                <i class="fas fa-arrow-up fa-fw"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
-                <i class="fas fa-comment fa-fw"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":60},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', 'G-Z0NYXY577C');
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-Z0NYXY577C" async></script></body>
-</html>
+</code></pre></div><p>Let&rsquo;s run the script and check the value of <code>out.bin</code>:</p><div class=highlight><pre class=chroma><code class=language-vb data-lang=vb><span class=err>$</span> <span class=n>file</span> <span class=n>out</span><span class=p>.</span><span class=n>bin</span>
+<span class=n>out</span><span class=p>.</span><span class=n>bin</span><span class=p>:</span> <span class=n>PNG</span> <span class=n>image</span> <span class=n>data</span><span class=p>,</span> <span class=n>600</span> <span class=n>x</span> <span class=n>310</span><span class=p>,</span> <span class=n>8</span><span class=o>-</span><span class=n>bit</span><span class=o>/</span><span class=n>color</span> <span class=n>RGBA</span><span class=p>,</span> <span class=n>non</span><span class=o>-</span><span class=n>interlaced</span>
+</code></pre></div><p>The <code>file</code> command told us it is a valid PNG file, let&rsquo;s open it in an image viewer and check it out:</p><a class=lightgallery href=/posts/flare-on7-report/images/image_2.png title=/posts/flare-on7-report/images/image_2.png data-thumbnail=/posts/flare-on7-report/images/image_2.png><img class=lazyload src=/svg/loading.min.svg data-src=images/image_2.png data-srcset="/posts/flare-on7-report/images/image_2.png, images/image_2.png 1.5x, /posts/flare-on7-report/images/image_2.png 2x" data-sizes=auto alt=/posts/flare-on7-report/images/image_2.png></a><p>We got the flag! Cool one.</p><p>Flag: <code>thi5_cou1d_h4v3_b33n_b4d@flare-on.com</code></p><h2 id=vba-stomping-references>VBA Stomping References</h2><p><a href=https://vbastomp.com/ target=_blank rel="noopener noreffer">https://vbastomp.com/</a></p><p><a href=https://github.com/Big5-sec/pcode2code target=_blank rel="noopener noreffer">https://github.com/Big5-sec/pcode2code</a></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2020-10-23</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/flare-on/>flare-on</a></section><section><span><a href=javascript:void(0); onclick=window.history.back();>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/flare-on7-wednesday/ class=prev rel=prev title="Flare-On 7 — 03 Wednesday"><i class="fas fa-angle-left fa-fw"></i>Flare-On 7 — 03 Wednesday</a>
+<a href=/posts/flare-on7-tkapp/ class=next rel=next title="Flare-On 7 — 05 TKApp">Flare-On 7 — 05 TKApp<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i>LoveIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank></a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw"></i></a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/lib/lightgallery/lightgallery.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":60},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Z0NYXY577C');</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-Z0NYXY577C" async></script></body></html>
