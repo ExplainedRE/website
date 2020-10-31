@@ -19,6 +19,20 @@ toc:
 Hello and welcome to our series of tutorials about Flare-On 7! In this series we will take you to a journey 
 into each and every one of the challenges -- including the almighty 10th and 11th challenges.
 
+| Write-ups |
+|:---------:|
+| [1 - Fidler](/posts/flare-on7-fidler/) |
+| [2 - Garbage](/posts/flare-on7-garbage/) |
+| [3 - Wednesday](/posts/flare-on7-wednesday/) |
+| [4 - Report](/posts/flare-on7-report/) |
+| [5 - TKApp](/posts/flare-on7-tkapp/) |
+| [6 - Codeit](/posts/flare-on7-codeit/) |
+| [7 - Re-Crowd](/posts/flare-on7-re-crowd/) |
+| [8 - Aardvark](/posts/flare-on7-aardvark/) |
+| [9 - Crackinstaller](/posts/flare-on7-crackinstaller/) |
+| [10 - Break](/posts/flare-on-7-break/) |
+| [11 - Rabbithole](/posts/flare-on-7-rabbithole/) |
+
 In the write-ups, we explain how we approached the different challenges, how we overcame obstacles, scripted our way to 
 the top and avoided rabbit holes.
 
