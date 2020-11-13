@@ -27,7 +27,7 @@ Found a write-up that we did not mention? Wrote a write-up and can't find it her
 ## 1 - fidler 🐍
 
 1. Static
-    1. Call `decode_flag` with the correct number - [explained.re](https://explained.re/posts/flare-on7-fidler/), [a](https://explained.re/posts/flare-on7-fidler/)[uthor✏️](https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/flareon7-challenge1-solution.pdf), [asuna amawaka](https://medium.com/insomniacs/journal-flareon7-part-1-ca675815f204), [@NotCoderL](https://github.com/LeoCodes21/ctf-writeups/tree/main/Flare-On%202020/01-fidler)
+    1. Call `decode_flag` with the correct number - [explained.re](https://explained.re/posts/flare-on7-fidler/), [a](https://explained.re/posts/flare-on7-fidler/)[uthor✏️](https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/flareon7-challenge1-solution.pdf), [asuna amawaka](https://medium.com/insomniacs/journal-flareon7-part-1-ca675815f204), [@NotCoderL](https://github.com/LeoCodes21/ctf-writeups/tree/main/Flare-On%202020/01-fidler), [@arnaugamez](https://arnaugamez.com/blog/2020/10/23/writeup-flareon7-challenge1/)
     2. Guess correct input for `decode_flag` - [@demonslay335](https://www.youtube.com/watch?v=OpBXDZxc2DQ) (video)
 2. Dynamic
     1. Cheat Engine
@@ -48,17 +48,18 @@ Found a write-up that we did not mention? Wrote a write-up and can't find it her
     2. Emulation
         1. Cutter - [explained.re](https://explained.re/posts/flare-on7-garbage/#emulating-the-binary-on-cutter-for-linux)
         2. Unicorn Engine - [0xswitch](https://0xswitch.fr/CTF/flare-on-2020-how-not-to-solve-an-easy-reverse-challenge)
+        3. radare2's ESIL - [@arnaugamez](https://arnaugamez.com/blog/2020/10/24/writeup-flareon7-challenge2/)
 3. Manual unpack - [@AleeAmini](https://github.com/aleeamini/Flareon7-2020/tree/main/2)
 
 ## 3 - wednesday 🐸
 
 1. Dynamic
-    1. Patch collision - [explained.re](https://explained.re/posts/flare-on7-wednesday/), [author✏️](https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/flareon7-challenge3-solution.pdf), [@74wny0wl](https://whitehatlab.eu/en/blog/writeup/flareon/2020/003-wednesday/), [@0xdf_](https://0xdf.gitlab.io/flare-on-2020/wednesday), [@AleeAmini](https://github.com/aleeamini/Flareon7-2020/tree/main/3), [@g3rzi](https://eviatargerzi.medium.com/flare-on-7-2020-challenge-3-wednesday-132e60858a0b)
-    2. Cheat Engine - [@xEHLE_](https://blog.p1.gs/#wednesday), [@demonslay335](https://www.youtube.com/watch?v=F3AEkaHs29c) (video)
+    1. Patch collision - [explained.re](https://explained.re/posts/flare-on7-wednesday/), [author✏️](https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/flareon7-challenge3-solution.pdf), [@74wny0wl](https://whitehatlab.eu/en/blog/writeup/flareon/2020/003-wednesday/), [@0xdf_](https://0xdf.gitlab.io/flare-on-2020/wednesday), [@AleeAmini](https://github.com/aleeamini/Flareon7-2020/tree/main/3), [@g3rzi](https://eviatargerzi.medium.com/flare-on-7-2020-challenge-3-wednesday-132e60858a0b), [@arnaugamez](https://arnaugamez.com/blog/2020/11/07/writeup-flareon7-challenge3/)
+    2. Cheat Engine - [@xEHLE_](https://blog.p1.gs/#wednesday), [@demonslay335](https://www.youtube.com/watch?v=F3AEkaHs29c) (video), [@arnaugamez](https://arnaugamez.com/blog/2020/11/07/writeup-flareon7-challenge3/)
     3. Play and win - [@NotCoderL](https://github.com/LeoCodes21/ctf-writeups/tree/main/Flare-On%202020/03-wednesday)
     4. Patch required score - [asuna amawaka](https://medium.com/insomniacs/journal-flareon7-part-1-ca675815f204)
 2. Static
-    1. Decode binary flag from obstacles array - [author✏️](https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/flareon7-challenge3-solution.pdf), [@_graypanda](https://github.com/gray-panda/grayrepo/tree/master/2020_flareon/03_wednesday), [@L3cr0f](https://github.com/L3cr0f/flare-on_2020/blob/master/3_Wednesday/3_Wednesday.md)
+    1. Decode binary flag from obstacles array - [author✏️](https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/flareon7-challenge3-solution.pdf), [@_graypanda](https://github.com/gray-panda/grayrepo/tree/master/2020_flareon/03_wednesday), [@L3cr0f](https://github.com/L3cr0f/flare-on_2020/blob/master/3_Wednesday/3_Wednesday.md), [@arnaugamez](https://arnaugamez.com/blog/2020/11/07/writeup-flareon7-challenge3/)
 
 ## 4 - Report 📄
 
